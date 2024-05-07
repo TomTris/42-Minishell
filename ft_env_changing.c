@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/06 05:22:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/06 22:32:02 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_find_char(char *str, char c)
+static int	ft_find_char(char *str, char c)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	ft_find_char(char *str, char c)
 }
 
 //return -1 => str1 == 0 || str2 == 0 || there is no '='
-int	ft_strcmp_til_char(char *str1, char *str2, char c)
+static int	ft_strcmp_til_char(char *str1, char *str2, char c)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ int	ft_strcmp_til_char(char *str1, char *str2, char c)
 }
 
 //return 1 == find + replace. Return (0) -> need to add.
-int	ft_replace_rule(t_save *save, char *str_of_add_rule)
+static int	ft_replace_rule(t_save *save, char *str_of_add_rule)
 {
 	int	i;
 
@@ -63,29 +63,53 @@ int	ft_replace_rule(t_save *save, char *str_of_add_rule)
 }
 
 
-void	ft_add_rule(t_save *save, char *str_of_add_rule)
+static void	ft_add_rule(t_save *save, char *str_of_add_rule)
 {
-	int	i;
+	int		i;
+	char	**ret;
 
 	if (ft_replace_rule(save, str_of_add_rule) == 1)
 		return ;
 	i = 0;
 	while (save->env[i])
 		i++;
-	
-
+	ret = (char **)malloc((i + 2) * sizeof(char *));
+	if (ret == 0)
+	{
+		printf("something went wrong ft_add_rule in ft_env_changing.c\n");
+		exit(EXIT_FAILURE);
+	}
+	ret[i] = ft_strdup(str_of_add_rule);
+	if (ret[i] == 0)
+	{
+		printf("something went wrong ft_str_dup ft_add_rule in ");
+		printf("ft_env_changing.c\n");
+		exit(EXIT_FAILURE);
+	}
+	ret[i + 1] = NULL;
+	i = -1;
+	while (save->env[++i])
+		ret[i] = save->env[i];
 }
 
-void	ft_creat_n_modify_env(t_save *save, char *str_of_add_rule, int add_remove)
+//add_replace_remove == 1 -> add / replace
+//add_replace_remove == 2 -> remove
+//else: Error
+static void	ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
+		int add_replace_remove)
 {
-	if (add_remove == 1)//add
-	{//if exist -> replace, else remove
-		if (ft_strcmp_til_char(str_of_add_rule,))
-	}
-	else if (add_remove == 2)
+	if (add_replace_remove == 1)
 	{
-		
+		if (ft_replace_rule(save, str_of_add_rule) == 1)
+			return ;
+		ft_add_rule(save, str_of_add_rule);
 	}
+	else if (add_replace_remove == 2)
+		ft_add_rule(save, str_of_add_rule);
 	else
+	{
+		printf("something went wrong ft_create_n_modify_env in ");
+		printf("ft_env_changing.c\n");
 		exit(EXIT_FAILURE);
+	}
 }
