@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/06 04:43:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/06 22:33:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h> // Include readline header
 # include "pipex/pipex.h"
-# include <readline/readline.h> //read_line
 
 typedef struct s_save
 {
@@ -26,6 +28,5 @@ typedef struct s_save
 }	t_save;
 
 char			**ft_split(char const *s, char c);
-
 
 #endif
