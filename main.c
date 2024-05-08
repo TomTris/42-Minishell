@@ -6,36 +6,22 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 23:19:34 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 05:33:25 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/08 05:41:22 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_isalpha_or__(char c)
-{
-	if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '_')
-		return (1);
-	return (0);
-}
-
-int	ft_is_a_num(char c)
-{
-	if ('0' <= c && c <= '9')
-		return (1);
-	return (0);
-}
 
 int	ft_count_valid_characters_of_a_word(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (str == 0 || ft_is_a_num(str[0]) == 1)
+	if (str == 0 || ft_isdigit(str[0]) == 1)
 		return (0);
 	while (str[i])
 	{
-		if (ft_isalpha_or__(str[i]) == 1 || ft_is_a_num(str[i] == 1))
+		if (ft_isalnum(str[i]) == 1 || str[i] == '_')
 			i++;
 		else
 			return (i);
@@ -55,7 +41,7 @@ void	ft_groups_break_init(t_groups_break *groups_break)
 }
 
 
-//1. determine string is first step. it is so solid that we will destroy it at the end.
+//1. determine "" and is first step. it is so solid that we will destroy it at the end.
 //2. determine "|", split them.
 //3. determine input and output.
 //4. determine " " - space, split them.
