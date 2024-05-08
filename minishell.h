@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 07:20:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/08 20:48:56 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ typedef struct s_groups_break
 	char	pipe_sign[2];
 }	t_groups_break;
 
-typedef struct s_save
-{
-	char			**env;
-	char			**path_system;
-	t_groups_break	groups_break;
-	t_input_break	*input_break;
-}	t_save;
-
 // nothing		0;
 // doublequote	1
 // singlequote	2
@@ -52,6 +44,15 @@ typedef struct s_input_break
 	int		sign_after;
 	char	*str;
 }	t_input_break;
+
+typedef struct s_save
+{
+	char			**env;
+	char			**path_system;
+	t_groups_break	groups_break;
+	t_input_break	*input_break;
+}	t_save;
+
 
 int	ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
 		int add_replace_remove);
