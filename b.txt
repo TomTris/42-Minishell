@@ -1,0 +1,244 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_env_changing.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/08 01:36:54 by qdo              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+//return -1 => str1 == 0 || str2 == 0 || there is no '='
+static int	ft_strcmp_til_char(char *str1, char *str2, char c)
+{
+	int	i;
+
+	if (ft_find_char(str1, c) == 0 || ft_strrchr(str2, c) == NULL)
+		return (-1);
+	i = -1;
+	while (str1[++i] != c)
+		if (str1[i] != str2[i])
+			return (0);
+	return (1);
+}
+
+//return 1 == find + replace. Return (0) -> need to add.
+static int	ft_replace_rule(t_save *save, char *str_of_add_rule)
+{
+	int	i;
+
+	i = -1;
+	while (save->env[i++] != 0)
+	{
+		if (ft_strcmp_til_char(save->env[i], str_of_add_rule, '=') == 1)
+		{
+			free(save->env[i]);
+			save->env[i] = ft_strdup(str_of_add_rule);
+			if (save->env[i] == 0)
+			{
+				printf("ft_add_rule malloc\n");
+				exit(EXIT_SUCCESS);
+			}
+			return (1);
+		}
+	}
+	return (0);
+}
+
+
+static void	ft_add_rule(t_save *save, char *str_of_add_rule)
+{
+	int		i;
+	char	**ret;
+
+	if (ft_replace_rule(save, str_of_add_rule) == 1)
+		return ;
+	i = 0;
+	while (save->env[i])
+		i++;
+	ret = (char **)malloc((i + 2) * sizeof(char *));
+	if (ret == 0)
+	{
+		printf("something went wrong ft_add_rule in ft_env_changing.c\n");
+		exit(EXIT_FAILURE);
+	}
+	ret[i] = ft_strdup(str_of_add_rule);
+	if (ret[i] == 0)
+	{
+		printf("something went wrong ft_str_dup ft_add_rule in ");
+		printf("ft_env_changing.c\n");
+		exit(EXIT_FAILURE);
+	}
+	ret[i + 1] = NULL;
+	i = -1;
+	while (save->env[++i])
+		ret[i] = save->env[i];
+}
+
+//add_replace_remove == 1 -> add / replace
+//add_replace_remove == 2 -> remove
+//else: Error
+static void	ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
+		int add_replace_remove)
+{
+	if (add_replace_remove == 1)
+	{
+		if (ft_replace_rule(save, str_of_add_rule) == 1)
+			return ;
+		ft_add_rule(save, str_of_add_rule);
+	}
+	else if (add_replace_remove == 2)
+		ft_add_rule(save, str_of_add_rule);
+	else
+	{
+		printf("something went wrong ft_create_n_modify_env in ");
+		printf("ft_env_changing.c\n");
+		exit(EXIT_FAILURE);
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/05 23:19:34 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/08 02:13:35 by qdo              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+int	ft_isalpha_or__(char c)
+{
+	if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || c == '_')
+		return (1);
+	return (0);
+}
+
+int	ft_is_a_num(char c)
+{
+	if ('0' <= c && c <= '9')
+		return (1);
+	return (0);
+}
+
+int	ft_count_valid_characters_of_a_word(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == 0 || ft_is_a_num(str[0]) == 1)
+		return (0);
+	while (str[i])
+	{
+		if (ft_isalpha_or__(str[i]) == 1 || ft_is_a_num(str[i] == 1))
+			i++;
+		else
+			return (i);
+	}
+}
+
+void	ft_groups_break_init(t_groups_break *groups_break)
+{
+	ft_strcpy(groups_break->and_sign, "&&");
+	ft_strcpy(groups_break->doublequote, "\"");
+	ft_strcpy(groups_break->or_sign, "&&");
+	ft_strcpy(groups_break->parenthesis_close, "(");
+	ft_strcpy(groups_break->parenthesis_open, ")");
+	ft_strcpy(groups_break->pipe_sign, "|");
+	ft_strcpy(groups_break->singlequote, "'");
+	groups_break->new_input = 0;
+}
+
+
+//1. determine string is first step. it is so solid that we will destroy it at the end.
+//2. determine "|", split them.
+//3. determine input and output.
+//4. determine " " - space, split them.
+//5. determine $ and expand it.
+//6. split again with " " - space
+//7. dequote
+
+int	ft_cnt_sub_str_for_new_input(char *str)
+{
+	
+}
+
+int	ft_break_input(char *str)
+{
+	int				i;
+	t_groups_break	groups_break;
+	int				num;
+
+	ft_groups_break_init(&groups_break);
+	groups_break.new_input = (char **)malloc
+		((ft_cnt_sub_str_for_new_input(str) + 1 )* sizeof(char *));
+	if (groups_break.new_input == 0)
+		return (0);
+	ft_fill_new_input(str);
+}
+NAME = minishell
+CFLAGS = -lreadline
+SRC = main.c
+OBJS = $(SRC:.c=.o)
+
+all : $(NAME)
+
+$(NAME): $(OBJS)
+	make -C libft
+	cc $(CFLAGS) -o $(NAME) $(OBJS) libft/libft.a
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME) libft/libft.a
+
+re: fclean all/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/08 01:56:43 by qdo              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <readline/readline.h> // Include readline header
+# include "libft/libft.h"
+
+typedef struct s_groups_break
+{
+	char	doublequote[2];
+	char	singlequote[2];
+	char	or_sign[3];
+	char	and_sign[3];
+	char	parenthesis_open[2];
+	char	parenthesis_close[2];
+	char	pipe_sign[2];
+	char	**new_input;
+}	t_groups_break;
+
+typedef struct s_save
+{
+	char	**env;
+}	t_save;
+
+typedef struct s_begin_end
+{
+	int	i_begin;
+	int	i_end;
+}	t_begin_end;
+
+#endif
