@@ -1,4 +1,4 @@
 Bori:
-create prompt
-deal with history
-deal with signals
+01 - create prompt
+02 - deal with history
+03 - deal with signals
