@@ -1,8 +1,7 @@
 CC				= cc 
-CFLAGS			= -Wall -Werror -Wextra -I./libft
-LIBFT_FLAGS		= -Llibft
-TEST_FLAGS		= -I./libft -I./src/prompt
-LFLAGS			= $(LIBFT_FLAGS)
+CFLAGS			= -Wall -Werror -Wextra
+HDR_FLAGS		= -I./libft -I./src/prompt
+LFLAGS			= -Llibft -lreadline
 RM				= rm -rf
 SRC				= prompt/minishell.c
 TEST_SRC		= minishell.c
@@ -14,11 +13,11 @@ NAME			= minishell
 
 all: $(NAME)
 
-src/test/%.o: src/test/%.c
-	$(CC) $(TEST_FLAGS) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) $(HDR_FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(LFLAGS) $(HDR_FLAGS) -o $(NAME) $(OBJS) $(LIBFT) && ./$(NAME)
 
 test:  $(OBJS) $(TEST_OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FLAGS) -o $(TEST_PATH)/$(NAME) $(TEST_OBJS) $(LIBFT) && ./$(TEST_PATH)/$(NAME)
