@@ -1,0 +1,4 @@
+Bori:
+create prompt
+deal with history
+deal with signals
