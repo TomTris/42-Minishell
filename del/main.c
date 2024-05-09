@@ -6,27 +6,27 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 23:19:34 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 07:41:29 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 15:03:26 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int	ft_count_valid_characters_of_a_word(char *str)
-// {
-// 	int	i;
+int	ft_count_valid_characters_of_a_word(char *str)
+{
+	int	i;
 
-// 	i = 0;
-// 	if (str == 0 || ft_isdigit(str[0]) == 1)
-// 		return (0);
-// 	while (str[i])
-// 	{
-// 		if (ft_isalnum(str[i]) == 1 || str[i] == '_')
-// 			i++;
-// 		else
-// 			return (i);
-// 	}
-// }
+	i = 0;
+	if (str == 0 || ft_isdigit(str[0]) == 1)
+		return (0);
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 1 || str[i] == '_')
+			i++;
+		else
+			return (i);
+	}
+}
 
 void	ft_groups_break_init(t_groups_break *groups_break)
 {
