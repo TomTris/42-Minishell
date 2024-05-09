@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:07:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 17:51:01 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 19:38:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,10 @@ int	ft_pre_check_input(char *str)
 		return (0);
 	}
 	if (ft_check_parenthesis(str) == 0)
+	{
 		printf("input not qualified2\n");
+		return (0);
+	}
 	return (1);
 }
 
