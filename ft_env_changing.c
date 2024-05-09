@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 06:33:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 13:50:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ static int	ft_replace_rule(t_save *save, char *rule_to_add)
 	int	i;
 	int	len_to_cmp;
 
+	len_to_cmp = 0;
+	if (ft_strchr(rule_to_add, '=') != NULL)
+		len_to_cmp = ft_strchr(rule_to_add, '=') - rule_to_add + 1;
 	i = -1;
-	while (save->env[i++] != 0)
+	while (save->env[++i] != 0 && len_to_cmp > 0)
 	{
-		len_to_cmp = 0;
-		if (ft_strchr(rule_to_add, '=') != NULL)
-			len_to_cmp = ft_strchr(rule_to_add, '=') - rule_to_add + 1;
-		if (len_to_cmp > 0 &&
-			ft_strncmp(save->env[i], rule_to_add, len_to_cmp) == 0)
+		if (ft_strncmp(save->env[i], rule_to_add, len_to_cmp) == 0)
 		{
 			free(save->env[i]);
 			save->env[i] = ft_strdup(rule_to_add);
@@ -68,7 +67,7 @@ static int	ft_rule_add(t_save *save, char *rule_to_add)
 static int	ft_rule_remove(t_save *save, char *rule_to_remove)
 {
 	int		i;
-	char	*ret;
+	char	**ret;
 	int		check;
 
 	check = -1;
@@ -96,10 +95,10 @@ static int	ft_rule_remove(t_save *save, char *rule_to_remove)
 
 //add_replace_remove == 1 -> add / replace
 //add_replace_remove == 2 -> remove
-//else: Error
+//else: -> code wrong.
 //if malloc failed or stuff like that,
 //this function will clean only, what's created here and
-//make env safe to free from a to z.
+//make save->env safe to free from a to z with function ft_free_env
 int	ft_create_n_modify_env(t_save *save, char *rule,
 		int add_replace_remove)
 {
@@ -123,3 +122,35 @@ int	ft_create_n_modify_env(t_save *save, char *rule,
 	else
 		return (perror("ft_create_n_modify_env: wrong int check value"), 0);
 }
+
+char	ft_free_env(char **save_env)
+{
+	int	i;
+
+	i = -1;
+	if (save_env != 0)
+		while (save_env[++i] != 0)
+			free(save_env[i]);
+	free(save_env);
+}
+
+//What is this file about?
+// This file is a helper file that reproduces work when we want to add,
+//replace or remove a env variable. Especially when people use export
+// and unset
+//
+// how it works? cmd: "export abb=aowl"
+// if there is not '=' sign in the commandline -> it doesn't work.
+// if there is already a "abb" variable => the old variable will be replaced.
+// unset: if we have a "abb" variable -> we unset it.
+//
+//How to use this file?
+// 1. ft_free_env 
+// to free save->env. Please do it by your own.
+// all functions always free everything that it created and make things to be
+// safe to be used by fr_free_env
+//
+//2. ft_create_n_modify_env 
+// to add or replace or remove a rule.
+// It takes the rule as string, for example "abb=aowl", and add/replace/remove it
+// in / from env. 1 to add / replace, 2 to remove.
