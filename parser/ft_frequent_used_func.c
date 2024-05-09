@@ -6,11 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 09:23:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 11:15:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 12:19:52 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 char	*ft_trim_whitespace(char *str)
 {
@@ -46,7 +46,7 @@ int	ft_parenthesis_close_find(char *str)
 		else if (str[i] == ')')
 			return (i + 1);
 		else if (str[i] == '(')
-			i += ft_check_parenthesis_closed(str + i + 1);
+			i += ft_parenthesis_close_find(str + i + 1);
 	}
 	return (0);
 }
