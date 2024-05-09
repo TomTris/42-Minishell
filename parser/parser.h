@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parenthesis_n_signs.c                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 09:22:27 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 11:38:34 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/09 11:38:47 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/09 11:39:58 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-int	ft_check_parenthesis_double(char *str)
-{
-	
-}
+#include "../minishell"
 
+#endif
