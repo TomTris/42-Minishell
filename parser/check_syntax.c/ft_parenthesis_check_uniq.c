@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 09:22:27 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 17:57:38 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 20:21:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ int	ft_count_valid_characters_of_a_word(char *str)
 		else
 			return (i);
 	}
-	return (0);
+	return (i);
 }
-
 
 // the redirection properly -> has name and sign => return (1)
 // only redirection sign or not propername or reach the end of the line
@@ -43,7 +42,7 @@ int	ft_skip_redirection(char *str)
 		i++;
 	while (str[++i])
 	{
-		if (ft_isempty(str[i] != 1))
+		if (ft_isempty(str[i]) != 1)
 		{
 			temp = ft_count_valid_characters_of_a_word(str + i);
 			if (temp == 0)
@@ -94,15 +93,16 @@ int	ft_find_sign_after(char *str, int i)
 	len = ft_strlen(str);
 	while (++i < len)
 	{
-		if (str[i] == '|' || (str[i] == '&' && i + 1 <= len && str[i] == '&'))
+		if (str[i] == '|' || (str[i] == '&' && i + 1 <= len && str[i] == '&')
+			|| str[i] == ')')
 			return (1);
 		else if (ft_isempty(str[i]) != 1)
 		{
 			if (str[i] == '<' || str[i] == '>')
 			{
-				if (ft_skip_redirection(str + i) != -1)
+				if (ft_skip_redirection(str + i) == -1)
 					return (ft_print_str_error(str + i, -1));
-				i = i + ft_skip_redirection(str + i);
+				i = i + ft_skip_redirection(str + i) - 1;
 			}
 			else
 				return (ft_print_str_error(str + i, -1));
@@ -122,7 +122,8 @@ int	ft_find_sign_before(char *str, int i)
 	j = i + 1;
 	while (--i >= 0)
 	{
-		if (str[i] == '|' || (str[i] == '&' && i >= 1 && str[i - 1] == '&'))
+		if (str[i] == '|' || (str[i] == '&' && i >= 1 && str[i - 1] == '&')
+			|| str[i] == '(')
 			return (1);
 		else if (ft_isempty(str[i]) != 1)
 		{

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:49:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 19:10:33 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 20:52:48 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 //1: gut
 //2: not gut
-
-int ft_check_empty_before2(char *str, int j, char *temp)
+static int	ft_check_empty_before2(char *str, int j, char *temp)
 {
-	if (str[j] == str[j - 1] && (str[j] = '|' || str[j] == '&'))
+	if (str[j] == str[j - 1] && (str[j] == '|' || str[j] == '&'))
 	{
 		temp = ft_strndup(str + j - 1, 2);
 		if (temp == 0)
@@ -28,7 +27,7 @@ int ft_check_empty_before2(char *str, int j, char *temp)
 	return (ft_printf_fd(2, "systax error near `%c'\n", str[j]), 0);
 }
 
-int	ft_check_empty_before(char *str, int i, int j, char *temp)
+static int	ft_check_empty_before(char *str, int i, int j, char *temp)
 {
 	if (i == 0)
 		return (1);
@@ -41,7 +40,7 @@ int	ft_check_empty_before(char *str, int i, int j, char *temp)
 			if ((str[i] == '|') || (str[i] == '&' && str[i - 1] == '&')
 				|| str[i] == '(')
 			{
-				if (str[j] == str[j - 1] && (str[j] = '|' || str[j] == '&'))
+				if (str[j] == str[j - 1] && (str[j] == '|' || str[j] == '&'))
 				{
 					temp = ft_strndup(str + j - 1, 2);
 					if (temp == 0)
@@ -57,8 +56,7 @@ int	ft_check_empty_before(char *str, int i, int j, char *temp)
 	return (ft_check_empty_before2(str, j, temp));
 }
 
-
-int	ft_check_empty_after2(char *str, int j, char *temp)
+static int	ft_check_empty_after2(char *str, int j, char *temp)
 {
 	if (str[j] == str[j - 1] && (str[j] == '|' || str[j] == '&'))
 	{
@@ -71,7 +69,7 @@ int	ft_check_empty_after2(char *str, int j, char *temp)
 	return (ft_printf_fd(2, "systax error near `%c'\n", str[j]), 0);
 }
 
-int	ft_check_empty_after(char *str, int i)
+static int	ft_check_empty_after(char *str, int i)
 {
 	int		j;
 	char	*temp;

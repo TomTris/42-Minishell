@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 09:23:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 12:19:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 22:19:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,19 @@ int	ft_parenthesis_close_find(char *str)
 	}
 	return (0);
 }
+
+int	ft_check_syntax(char *str)
+{
+	if (ft_pre_check_input(str) == 0 ||
+		ft_parenthesis_check_uniq(str) == 0 || ft_sign_check_empty(str) == 0)
+		return (0);
+	return (1);
+}
+// char *str = "(22) | 1 | ( 2 && 144 ) && ( | ( )( )) || 2 ||(1) | 1";
+// char *str = "((  1|  )1 |) ";
+// char *str = "(1 |((1)) <1| (1) && 7 ) || a";
+// char *str = "1 <baaa<323232";
+// char *str;
+// ac = 0;
+// str = av[1];
+//ls -l | wc -l | sleep 4 | cat <Makefile >  | cat

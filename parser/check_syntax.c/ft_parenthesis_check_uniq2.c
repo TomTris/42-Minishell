@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:57:04 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 19:13:00 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 20:53:22 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,4 @@ int	ft_parenthesis_check_uniq(char *str)
 		}
 	}
 	return (1);
-}
-
-int	main(void)
-{
-	// char *str = "(22) | 1 | ( 2 && 144 ) && ( | ( )( )) || 2 ||(1) | 1";
-	// char *str = "((  1|  )1 |) ";
-	char *str = "(1(1)a";
-
-	if (ft_pre_check_input(str) == 0 || ft_parenthesis_check_uniq(str) == 0 || ft_sign_check_empty(str) == 0)
-		ft_printf_fd(2, "somewere wrong\n");
-	return (0);
 }
