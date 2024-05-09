@@ -1,6 +1,6 @@
 CC				= cc 
 CFLAGS			= -Wall -Werror -Wextra
-HDR_FLAGS		= -I./libft -I./src/prompt
+HDR_FLAGS		= -I./libft -I./src
 LFLAGS			= -Llibft -lreadline
 RM				= rm -rf
 SRC				= prompt/minishell.c
