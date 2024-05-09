@@ -1,0 +1,11 @@
+Makefile
+b.txt
+del
+en.subject.pdf
+ft_env_changing.c
+ft_handle_env.c
+libft
+minishell
+parser
+src
+todo.txt
