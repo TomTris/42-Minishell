@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 05:32:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 13:56:11 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	ft_set_shell_lvl_2(t_save *save, int i)
 	char	*temp2;
 	char	*temp3;
 
-	temp = ft_itoa(ft_atoi(save->env[i + 6]));
+	temp = ft_itoa(ft_atoi(save->env[i] + 6) + 1);
 	if (temp == 0)
 		return (0);
 	temp2 = ft_strndup(save->env[i], 6);
 	if (temp2 == 0)
 		return (free(temp), 0);
-	temp3 = ft_strjoin(temp, temp2);
+	temp3 = ft_strjoin(temp2, temp);
 	if (temp3 == 0)
 		return (free(temp), free(temp2), 0);
 	free(temp);
@@ -53,7 +53,7 @@ static int	ft_env_exist(t_save *save, char **env_outside)
 	int	i;
 	int	j;
 
-	i = -1;
+	i = 0;
 	while (env_outside[i])
 		i++;
 	save->env = (char **)malloc((i + 1) * sizeof(char *));
@@ -62,7 +62,7 @@ static int	ft_env_exist(t_save *save, char **env_outside)
 	i = -1;
 	while (env_outside[++i])
 	{
-		save->env[i] = ft_strdup(env_outside);
+		save->env[i] = ft_strdup(env_outside[i]);
 		if (save->env[i] == 0)
 			break ;
 	}
@@ -109,8 +109,47 @@ int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
 	if (env_outside[0] == NULL)
 		check = ft_env_not_exist(save);
 	else
-		check = ft_env_exists(save, env_outside);
+		check = ft_env_exist(save, env_outside);
 	if (check == 0)
 		return (free(save->path_system), 0);
 	return (1);
 }
+
+//check function to check the env created which is stored in save.env
+// int	main(int ac, char **av, char **env)
+// {
+// 	t_save save;
+
+// 	if (av == 0)
+// 		ac = 0;
+// 	if (ft_save_path_system_n_env_init(&save, env) == 0)
+// 		return (0);
+// 	int	i;
+
+// 	i = -1;
+// 	while (save.env[++i] != 0)
+// 		printf("%s\n", save.env[i]);
+// 	printf("%d\n", i);
+// 	if (ft_create_n_modify_env(&save, "PATH=abbbbfbfbf", 2) == 0)
+// 		return (1);
+// 	// int	i;
+
+// 	i = -1;
+// 	while (save.env[++i] != 0)
+// 		printf("%s\n", save.env[i]);
+// 	printf("%d\n", i);
+// }
+
+// this file is about: ft_save_path_system_n_env_init
+//
+//
+// 1. Create a hidden PATH variable, which is copid from our Computer
+// so that even when our programm don't have env, it will create it own env
+// and it still can execute command
+// 2. create it's own env. 
+// when we call our programm like env -i bash, => bash doesn't get any env from
+// outside but it still have some env. we need to creat it. But, there is 1
+// thing. i haven't handled the PWD yet. Please, when you know how to use pwd,
+// use it, and use file ft_env_changing.c with the func ft_create_n_modify_env
+// to add it to the env.
+//

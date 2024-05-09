@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unquoted_quote_parenthesis.c                    :+:      :+:    :+:   */
+/*   ft_pre_check_input.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:07:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 11:15:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 12:13:58 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-// void	ft_print_error(char *error, char *str)
-// {
-// 	if (ft_strcmp(error, "syntax") == 1)
-// 	{
-// 		if (write(2, "syntax error near unexpected token `", 36) != -1)
-// 			if (write(2, str, ft_strlen(str)) != -1)
-// 				write(2, "'\n", 2);
-// 	}
-// }
-
-//str_end == 0 -> check til the end
 static int	ft_is_only_empty(char *str_start, char *str_end)
 {
 	if (str_end == 0)
@@ -45,8 +34,6 @@ static int	ft_is_only_empty(char *str_start, char *str_end)
 	}
 	return (1);
 }
-
-
 
 static int	ft_check_quotes(char *str, int i, char *temp)
 {
@@ -133,7 +120,7 @@ static int	ft_check_parenthesis(char *str)
 //	if we get unclosed quotes or parenthesis, that's syntax error -> exit code 2
 
 // here we checked: not unquoted, not unclosed parenthesis, not empty closed parenthesis.
-int	ft_input_check_parenthesis_n_quotes(char *str)
+int	ft_pre_check_input(char *str)
 {
 	if (ft_check_quotes(str, 0, 0) == 0 || ft_check_parenthesis(str) == 0)
 	{
