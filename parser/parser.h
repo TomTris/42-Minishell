@@ -6,14 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:38:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 13:59:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 18:55:15 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../minishell.h"
 # include "../libft/libft.h"
 
 typedef struct s_groups_break
@@ -58,5 +57,17 @@ int		ft_pre_check_input(char *str);
 
 int		ft_parenthesis_close_find(char *str);
 char	*ft_trim_whitespace(char *str);
+
+/***************************ft_parenthesis_check_uniq *************************/
+int		ft_find_sign_before(char *str, int i);
+int		ft_find_sign_after(char *str, int i);
+int		ft_count_valid_characters_of_a_word(char *str);
+int		ft_skip_redirection(char *str);
+int		ft_print_str_error(char *str, int i);
+int		ft_parenthesis_check_uniq(char *str);
+
+int		ft_sign_check_empty(char *str);
+
+
 
 #endif

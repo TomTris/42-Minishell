@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:07:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 12:13:58 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/09 17:51:01 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ static int	ft_check_parenthesis_closed(char *str)
 		else if (str[i] == '"')
 			i = ft_strchr(str + i + 1, '"') - str;
 		else if (str[i] == ')')
-			return (i);
+			return (i + 1);
 		else if (str[i] == '(')
 		{
 			check = ft_check_parenthesis_closed(str + i + 1);
 			if (check == 0)
 				return (0);
-			if (ft_is_only_empty(str + i + 1, str + i + 1 + check) == 1)
+			if (ft_is_only_empty(str + i + 1, str + i + check - 1) == 1)
 				return (write(2,
 						"syntax error near unexpected token `)'\n", 39), 0);
-			i = i + 1 + check;
+			i = i + check;
 		}
 	}
 	return (write(2, "syntax error near unexpected token `(`'\n", 39), 0);
@@ -119,14 +119,17 @@ static int	ft_check_parenthesis(char *str)
 // because we don't handle unclosed quotes =>
 //	if we get unclosed quotes or parenthesis, that's syntax error -> exit code 2
 
-// here we checked: not unquoted, not unclosed parenthesis, not empty closed parenthesis.
+// here we checked: **-*-*-*-
+//  not unclosed quotes, not unclosed parenthesis, not empty closed parenthesis.
 int	ft_pre_check_input(char *str)
 {
-	if (ft_check_quotes(str, 0, 0) == 0 || ft_check_parenthesis(str) == 0)
+	if (ft_check_quotes(str, 0, 0) == 0)
 	{
-		printf("input not qualified\n");
+		printf("input not qualified1\n");
 		return (0);
 	}
+	if (ft_check_parenthesis(str) == 0)
+		printf("input not qualified2\n");
 	return (1);
 }
 
