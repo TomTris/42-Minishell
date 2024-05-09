@@ -1,7 +1,9 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 NAME = parser
-SRC = ft_pre_check_input.c ft_frequent_used_func.c ft_parenthesis_check.c
+SRC = ft_pre_check_input.c ft_frequent_used_func.c \
+	ft_parenthesis_check_uniq.c ft_parenthesis_check_uniq2.c\
+	ft_sign_check_empty.c
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)
