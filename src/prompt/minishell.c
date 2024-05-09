@@ -6,11 +6,17 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:25:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/09 16:23:49 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:46:15 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include "prompt.h"
+
+// void	init_signals()
+// {
+// 	signal(SIGUSR2, handler);
+// }
 
 int	main(int argc, char const *argv[])
 {
@@ -19,10 +25,12 @@ int	main(int argc, char const *argv[])
 	(void)argc;
 	(void)argv;
 	using_history();
+	// init_signals();
 	while (1)
 	{
-		line = readline("minishell>");
-		add_history(line);
+		line = readline("minishell$");
+		if (line[0])
+			add_history(line);
 		free(line);
 	}
 	return (0);
