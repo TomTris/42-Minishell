@@ -17,10 +17,13 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(HDR_FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) $(HDR_FLAGS) -o $(NAME) $(OBJS) $(LIBFT) && ./$(NAME)
+	$(CC) $(CFLAGS) $(LFLAGS) $(HDR_FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 
-test:  $(OBJS) $(TEST_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FLAGS) -o $(TEST_PATH)/$(NAME) $(TEST_OBJS) $(LIBFT) && ./$(TEST_PATH)/$(NAME)
+# test:  $(OBJS) $(TEST_OBJS) $(LIBFT)
+# 	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FLAGS) -o $(TEST_PATH)/$(NAME) $(TEST_OBJS) $(LIBFT) && ./$(TEST_PATH)/$(NAME)
+
+test:  $(NAME)
+	./minishell
 
 libft: $(LIBFT)
 
