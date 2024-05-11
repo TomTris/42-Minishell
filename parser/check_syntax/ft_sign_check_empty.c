@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:49:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 20:52:48 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/11 00:37:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	ft_check_empty_after(char *str, int i)
 {
 	int		j;
 	char	*temp;
-
+// printf("%s\n", str + i);
 	j = i;
 	while (str[i] && str[++i])
 	{
@@ -108,7 +108,7 @@ int	ft_sign_check_empty(char *str)
 		if (str[i] == '\'' || str[i] == '"')
 			i = ft_strchr(str + i + 1, str[i]) - str;
 		if ((str[i] == '|' ) || (str[i + 1] == '&' && str[i] == '&'))
-		{
+		{printf("%s\n", str + i);
 			if ((str[i] == '|' && str[i + 1] == '|')
 				|| ((str[i]) == '&' && str[i + 1] == '&'))
 				i++;

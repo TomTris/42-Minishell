@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 22:50:38 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/10 22:04:41 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/11 05:10:28 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/11 05:16:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int a)
+char	*ft_strnjoin(char const *dest, char const *src, int n)
 {
-	if (((a > 47) && (a < 58))
-		|| ((a > 64) && (a < 91))
-		|| ((a > 96) && (a < 123)))
-		return (1);
-	else
-		return (0);
+	int		i;
+	int		j;
+	char	*ret;
+
+	ret = (char *)malloc
+		(ft_strlen(((char *)dest) + n + 1) * sizeof(char));
+	if (ret == 0)
+		return (NULL);
+	i = -1;
+	while (dest[++i])
+		ret[i] = dest[i];
+	j++;
+	while (n >= 1)
+	{
+		ret[i++] = src[j++];
+		n--;
+	}
+	ret[i] = 0;
+	return (ret);
 }
-
-/*int main(void)
-{
-    int a;
-
-    a = 0;
-    while(a < 170)
-    {
-        if ((ft_isalnum(a)) != (isalnum(a)))
-        {
-            printf("%d",a);
-            break;
-        }
-        a++;
-    }
-    if (a == 170)
-        printf("%d", a);
-    return(0);
-}*/

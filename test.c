@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parenthesis_check_uniq2.c                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 17:57:04 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 20:53:22 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/10 15:22:13 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/10 15:24:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "stdio.h"
 
-int	ft_parenthesis_check_uniq(char *str)
+int	main(int ac, char **av)
 {
 	int	i;
-	int	temp;
-
-	i = -1;
-	while (str[++i])
+	
+	if (ac != -1)
 	{
-		if (str[i] == '\'' || str[i] == '"')
-			i = ft_strchr(str + i + 1, str[i]) - str;
-		else if (str[i] == '(')
+		i = 0;
+		while (av[i] != 0)
 		{
-			temp = ft_parenthesis_close_find(str + i + 1);
-			if (ft_find_sign_before(str, i) == 0
-				|| ft_find_sign_after(str, i + temp) == 0)
-				return (0);
+			printf("%s\n", av[i]);
+			i++;
 		}
 	}
 	return (1);
