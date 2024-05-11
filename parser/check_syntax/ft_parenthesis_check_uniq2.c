@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_break_input.h                                   :+:      :+:    :+:   */
+/*   ft_parenthesis_check_uniq2.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 21:04:22 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/10 23:50:28 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/09 17:57:04 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/10 14:15:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BREAK_INPUT.H
-# define FT_BREAK_INPUT.H
+#include "parser.h"
 
-#include "../../libft/libft.h"
-
-typedef struct s_sub_shell
+int	ft_parenthesis_check_uniq(char *str)
 {
-	int		in_fd;
-	int		out_fd;
-	int		nbr;
-	int		sign_before;
-	int		sign_after;
-	char	*str;
-	char	**env;
-}	t_sub_shell;
+	int	i;
+	int	temp;
 
-
-
-void		ft_free_sub_shell(t_sub_shell *sub_shell);
-t_sub_shell	*ft_sub_shell_pre_init(char *str, char **env);
-int			ft_sub_shell_execute(t_sub_shell sub_shell);
-
-#endif
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			i = ft_strchr(str + i + 1, str[i]) - str;
+		else if (str[i] == '(')
+		{
+			temp = ft_parenthesis_close_find(str + i + 1);
+			if (ft_find_sign_before(str, i) == 0
+				|| ft_find_sign_after(str, i + temp) == 0)
+				return (0);
+		}
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 09:22:27 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 20:21:42 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/11 00:48:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,9 @@ int	ft_find_sign_before(char *str, int i)
 // int	main(void)
 // {
 // 	// char *str = "(22) | 1 | ( 2 && 144 ) && ( | ( )( )) || 2 ||(1) | 1";
-// 	char *str = "((  || && |)1) ";
+// 	char *str = " ac || we \"() && (()\" || '";
 
-// 	if (ft_pre_check_input(str) == 0 || ft_parenthesis_check_uniq(str) == 0)
+// 	if (ft_pre_check_input(str) == 0 || ft_parenthesis_check_uniq(str) == 0 || ft_sign_check_empty(str) == 0)
 // 		ft_printf_fd(2, "somewere wrong\n");
 // 	return (0);
 // }

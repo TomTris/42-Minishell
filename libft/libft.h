@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 11:28:56 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/11 05:16:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,26 @@ int		ft_toupper(int c);
 
 /************************   Functions that i added   **************************/
 int		ft_isempty(int c);
+int		ft_isalnum_(int c);
 int		ft_strcmp(char *str1, char *str2);
+char	*ft_strdup_middle_del(char *str, int start_del, int end_del);
+char	*ft_trim_whitespace(char *str);
+int		ft_is_valid_word(char *str, int i);
+int		ft_cnt_valid_word(char *str);
+int		ft_empty_cnt(char *str);
+char	*ft_trim_whitespace(char *str);
+char	*ft_strdup_middle_del(char *str, int start_del, int end_del);
+int		ft_isalnum_(int a);
+int		ft_cnt_valid_word(char *str);
+int		ft_is_valid_word(char *str, int i);
+int		ft_empty_cnt(char *str);
+char	*ft_strnjoin(char const *dest, char const *src, int n);
 
 /************************   ADVANCED C FUNCTIONS   **************************/
 //ft_split, we have an array of separators, not only a char
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char *separators);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -74,7 +86,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
-
+/*********************** FUNCTIONS THAT I MODIFIED **************************/
+char	**ft_split(char const *s, char *separators);
 /**********************   LINKED LISTS' FUNCTIONS   *************************/
 typedef struct s_list
 {

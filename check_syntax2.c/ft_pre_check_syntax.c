@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pre_check_input.c                               :+:      :+:    :+:   */
+/*   ft_pre_check_syntax.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:07:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 19:38:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/11 02:18:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_check_quotes(char *str, int i, char *temp)
 			temp = ft_strchr(str + i + 1, '"');
 			if (temp == 0)
 				return (write(2,
-						"syntax error near unexpected token `\"'\n", 39), 0);
+						"syntax error near `\"'\n", 39), 0);
 			i = temp - str;
 		}
 		else if (str[i] == '\'')
@@ -53,7 +53,7 @@ static int	ft_check_quotes(char *str, int i, char *temp)
 			temp = ft_strchr(str + i + 1, '\'');
 			if (temp == 0)
 				return (write(2,
-						"syntax error near unexpected token `''\n", 39), 0);
+						"syntax error near `''\n", 39), 0);
 			i = temp - str;
 		}
 	}
@@ -81,11 +81,11 @@ static int	ft_check_parenthesis_closed(char *str)
 				return (0);
 			if (ft_is_only_empty(str + i + 1, str + i + check - 1) == 1)
 				return (write(2,
-						"syntax error near unexpected token `)'\n", 39), 0);
+						"syntax error token `)'\n", 39), 0);
 			i = i + check;
 		}
 	}
-	return (write(2, "syntax error near unexpected token `(`'\n", 39), 0);
+	return (write(2, "syntax error token `(`'\n", 39), 0);
 }
 
 static int	ft_check_parenthesis(char *str)
@@ -100,7 +100,7 @@ static int	ft_check_parenthesis(char *str)
 			i = ft_strchr(str + i + 1, str[i]) - str;
 		else if (str[i] == ')')
 			return (write(2,
-					"syntax error near unexpected token `)'\n", 39), 0);
+					"syntax error near token `)'\n", 39), 0);
 		else if (str[i] == '(')
 		{
 			check = ft_check_parenthesis_closed(str + i + 1);
@@ -121,7 +121,7 @@ static int	ft_check_parenthesis(char *str)
 
 // here we checked: **-*-*-*-
 //  not unclosed quotes, not unclosed parenthesis, not empty closed parenthesis.
-int	ft_pre_check_input(char *str)
+int	ft_pre_check_syntax(char *str)
 {
 	if (ft_check_quotes(str, 0, 0) == 0)
 	{
