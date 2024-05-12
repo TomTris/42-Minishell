@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 05:16:42 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 00:43:36 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,15 @@ int		ft_isalnum_(int a);
 int		ft_cnt_valid_word(char *str);
 int		ft_is_valid_word(char *str, int i);
 int		ft_empty_cnt(char *str);
-char	*ft_strnjoin(char const *dest, char const *src, int n);
+char	*ft_strnjoin(char *dest, char *src, int n);
+
+//fnc i modified and it's shorter
+char	*sdup(const char *s1);
+char	*snjoin(char *dest, char *src, int n);
+char	*sdup_md_del(char *str, int start_del, int end_del);
+int		sncmp(const char *s1, const char *s2, size_t n);
+size_t	slen(const char *a);
+
 
 /************************   ADVANCED C FUNCTIONS   **************************/
 //ft_split, we have an array of separators, not only a char
@@ -107,7 +115,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void*));
 
 /***************************   GET_NEXT_LINE   ******************************/
 char	*get_next_line(int fd);
-char	*ft_strndup(char *str, int n);
+char	*sndup(char *str, int n);
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
 
@@ -124,7 +132,7 @@ int		ft_putx(unsigned int n);
 int		ft_putxx(unsigned int n);
 
 /***************************   FT_PRINTF__FD *********************************/
-int		ft_printf_fd(int fd, const char *str_o, ...);
+int		print_fd(int fd, const char *str_o, ...);
 int		ft_putp_fd(unsigned long n, int fd);
 int		ft_putc_fd(char c, int fd);
 int		ft_putdi_fd(int n, int fd);

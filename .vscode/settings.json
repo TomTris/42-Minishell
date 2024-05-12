@@ -2,6 +2,7 @@
 	"files.associations": {
 		"parser.h": "c",
 		"libft.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"wildcard.h": "c"
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:47:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 03:30:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 00:42:56 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *str1, char *str2)
+int	scmp(char *str1, char *str2)
 {
 	int	i;
 

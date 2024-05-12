@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   fre_used_func.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/11 22:24:26 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/11 22:32:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+int	token_check(char *str)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
-
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	if (str[0] == '|' && str[0 + 1] == '|')
+		return (1);
+	if (str[0] == '&' && str[0 + 1] == '&')
+		return (2);
+	if (str[0] == '|')
+		return (3);
+	if (str[0] == '(')
+		return (4);
+	if (str[0] == ')')
+		return (5);
+	if (str[0] == '<')
+		return (6);
+	if (str[0] == '>')
+		return (7);
+	return (0);
 }
