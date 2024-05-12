@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:55:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 10:50:35 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 00:42:30 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*ft_free(char **str1, char **str2)
 	return (0);
 }
 
-char	*ft_strndup(char *str, int n)
+char	*sndup(char *str, int n)
 {
 	int		i;
 	char	*ret;
@@ -87,7 +87,7 @@ static char	*ft_before_after_nl(char *lstr, int i, int check,
 		}
 		if (check == 0)
 			return (ft_strdup(lstr));
-		return (ft_strndup(lstr, i));
+		return (sndup(lstr, i));
 	}
 	while (lstr[i])
 		if (lstr[i++] == '\n')
