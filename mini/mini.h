@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 23:12:06 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 01:16:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ typedef struct s_mini
 	t_sub_mini	*sub_mini;
 }	t_mini;
 
-int	ft_pre_check_syntax(char *str);
 
+int				ft_isclosed(char *str);
 
 void			mini0(t_mini *mini, char *str, char **env);
 int				sub_mini0(t_mini *mini);
 int				mini_unit0(t_sub_mini *sub_mini);
-int				ft_syntax_break(t_mini_unit *mini_unit, char *str);
+int				syntax_check(t_mini_unit *mini_unit, char *str);
 
 
 int				free_mini(t_mini *mini);

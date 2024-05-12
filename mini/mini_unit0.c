@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 00:48:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 01:16:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	mini_unit0(t_sub_mini *sub_mini)
 	cnt = 0;
 	while (++cnt <= sub_mini->mini_unit[0].nbr)
 	{
-		if (ft_syntax_break(&sub_mini->mini_unit[cnt],
+		if (syntax_check(&sub_mini->mini_unit[cnt],
 				sub_mini->mini_unit[cnt].str) == 0)
 		{
 			// printf("mini_unit0 return\n");

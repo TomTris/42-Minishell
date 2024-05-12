@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 01:11:33 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 01:18:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int ac, char **av, char **env)
 	// ft_strcpy(str,
 	// 	 "1(2(3)4(5(6)7(8)9 1)2s34f5 )6|7 8|9 ||1c0d2|3|4a5b6 7s8f9f1 0%2%34 56\" 7'8\"");
 	// ft_strcpy(str, "1 |(23)46|7 8|9 ||1c0d2|");
-	ft_strcpy(str, "<$> | $.");
+	ft_strcpy(str, "<$ >3 (a) | $.");
 	if (ac != 0)
 		av = 0;
-	if (ft_pre_check_syntax(str) == 0)
+	if (ft_isclosed(str) == 0)
 		return (printf("pre_check wrong\n"), 1);
 	mini0(&mini, str, env);
 	if (sub_mini0(&mini) == 0)

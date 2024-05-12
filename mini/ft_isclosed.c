@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pre_check_syntax.c                              :+:      :+:    :+:   */
+/*   ft_isclosed.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 19:07:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 06:09:09 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 01:17:34 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_is_unparented(char *str, int ret, int cnt)
 	return (1);
 }
 
-int	ft_pre_check_syntax(char *str)
+int	ft_isclosed(char *str)
 {
 	if (ft_is_unquoted(str) == 0 || ft_is_unparented(str, 0, 0) == 0)
 		return (0);

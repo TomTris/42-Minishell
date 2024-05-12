@@ -4,7 +4,7 @@ NAME = mini
 LIBFT_H = ../libft
 LIBFT_A = ../libft/libft.a
 SRC = 	mini0.c sub_mini0.c mini_unit0.c\
-		syntax_break.c	\
+		syntax_check.c	\
 		freq_used.c freq_used2.c ft_isclosed.c ft_free.c
 OBJS = $(SRC:.c=.o)
 
