@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:03:10 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/10 22:51:56 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 04:11:02 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ char	*ft_trim_whitespace(char *str)
 	while (str[--j])
 		if (ft_isempty(str[j]) != 1)
 			break ;
-	return (ft_strndup(str + i, j - i + 1));
+	return (sndup(str + i, j - i + 1));
 }

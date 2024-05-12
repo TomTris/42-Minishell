@@ -1,6 +1,0 @@
-1. handle wildcard. Know priority of it in this order:
-2. handle set in_fd, out_fd, split space, execute $ in quotes, split with space, dequotes
-3. ask bori about pipex.
-4. Thanks for doing good today. done syntax check, done sub_shell_create. starting recursion.
-
-22:36 9.5.2024 Tom

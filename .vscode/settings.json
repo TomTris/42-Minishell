@@ -3,6 +3,7 @@
 		"parser.h": "c",
 		"libft.h": "c",
 		"minishell.h": "c",
-		"wildcard.h": "c"
+		"wildcard.h": "c",
+		"mini.h": "c"
 	}
 }
