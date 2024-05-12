@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 00:43:36 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 04:02:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <ctype.h>
 # include <stdarg.h>
 # include <string.h>
+# include <pthread.h>
+# include <semaphore.h>
 
 // there are 1.libft 2.get_next_line 3.ft_printf and 4.ft_printf_fd
 // get_next_line -only 1 file descriptor. call get_next_line(-1) to reset
