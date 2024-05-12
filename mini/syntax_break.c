@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 21:52:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 01:13:18 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_redi(t_mini_unit *mini_unit, char *str, int *i)
 	while (ft_isempty(str[*i]) != 1 && str[*i] != 0 && token(str + *i) == 0)
 	{
 		*i += after_quote(str + *i);
-		if (*i != i_old)
+		if (*i == i_old)
 			(*i)++;
 		i_old = *i;
 	}
@@ -59,13 +59,13 @@ int	ft_redi(t_mini_unit *mini_unit, char *str, int *i)
 // 	if (token(str + *i) == C_PARENT)
 // 	{
 // 		if (tke->cmd == 0 && tke->av == 0 && tke->redi == 0)
-// 			return (print_err("syntax error near unexpected token `)'\n"));
+// 			return (print_err("syntax error near unexpected token `)'"));
 // 		return (2);
 // 	}
 // 	else if (token(str + *i) == O_PARENT)
 // 	{
 // 		if (tke->cmd != 0)
-// 			return (print_err("syntax error near unexpected token `('\n"));
+// 			return (print_err("syntax error near unexpected token `('"));
 // 		if (ft_syntax_break(mini_unit, str + 1) == 0)
 // 			return (0);
 // 		*i += after_mlt_parent(str + *i);
@@ -88,10 +88,13 @@ int	ft_syntax_break(t_mini_unit *mini_unit, char *str)
 	tke.redi = 0;
 	while (str[i])
 	{
-		while (ft_isempty(str[i]) == 1)
+		if (ft_isempty(str[i]) == 1)
 			i++;
-		if (str[i] == '\'' || str[i] == '"')
+		else if (str[i] == '\'' || str[i] == '"')
+		{
+			tke.cmd = 1;
 			i += after_quote(str + i);
+		}
 		else if (token(str + i) == 0 && str[i])
 		{
 			i++;
@@ -100,13 +103,13 @@ int	ft_syntax_break(t_mini_unit *mini_unit, char *str)
 		else if (token(str + i) == C_PARENT)
 		{
 			if (tke.cmd == 0 && tke.av == 0 && tke.redi == 0)
-				return (print_err("syntax error near unexpected token `)'\n"));
+				return (print_err("syntax error near unexpected token `)'"));
 			return (2);
 		}
 		else if (token(str + i) == O_PARENT)
 		{
 			if (tke.cmd != 0)
-				return (print_err("syntax error near unexpected token `('\n"));
+				return (print_err("syntax error near unexpected token `('"));
 			if (ft_syntax_break(mini_unit, str + 1) == 0)
 				return (0);
 			i += after_mlt_parent(str + i);
@@ -117,7 +120,6 @@ int	ft_syntax_break(t_mini_unit *mini_unit, char *str)
 			tke.redi = 1;
 			if (ft_redi(mini_unit, str, &i) == 0)
 				return (0);
-			return (1);
 		}
 	}
 	if (tke.cmd == 0 && tke.av == 0 && tke.redi == 0)
@@ -148,13 +150,13 @@ int	ft_syntax_break(t_mini_unit *mini_unit, char *str)
 // 		if (token(str + i) == C_PARENT)
 // 		{
 // 			if (tke.cmd == 0 && tke.av == 0 && tke.redi == 0)
-// 				return (print_err("syntax error near unexpected token `)'\n"));
+// 				return (print_err("syntax error near unexpected token `)'"));
 // 			return (1);
 // 		}
 // 		else if (token(str + i) == O_PARENT)
 // 		{
 // 			if (tke.cmd != 0)
-// 				return (print_err("syntax error near unexpected token `('\n"));
+// 				return (print_err("syntax error near unexpected token `('"));
 // 			tke.cmd = 1;
 // 			if (ft_syntax_break(mini_unit, str + 1) == 0)
 // 				return (0);
@@ -174,8 +176,8 @@ int	ft_syntax_break(t_mini_unit *mini_unit, char *str)
 // 			return (print_err
 // 				("syntax error near unexpected token `newline'\n"));
 // 		if (mini_unit->sign_sub == 1)
-// 			return (print_err("syntax error near unexpected token `||'\n"));
+// 			return (print_err("syntax error near unexpected token `||'"));
 // 		else
-// 			return (print_err("syntax error near unexpected token `&&'\n"));
+// 			return (print_err("syntax error near unexpected token `&&'"));
 // 	}
 // }

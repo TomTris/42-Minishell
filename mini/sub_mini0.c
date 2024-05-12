@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 23:51:04 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 23:58:07 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,11 @@ int	sub_mini0(t_mini *mini)
 	// }
 	while (++i <= mini->sub_mini[0].nbr)
 	{
-		printf("sub[%d]:\n", i);
+		// printf("sub[%d]:\n", i);
 		// printf("str = {%s}\n", mini->sub_mini[i].str);
 		if (mini_unit0(&mini->sub_mini[i]) == 0)
 		{
-			printf("sub_mini returns\n");
+			// printf("sub_mini returns\n");
 			return (0);
 		}
 	}

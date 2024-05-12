@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 23:52:27 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 00:48:21 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_pipe_finder(char *str)
 			j++;
 		j_old = j;
 	}
-	printf("str = {%s}\n", str + j);
+	// printf("str = {%s}\n", str + j);
 	return (j);
 }
 
@@ -119,17 +119,17 @@ int	mini_unit0(t_sub_mini *sub_mini)
 	if (ft_mini_unit_str_split(sub_mini) == 0)
 		return (0);
 	cnt = 0;
-	while (++cnt <= sub_mini->mini_unit[0].nbr)
-		printf("sub_mini str = {%s}\n", sub_mini->mini_unit[cnt].str);
-	// cnt = 0;
 	// while (++cnt <= sub_mini->mini_unit[0].nbr)
-	// {
-	// 	if (ft_syntax_break(&sub_mini->mini_unit[cnt],
-	// 			sub_mini->mini_unit[cnt].str) == 0)
-	// 	{
-	// 		printf("mini_unit0 return\n");
-	// 		return (0);
-	// 	}
-	// }
+	// 	printf("sub_mini str = {%s}\n", sub_mini->mini_unit[cnt].str);
+	cnt = 0;
+	while (++cnt <= sub_mini->mini_unit[0].nbr)
+	{
+		if (ft_syntax_break(&sub_mini->mini_unit[cnt],
+				sub_mini->mini_unit[cnt].str) == 0)
+		{
+			// printf("mini_unit0 return\n");
+			return (0);
+		}
+	}
 	return (0);
 }

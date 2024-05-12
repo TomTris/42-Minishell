@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 13:49:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 00:07:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 int	syn_err(char *str, int sign)
 {
 	if (str != 0)
-		if (print_fd(2, "syntax error near unexpected token `%s'\n") == -1)
+		if (print_fd(2, "syntax error near unexpected token `%s'") == -1)
 			return (perror("printf_fd"), 0);
 	if (sign == OR)
-		return (print_err("syntax error near unexpected token `||'\n"));
+		return (print_err("syntax error near unexpected token `||'"));
 	if (sign == AND)
-		return (print_err("syntax error near unexpected token `&&'\n"));
+		return (print_err("syntax error near unexpected token `&&'"));
 	if (sign == PIPE)
-		return (print_err("syntax error near unexpected token `|'\n"));
+		return (print_err("syntax error near unexpected token `|'"));
 	if (sign == RE_IN)
-		return (print_err("syntax error near unexpected token `<'\n"));
+		return (print_err("syntax error near unexpected token `<'"));
 	if (sign == RE_OUT)
-		return (print_err("syntax error near unexpected token `>'\n"));
+		return (print_err("syntax error near unexpected token `>'"));
 	if (sign == APPEND)
-		return (print_err("syntax error near unexpected token `>>'\n"));
+		return (print_err("syntax error near unexpected token `>>'"));
 	if (sign == HERE_DOC)
-		return (print_err("syntax error near unexpected token `<<'\n"));
+		return (print_err("syntax error near unexpected token `<<'"));
 	if (sign == NEWLINE)
-		return (print_err("syntax error near unexpected token `<<'\n"));
+		return (print_err("syntax error near unexpected token `new line'"));
 	else
 		return (print_err("sthing wrong in syn_err"));
 }
