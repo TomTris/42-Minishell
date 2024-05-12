@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:24:52 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 10:41:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 11:24:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	token(char *str)
 	if (str[0] == '(')
 		return (O_PARENT);
 	if (str[0] == ')')
-		return (CLO_PARENT);
+		return (C_PARENT);
 	if (str[0] == '<' && str[1] == '<')
 		return (HERE_DOC);
 	if (str[0] == '>' && str[0] == '>')

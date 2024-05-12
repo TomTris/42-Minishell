@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 10:42:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 23:51:04 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_or_and_finder(t_sub_mini *sub_mini, char *str)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (str[i])
 	{
 		if (token(str + i) != OR && token(str + i) != AND)
@@ -108,19 +108,27 @@ static int	ft_init_sub_mini(t_sub_mini	*sub_mini, char *str_ori)
 
 int	sub_mini0(t_mini *mini)
 {
-	int	i;
+	int		i;
 
-	mini->str = mini->str;
 	mini->sub_mini = sub_mini_cre(ft_cnt_sub_mini(mini->str), &mini->env);
 	if (mini->sub_mini == NULL)
 		return (0);
 	if (ft_init_sub_mini(mini->sub_mini, mini->str) == 0)
-		return (ft_free_mini(mini), 0);
+		return (0);
 	i = 0;
+	// while (++i <= mini->sub_mini[0].nbr)
+	// {
+	// 	printf("str = {%s}\n", mini->sub_mini[i].str)
+	// }
 	while (++i <= mini->sub_mini[0].nbr)
 	{
+		printf("sub[%d]:\n", i);
+		// printf("str = {%s}\n", mini->sub_mini[i].str);
 		if (mini_unit0(&mini->sub_mini[i]) == 0)
-			return (ft_free_sub_mini(&mini->sub_mini));
+		{
+			printf("sub_mini returns\n");
+			return (0);
+		}
 	}
 	return (1);
 }

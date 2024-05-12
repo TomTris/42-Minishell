@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 10:32:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 23:12:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # define AND 2
 # define PIPE 3
 # define O_PARENT 4
-# define CLO_PARENT 5
+# define C_PARENT 5
 # define RE_IN 6
 # define RE_OUT 7
 # define HERE_DOC 8
 # define APPEND 9
+# define NEWLINE 10
 
 typedef struct s_mini	t_mini;
 //sign 0 nothing
@@ -37,6 +38,7 @@ typedef struct s_mini	t_mini;
 typedef struct s_mini_unit
 {
 	int			nbr;
+	int			nbr_sum;
 	char		*str;
 	char		*cmd;
 	char		**args;
@@ -45,6 +47,7 @@ typedef struct s_mini_unit
 	char		**here_doc;
 	char		**append;
 	char		***env_ori;
+	int			sign_sub;
 	t_mini		*mini;
 }	t_mini_unit;
 
@@ -67,13 +70,15 @@ typedef struct s_mini
 int	ft_pre_check_syntax(char *str);
 
 
-int				mini_unit0(t_sub_mini *sub_mini);
 void			mini0(t_mini *mini, char *str, char **env);
 int				sub_mini0(t_mini *mini);
+int				mini_unit0(t_sub_mini *sub_mini);
+int				ft_syntax_break(t_mini_unit *mini_unit, char *str);
 
-int				ft_free_mini(t_mini *mini);
-int				ft_free_sub_mini(t_sub_mini **sub_mini_ori);
-int				ft_free_mini_unit(t_mini_unit **mini_unit_ori);
+
+int				free_mini(t_mini *mini);
+int				free_sub_mini(t_sub_mini *sub_mini);
+int				free_mini_unit(t_mini_unit *mini_unit);
 
 
 int				after_quote(char *str);
@@ -81,5 +86,8 @@ int				token(char *str);
 int				print_err(char *str);
 int				after_1_parent(char *str);
 int				after_mlt_parent(char *str);
+
+int				syn_err(char *str, int sign);
+char			**smerge(char **dest, char *src);
 
 #endif
