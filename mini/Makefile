@@ -4,11 +4,14 @@ NAME = mini
 LIBFT_H = ../libft
 LIBFT_A = ../libft/libft.a
 SRC = 	mini0.c sub_mini0.c mini_unit0.c\
-		freq_used.c ft_pre_check_syntax.c ft_free.c
+		syntax_break.c	\
+		freq_used.c freq_used2.c ft_isclosed.c ft_free.c
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)
 	cc -o $(NAME) $(OBJS) $(LIBFT_A)
+	make clean
+	./mini
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -22,6 +25,6 @@ fclean:
 	make clean -C $(LIBFT_H)
 	rm -f  $(NAME) $(LIBFT_A)
 
-re: fclean all
+re: fclean all clean
 
 .PHONY: all clean fclean re bonus

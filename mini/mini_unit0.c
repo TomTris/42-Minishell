@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 11:04:48 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 23:52:27 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_mini_unit	*mini_unit_cre(int nbr, char ***env)
+t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
 {
 	t_mini_unit	*ret;
 	int			i;
@@ -33,6 +33,8 @@ t_mini_unit	*mini_unit_cre(int nbr, char ***env)
 		ret[i].env_ori = 0;
 		ret[i].mini = 0;
 		ret[i].env_ori = env;
+		ret[i].sign_sub = sign;
+		ret[i].nbr_sum = nbr;
 	}
 	ret[0].nbr = nbr;
 	return (ret);
@@ -110,15 +112,24 @@ int	mini_unit0(t_sub_mini *sub_mini)
 	int	cnt;
 
 	cnt = ft_cnt_mini_unit(sub_mini->str);
-	sub_mini->mini_unit = mini_unit_cre(cnt, sub_mini->env_ori);
+	sub_mini->mini_unit = mini_unit_cre(cnt,
+			sub_mini->env_ori, sub_mini->sign_after);
 	if (sub_mini->mini_unit == 0)
-		return (ft_free_sub_mini(&sub_mini));
+		return (0);
 	if (ft_mini_unit_str_split(sub_mini) == 0)
-		return (ft_free_sub_mini(&sub_mini));
+		return (0);
 	cnt = 0;
 	while (++cnt <= sub_mini->mini_unit[0].nbr)
-	{
-		printf("%s\n", sub_mini->mini_unit[cnt].str);
-	}
-	return (1);
+		printf("sub_mini str = {%s}\n", sub_mini->mini_unit[cnt].str);
+	// cnt = 0;
+	// while (++cnt <= sub_mini->mini_unit[0].nbr)
+	// {
+	// 	if (ft_syntax_break(&sub_mini->mini_unit[cnt],
+	// 			sub_mini->mini_unit[cnt].str) == 0)
+	// 	{
+	// 		printf("mini_unit0 return\n");
+	// 		return (0);
+	// 	}
+	// }
+	return (0);
 }

@@ -4,6 +4,14 @@
 		"libft.h": "c",
 		"minishell.h": "c",
 		"wildcard.h": "c",
-		"mini.h": "c"
+		"mini.h": "c",
+		"sstream": "c",
+		"bitset": "c",
+		"cmath": "c",
+		"complex": "c",
+		"ios": "c",
+		"locale": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }
