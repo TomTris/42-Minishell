@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 01:16:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 05:15:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,24 @@ typedef struct s_sub_mini
 
 typedef struct s_mini
 {
+	int			sign;
 	char		*str;
-	char		**env;
+	char		***env;
 	t_sub_mini	*sub_mini;
 }	t_mini;
 
 
 int				ft_isclosed(char *str);
 
-void			mini0(t_mini *mini, char *str, char **env);
+t_mini			*mini0(char *str, char ***env, int sign);
 int				sub_mini0(t_mini *mini);
 int				mini_unit0(t_sub_mini *sub_mini);
 int				syntax_check(t_mini_unit *mini_unit, char *str);
 
 
 int				free_mini(t_mini *mini);
-int				free_sub_mini(t_sub_mini *sub_mini);
-int				free_mini_unit(t_mini_unit *mini_unit);
+// int				free_sub_mini(t_sub_mini *sub_mini);
+// int				free_mini_unit(t_mini_unit *mini_unit);
 
 
 int				after_quote(char *str);
@@ -89,5 +90,6 @@ int				after_mlt_parent(char *str);
 
 int				syn_err(char *str, int sign);
 char			**smerge(char **dest, char *src);
+int				ft_cnt_unempty(char *str);
 
 #endif

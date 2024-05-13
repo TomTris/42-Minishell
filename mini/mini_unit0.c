@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 01:16:38 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 02:25:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
+static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
 {
 	t_mini_unit	*ret;
 	int			i;
@@ -40,7 +40,7 @@ t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
 	return (ret);
 }
 
-int	ft_cnt_mini_unit(char *str)
+static int	ft_cnt_mini_unit(char *str)
 {
 	int	i;
 	int	i_old;
@@ -54,7 +54,10 @@ int	ft_cnt_mini_unit(char *str)
 		i += after_quote(str + i);
 		i += after_mlt_parent(str + i);
 		if (token(str + i) == PIPE)
+		{
 			sub++;
+			i++;
+		}
 		if (i == i_old)
 			i++;
 		i_old = i;
@@ -62,7 +65,7 @@ int	ft_cnt_mini_unit(char *str)
 	return (sub);
 }
 
-int	ft_pipe_finder(char *str)
+static int	ft_pipe_finder(char *str)
 {
 	int	j;
 	int	j_old;
@@ -79,11 +82,11 @@ int	ft_pipe_finder(char *str)
 			j++;
 		j_old = j;
 	}
-	// printf("str = {%s}\n", str + j);
-	return (j);
+	return (print_err
+		("sth wrong in ft_pipe_finder,it go to the end of func\n"));
 }
 
-int	ft_mini_unit_str_split(t_sub_mini *sub_mini)
+static int	ft_mini_unit_str_split(t_sub_mini *sub_mini)
 {
 	int		i;
 	int		j;
@@ -131,5 +134,12 @@ int	mini_unit0(t_sub_mini *sub_mini)
 			return (0);
 		}
 	}
-	return (0);
+	// cnt = 0;
+	// while (++cnt <= sub_mini->mini_unit[0].nbr)
+	// {
+	// 	if (break_to_input(&sub_mini->mini_unit[cnt],
+	// 			sub_mini->mini_unit[cnt].str) == 0)
+	// 		return (0);
+	// }
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 00:07:41 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 02:11:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,14 @@ char	**smerge(char **dest, char *src)
 		ret[i] = dest[i];
 	free(dest);
 	return (ret);
+}
+
+int	ft_cnt_unempty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isempty(str[i]) == 0 && str[i] != 0)
+		i++;
+	return (i);
 }
