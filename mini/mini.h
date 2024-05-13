@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 15:15:10 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/14 00:06:32 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_mini
 }	t_mini;
 
 
-int				ft_isclosed(char *str);
 
 t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);
@@ -86,6 +85,7 @@ int				free_split(char **to_free2);
 // int				free_sub_mini(t_sub_mini *sub_mini);
 // int				free_mini_unit(t_mini_unit *mini_unit);
 
+int				ft_isclosed(char *str);
 
 int				after_quote(char *str);
 int				token(char *str);
@@ -94,7 +94,16 @@ int				after_1_parent(char *str);
 int				after_mlt_parent(char *str);
 
 int				syn_err(char *str, int sign);
-char			**smerge(char **dest, char *src, int i);
-int				ft_cnt_unempty(char *str);
+char			**smerge(char **dest, char *src);
 
+
+
+
+char			*dollar_handler(char *str_ori, char **env);
+int				after_1_dollar(char *str);
+char			*ft_is_dollar(char *ret, char *str, int i, char **env);
+char			*ft_isnt_dollar(char *str, char *ret, int *i);
+
+char			**wc_expand(char *str);
+char			**wc_expand2(char *str, int nbr);
 #endif
