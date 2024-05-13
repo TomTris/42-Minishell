@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 15:13:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/14 00:06:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,19 @@ int	syn_err(char *str, int sign)
 		return (print_err("syntax error near unexpected token `<<'"));
 	if (sign == NEWLINE)
 		return (print_err("syntax error near unexpected token `new line'"));
-	else
-		return (print_err("sthing wrong in syn_err"));
+	if (sign == O_PARENT)
+		return (print_err("syntax error near unexpected token `('"));
+	return (print_err("sthing wrong in syn_err"));
 }
 
 //this func will free(dest), not free src, and give you a merge.
 //regardless sucessful or failed
-char	**smerge(char **dest, char *src, int i)
+//i = 0
+//dest ==0 -> create 2dimen arr.
+char	**smerge(char **dest, char *src)
 {
 	char	**ret;
+	int		i;
 
 	if (dest == 0)
 	{
@@ -55,9 +59,9 @@ char	**smerge(char **dest, char *src, int i)
 		if (dest == 0)
 			return (perror("Malloc faile1d\n"), NULL);
 		dest[0] = NULL;
-	}
-	if (src[0] == '.')
 		return (dest);
+	}
+	i = 0;
 	while (dest[i] != 0)
 		i++;
 	ret = (char **)malloc((i + 2) * sizeof(char *));
@@ -73,12 +77,12 @@ char	**smerge(char **dest, char *src, int i)
 	return (ret);
 }
 
-int	ft_cnt_unempty(char *str)
-{
-	int	i;
+// int	ft_cnt_unempty(char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	while (ft_isempty(str[i]) == 0 && str[i] != 0)
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (ft_isempty(str[i]) == 0 && str[i] != 0)
+// 		i++;
+// 	return (i);
+// }
