@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 06:07:28 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 15:13:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,28 @@ int	syn_err(char *str, int sign)
 
 //this func will free(dest), not free src, and give you a merge.
 //regardless sucessful or failed
-char	**smerge(char **dest, char *src)
+char	**smerge(char **dest, char *src, int i)
 {
-	int		i;
 	char	**ret;
 
 	if (dest == 0)
 	{
 		dest = (char **)malloc(1 * sizeof(char *));
 		if (dest == 0)
-			return (perror("Malloc failed\n"), NULL);
+			return (perror("Malloc faile1d\n"), NULL);
 		dest[0] = NULL;
 	}
-	i = 0;
+	if (src[0] == '.')
+		return (dest);
 	while (dest[i] != 0)
 		i++;
-	ret = (char **)malloc(i + 2 * sizeof(char *));
+	ret = (char **)malloc((i + 2) * sizeof(char *));
 	if (ret == 0)
-		return (print_err("Malloc failed\n"), NULL);
-	ret[i + 1] = NULL;
+		return (perror("Malloc faile2d\n"), free_split(dest), NULL);
 	ret[i] = ft_strdup(src);
-	if (ret[i] == NULL)
-		return (print_err("Malloc failed\n"), NULL);
+	if (ret[i] == 0)
+		return (perror("ft_strdup"), free_split(dest), free(ret), NULL);
+	ret[i + 1] = NULL;
 	while (--i >= 0)
 		ret[i] = dest[i];
 	free(dest);

@@ -4,7 +4,7 @@ determine ‘(‘ and ‘)’ so that we don’t get in them
 split by || and && into sub-mini
 each sub_mini. will be split by | into mini_units
 break input - which part belongs to redirections and not redirections. <(ls) is a redirection, but < (ls) is a wrong syntax.
-Friendly reminder: <$(laa) => command not found and ambiguous redirect.
+Friendly reminder: <$(laa) => command not found and ambiguous redirect. But
 if there is ‘(‘ and  ‘)’ inside mini_units, break that part and it must be considered as command. if there is already command -> syntax error ( because ‘(‘ and ‘)’ also appears in part of redirections already. so there is no other purpose for ‘(‘ and ‘)’
 split by whitespaces
 expand $ in and out of quotes 

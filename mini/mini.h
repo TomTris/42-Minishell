@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 05:38:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 15:15:10 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include <dirent.h> //opendir
-
 
 # define OR 1
 # define AND 2
@@ -35,21 +34,24 @@ typedef struct s_mini	t_mini;
 //sign 3 = <<
 //sign 4 = >>
 
+typedef struct s_redirection
+{
+	int		type_re;
+	char	*str;
+} t_redirection;
+
 typedef struct s_mini_unit
 {
-	int			nbr;
-	int			nbr_sum;
-	int			lvl;
-	char		*str;
-	char		*cmd;
-	char		**args;
-	char		**re_in;
-	char		**re_out;
-	char		**here_doc;
-	char		**append;
-	char		***env_ori;
-	int			sign_sub;
-	t_mini		*mini;
+	int				nbr;
+	int				nbr_sum;
+	int				lvl;
+	char			*str;
+	char			*cmd;
+	char			**args;
+	t_redirection	*redi;
+	char			***env_ori;
+	int				sign_sub;
+	t_mini			*mini;
 }	t_mini_unit;
 
 typedef struct s_sub_mini
@@ -80,6 +82,7 @@ int				syntax_check(t_mini_unit *mini_unit, char *str);
 
 
 int				free_mini(t_mini *mini);
+int				free_split(char **to_free2);
 // int				free_sub_mini(t_sub_mini *sub_mini);
 // int				free_mini_unit(t_mini_unit *mini_unit);
 
@@ -91,7 +94,7 @@ int				after_1_parent(char *str);
 int				after_mlt_parent(char *str);
 
 int				syn_err(char *str, int sign);
-char			**smerge(char **dest, char *src);
+char			**smerge(char **dest, char *src, int i);
 int				ft_cnt_unempty(char *str);
 
 #endif
