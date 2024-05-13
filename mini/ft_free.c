@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 03:06:24 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 15:15:02 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static int	free_split(char **to_free2)
+int	free_split(char **to_free2)
 {
 	int	i;
 
@@ -36,12 +36,7 @@ static int	free_mini_unit(t_mini_unit *mini_unit)
 	{
 		free(mini_unit[i].str);
 		free(mini_unit[i].cmd);
-		free_split(mini_unit[i].append);
 		free_split(mini_unit[i].args);
-		free_split(mini_unit[i].here_doc);
-		free_split(mini_unit[i].re_in);
-		free_split(mini_unit[i].re_out);
-		free_split(mini_unit[i].append);
 		if (mini_unit[i].mini != 0)
 		{
 			free_mini(mini_unit[i].mini);

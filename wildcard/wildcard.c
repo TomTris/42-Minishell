@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:06:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 15:37:31 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 16:10:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,13 @@ char	**get_cwd_name(void)
 }
 
 //i = 0, j = 0
-int	ft_wc_expa(char *cwd_name, char *str, int i, int j)
+int	ft_wc_expa(char *name, char *str, int i, int j)
 {
-	i = 0;
-	j = 0;
-	while (str[i] && cwd_name[j])
+	while (str[i] && name[j])
 	{
 		if (str[i] != '*')
 		{
-			if (cwd_name[j] != str[i])
+			if (name[j] != str[i])
 				return (0);
 			i++;
 			j++;
@@ -100,12 +98,14 @@ int	ft_wc_expa(char *cwd_name, char *str, int i, int j)
 				i++;
 			if (str[i] == 0)
 				return (1);
-			while (cwd_name[j] != 0 && cwd_name[j] != str[i])
+			while (name[j] != 0 && name[j] != str[i])
 				j++;
-			if (cwd_name[j] == 0)
+			if (name[j] == 0)
 				return (0);
 		}
 	}
+	if (str[i] == 0 && name[j] == 0)
+		return (1);
 	return (1);
 }
 
@@ -114,7 +114,7 @@ int	main(void)
 	char	**cwd_ns;
 	int		i;
 	int		j;
-	char	*str = "*a*";
+	char	*str = "*3c";
 	char	**ret;
 
 	i = -1;
@@ -137,11 +137,7 @@ int	main(void)
 		ret = (char **)malloc(2 * sizeof(char *));
 		if (ret == 0)
 			return (perror("Malloc failed"), 0);
-		ret[0] = (char *)malloc(2 * sizeof(char));
-		if (ret[0] == 0)
-			return (free(ret), perror("Malloc failed"), 0);
-		ret[0][0] = '*';
-		ret[0][1] = 0;
+		ret[0] = ft_strdup(str);
 		ret[1] = 0;
 	}
 	i = 0;

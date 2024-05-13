@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 06:05:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 06:15:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_redi(t_mini_unit *mini_unit, char *str, int *i)
 }
 
 static int	syntax_check_3(t_mini_unit *mini_unit,
-	t_token_expect *tke, char *str, int *i)
+		t_token_expect *tke, char *str, int *i)
 {
 	if (token(str + *i) == C_PARENT)
 	{
@@ -73,20 +73,18 @@ static int	syntax_check_3(t_mini_unit *mini_unit,
 		if (tke->cmd != 0)
 			return (print_err("syntax error near unexpected token `('"));
 		mini_unit->mini = mini0(sndup(str + *i + 1,
-				after_1_parent(str + *i) - 2),
+					after_1_parent(str + *i) - 2),
 				mini_unit->env_ori, mini_unit->lvl + 1);
 		if (mini_unit->mini == 0)
 			return (0);
 		tke->paren = 1;
 		tke->cmd = 1;
 		*i += after_1_parent(str + *i);
+		return (1);
 	}
-	else
-	{
-		tke->redi = 1;
-		if (ft_redi(mini_unit, str, i) == 0)
-			return (0);
-	}
+	tke->redi = 1;
+	if (ft_redi(mini_unit, str, i) == 0)
+		return (0);
 	return (1);
 }
 
@@ -114,8 +112,7 @@ static int	syntax_check_2(t_mini_unit *mini_unit,
 		tke->cmd = 1;
 		return (1);
 	}
-	else
-		return (syntax_check_3(mini_unit, tke, str, i));
+	return (syntax_check_3(mini_unit, tke, str, i));
 }
 
 int	syntax_check(t_mini_unit *mini_unit, char *str)
