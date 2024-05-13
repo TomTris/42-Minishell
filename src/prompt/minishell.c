@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:25:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 14:16:50 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:43:42 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	reset_prompt(int signum)
 }
 void	init_signals()
 {
-	signal(SIGQUIT, SIG_IGN);
+	// signal(SIGQUIT, free_exit);
 	// if idle, reset prompt;
 	signal(SIGINT, reset_prompt);
 }
@@ -33,17 +33,16 @@ void	init_signals()
 t_exec	*simple_parse(char *line)
 {
 	t_exec	*cmd_args;
-	char	**exit_argv;
+	char	**argv;
 	char	**env;
 
-
 	env = get_env()->env_vars->env;
-	exit_argv = ft_split(line, " ");
+	argv = ft_split(line, " ");
 	cmd_args = ft_calloc(1, sizeof(t_exec));
-	cmd_args->argc = ft_arr_len(exit_argv);
-	cmd_args->argv = exit_argv;
+	cmd_args->argc = ft_arr_len(argv);
+	cmd_args->argv = argv;
 	cmd_args->env = env;
-	cmd_args->cmd = exit_argv[0];
+	cmd_args->cmd = argv[0];
 	return (cmd_args);
 }
 
@@ -63,9 +62,9 @@ int	main(int argc, char const *argv[], char **env)
 	while (1)
 	{
 		line = readline("minishell$ ");
-		cmd_args = simple_parse(line);
-		if (line[0])
+		if (line && line[0])
 		{
+			cmd_args = simple_parse(line);
 			exec_builtin(*cmd_args);
 			add_history(line);
 		}

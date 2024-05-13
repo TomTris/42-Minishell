@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 15:02:14 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:40:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_save
 typedef struct s_shared
 {
 	t_save	*env_vars;
+	int		*exit_code;
 }	t_shared;
 
 typedef struct s_exec
@@ -46,7 +47,8 @@ typedef struct s_exec
 t_shared		*get_env(void );
 int				set_env(char **env);
 char			*get_env_variable(const char *var_name);
-// char			*get_env_variable(char *var_name);
+void			free_exit(int signum);
+void			set_exit_code(int code);
 
 // builtins
 int				exec_builtin(t_exec exec);

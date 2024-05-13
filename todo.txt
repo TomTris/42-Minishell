@@ -4,3 +4,4 @@ Bori:
 03 - deal with signals
 increase SHLVL when running minishell
 cd ~
+history when line not empty
