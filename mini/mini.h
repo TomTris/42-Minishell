@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 05:15:17 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 05:38:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_mini_unit
 {
 	int			nbr;
 	int			nbr_sum;
+	int			lvl;
 	char		*str;
 	char		*cmd;
 	char		**args;
@@ -55,6 +56,7 @@ typedef struct s_sub_mini
 {
 	int			nbr;
 	int			sign_after;
+	int			lvl;
 	char		*str;
 	char		***env_ori;
 	t_mini_unit	*mini_unit;
@@ -62,16 +64,16 @@ typedef struct s_sub_mini
 
 typedef struct s_mini
 {
-	int			sign;
 	char		*str;
 	char		***env;
+	int			lvl;
 	t_sub_mini	*sub_mini;
 }	t_mini;
 
 
 int				ft_isclosed(char *str);
 
-t_mini			*mini0(char *str, char ***env, int sign);
+t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);
 int				mini_unit0(t_sub_mini *sub_mini);
 int				syntax_check(t_mini_unit *mini_unit, char *str);
