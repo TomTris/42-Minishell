@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 16:43:09 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:52:53 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_env_variable(const char *var_name)
 	i = -1;
 	name_len = ft_strlen((const char *)var_name);
 	env = get_env()->env_vars->env;
-	value = NULL;
+	value = ft_calloc(1, sizeof(char));
 	while (env[++i])
 	{
 		if (!ft_strncmp(var_name, env[i], name_len))

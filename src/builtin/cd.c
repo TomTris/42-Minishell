@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 15:01:44 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:01:22 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ void	on_cd(t_exec e)
 	char	*dest_path;
 	char	*home;
 
-	if (e.argc == 1)
-		return ;
 	cwd = getcwd(NULL, 0);
-	dest_path = e.argv[1];
-	if (dest_path[0] == '~')
+	home = get_env_variable("HOME");
+	if (e.argc == 1)
+		dest_path = ft_strdup(home);
+	else
 	{
-		home = get_env_variable("HOME");
-		dest_path = ft_strjoin(home, e.argv[1] + 1);
+		dest_path = ft_strdup(e.argv[1]);
+		if (e.argv[1][0] == '~')
+		{
+			free(dest_path);
+			dest_path = ft_strjoin(home, e.argv[1] + 1);
+		}
 	}
+	free(home);
 	chdir(dest_path);
+	free(dest_path);
 }
