@@ -1,6 +1,7 @@
 **/*.o
 **/*.out
 **/*.a
+test
 minishell
 # *.pdf
 # todo.txt
