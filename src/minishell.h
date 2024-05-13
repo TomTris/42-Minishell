@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 16:40:23 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:11:20 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <string.h> //for strerror
+# include <sys/stat.h> //for stat, for dirs
 
 typedef struct s_save
 {
