@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 14:07:02 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:02:14 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_exec
 //env
 t_shared		*get_env(void );
 int				set_env(char **env);
-char			*get_env_variable(char *var_name);
+char			*get_env_variable(const char *var_name);
+// char			*get_env_variable(char *var_name);
 
 // builtins
 int				exec_builtin(t_exec exec);

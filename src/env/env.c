@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 14:10:44 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:50:11 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,28 @@ int	set_env(char **env)
 	return (ft_save_path_system_n_env_init(vars->env_vars, env));
 }
 
-char	*get_env_variable(char *var_name)
+char	*get_env_variable(const char *var_name)
 {
-	printf("%s\n", var_name);
-	return (var_name);
+	char	**env;
+	int		i;
+	int		name_len;
+	int		line_len;
+	char	*value;
+
+	i = -1;
+	name_len = ft_strlen((const char *)var_name);
+	env = get_env()->env_vars->env;
+	value = NULL;
+	while (env[++i])
+	{
+		if (!ft_strncmp(var_name, env[i], name_len))
+		{
+			line_len = ft_strlen(env[i]);
+			if (line_len == name_len)
+				return (value);
+			if (env[i][name_len] == '=')
+				value = ft_strndup(env[i] + name_len + 1, line_len - name_len);
+		}
+	}
+	return (value);
 }
