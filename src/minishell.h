@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 11:44:31 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:07:02 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <string.h> //for strerror
 
 typedef struct s_save
 {
 	char			**env;
 	char			**path_system;
 }	t_save;
+
+typedef struct s_shared
+{
+	t_save	*env_vars;
+}	t_shared;
 
 typedef struct s_exec
 {
@@ -36,10 +42,10 @@ typedef struct s_exec
 	int				exit_code;
 }	t_exec;
 
-int				ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
-					int add_replace_remove);
-int				ft_save_path_system_n_env_init(t_save *save,
-					char **env_outside);
+//env
+t_shared		*get_env(void );
+int				set_env(char **env);
+char			*get_env_variable(char *var_name);
 
 // builtins
 int				exec_builtin(t_exec exec);

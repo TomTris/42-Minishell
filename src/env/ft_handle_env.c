@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 13:56:11 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 13:57:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env.h"
 
 static int	ft_set_shell_lvl_2(t_save *save, int i)
 {

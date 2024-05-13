@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 11:53:03 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/13 13:46:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef ENV_H
+# define ENV_H
 
-int	exec_builtin(t_exec exec)
-{
-	if (!ft_strcmp(exec.cmd, "exit"))
-		on_exit(exec);
-	if (!ft_strcmp(exec.cmd, "cd"))
-		on_cd(exec);
-	if (!ft_strcmp(exec.cmd, "pwd"))
-		on_pwd(exec);
-	return (0);
-}
+# include <minishell.h>
+
+int				ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
+					int add_replace_remove);
+int				ft_save_path_system_n_env_init(t_save *save,
+					char **env_outside);
+
+#endif

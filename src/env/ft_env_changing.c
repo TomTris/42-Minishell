@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_changing.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 13:50:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 13:19:21 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env.h"
 
 //return 1 == find + replace. Return (0) -> need to add.
 static int	ft_replace_rule(t_save *save, char *rule_to_add)
@@ -123,7 +123,7 @@ int	ft_create_n_modify_env(t_save *save, char *rule,
 		return (perror("ft_create_n_modify_env: wrong int check value"), 0);
 }
 
-char	ft_free_env(char **save_env)
+void	ft_free_env(char **save_env)
 {
 	int	i;
 

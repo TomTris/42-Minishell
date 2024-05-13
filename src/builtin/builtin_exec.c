@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 13:00:46 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/13 14:16:24 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	on_cd(t_exec e)
+int	exec_builtin(t_exec exec)
 {
-	char	*cwd;
-	int		i;
-
-	if (e.argc == 1)
-		return ;
-	cwd = getcwd(NULL, 0);
-	chdir(e.argv[1]);
-	i = -1;
-	// if (!ft_strcmp(e.argv[1], "~"))
-	// 	dest = HOME
-	while (e.env[++i])
-		printf("%s\n", e.env[i]);
+	if (!ft_strlen(exec.cmd))
+		return (0);
+	if (!ft_strcmp(exec.cmd, "exit"))
+		on_exit(exec);
+	if (!ft_strcmp(exec.cmd, "cd"))
+		on_cd(exec);
+	if (!ft_strcmp(exec.cmd, "pwd"))
+		on_pwd(exec);
+	return (0);
 }

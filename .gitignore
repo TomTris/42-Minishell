@@ -3,5 +3,6 @@
 **/*.a
 test
 minishell
+del/*
 # *.pdf
 # todo.txt
