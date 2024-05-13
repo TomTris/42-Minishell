@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 23:53:22 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 03:06:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	free_split(char **to_free2)
+static int	free_split(char **to_free2)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	free_split(char **to_free2)
 	return (0);
 }
 
-int	free_mini_unit(t_mini_unit *mini_unit)
+static int	free_mini_unit(t_mini_unit *mini_unit)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ int	free_mini_unit(t_mini_unit *mini_unit)
 	return (0);
 }
 
-int	free_sub_mini(t_sub_mini *sub_mini)
+static int	free_sub_mini(t_sub_mini *sub_mini)
 {
 	int			i;
 
@@ -64,6 +64,7 @@ int	free_sub_mini(t_sub_mini *sub_mini)
 // printf("--sub_mini i = {%d}\n", i);
 		if (sub_mini[i].mini_unit != 0)
 			free_mini_unit(sub_mini[i].mini_unit);
+		// sub_mini[i].mini_unit = 0;
 	}
 	free(sub_mini);
 	return (0);
