@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 02:25:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 06:01:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
+static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign, int lvl)
 {
 	t_mini_unit	*ret;
 	int			i;
@@ -21,7 +21,7 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
 	if (ret == 0)
 		return (perror("malloc failed\n"), NULL);
 	i = -1;
-	while (++i < nbr)
+	while (++i <= nbr)
 	{
 		ret[i].nbr = i;
 		ret[i].cmd = 0;
@@ -35,6 +35,7 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign)
 		ret[i].env_ori = env;
 		ret[i].sign_sub = sign;
 		ret[i].nbr_sum = nbr;
+		ret[i].lvl = lvl;
 	}
 	ret[0].nbr = nbr;
 	return (ret);
@@ -113,10 +114,10 @@ static int	ft_mini_unit_str_split(t_sub_mini *sub_mini)
 int	mini_unit0(t_sub_mini *sub_mini)
 {
 	int	cnt;
-
+// printf("%d\n", sub_mini->lvl);
 	cnt = ft_cnt_mini_unit(sub_mini->str);
 	sub_mini->mini_unit = mini_unit_cre(cnt,
-			sub_mini->env_ori, sub_mini->sign_after);
+			sub_mini->env_ori, sub_mini->sign_after, sub_mini->lvl);
 	if (sub_mini->mini_unit == 0)
 		return (0);
 	if (ft_mini_unit_str_split(sub_mini) == 0)

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 02:11:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 06:07:28 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 int	syn_err(char *str, int sign)
 {
 	if (str != 0)
-		if (print_fd(2, "syntax error near unexpected token `%s'") == -1)
-			return (perror("printf_fd"), 0);
+	{
+		if (print_fd(2, "syntax error near unexpected token `%s'\n", str) == -1)
+			perror("printf_fd");
+		return (0);
+	}
 	if (sign == OR)
 		return (print_err("syntax error near unexpected token `||'"));
 	if (sign == AND)

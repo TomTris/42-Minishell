@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 05:21:46 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 05:58:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_cnt_sub_mini(char *str)
 	return (sub);
 }
 
-static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int sign)
+static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int lvl)
 {
 	t_sub_mini	*ret;
 	int			i;
@@ -46,14 +46,15 @@ static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int sign)
 	if (ret == 0)
 		return (perror("Malloc failed\n"), NULL);
 	i = -1;
-	while (++i < nbr)
+	while (++i <= nbr)
 	{
 		ret[i].nbr = 0;
 		ret[i].str = 0;
-		ret[i].sign_after = sign;
+		ret[i].sign_after = 0;
 		ret[i].env_ori = env;
 		ret[i].mini_unit = 0;
 		ret[i].str = 0;
+		ret[i].lvl = lvl;
 	}
 	ret[0].nbr = nbr;
 	return (ret);
@@ -111,7 +112,7 @@ int	sub_mini0(t_mini *mini)
 {
 	int		i;
 
-	mini->sub_mini = sub_mini_cre(ft_cnt_sub_mini(mini->str), mini->env, mini->sign);
+	mini->sub_mini = sub_mini_cre(ft_cnt_sub_mini(mini->str), mini->env, mini->lvl);
 	if (mini->sub_mini == NULL)
 		return (0);
 	if (ft_init_sub_mini(mini->sub_mini, mini->str) == 0)
