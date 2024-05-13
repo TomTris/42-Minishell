@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/10 17:41:06 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 11:18:43 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,7 @@ int				ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
 int				ft_save_path_system_n_env_init(t_save *save,
 					char **env_outside);
 int				 exec_builtin(t_exec exec);
+
+// utils
+int	ft_arr_len(char **arr);
 #endif
