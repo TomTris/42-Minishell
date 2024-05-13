@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:14:22 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 11:37:14 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/13 11:53:03 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "builtins.h"
 
-int	ft_arr_len(char **arr)
+int	exec_builtin(t_exec exec)
 {
-	int	i;
-
-	i = 0;
-	while (arr && arr[i])
-		i++;
-	return (i);
-}
-
-// TODO:validate if exit arg valid int
-int	is_valid_int(char *arg)
-{
-	(void)arg;
-	return (1);
+	if (!ft_strcmp(exec.cmd, "exit"))
+		on_exit(exec);
+	if (!ft_strcmp(exec.cmd, "cd"))
+		on_cd(exec);
+	if (!ft_strcmp(exec.cmd, "pwd"))
+		on_pwd(exec);
+	return (0);
 }

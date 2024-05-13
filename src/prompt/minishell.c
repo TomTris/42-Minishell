@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:25:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 11:35:17 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/13 11:36:36 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,8 @@ int	main(int argc, char const *argv[], char **env)
 	while (1)
 	{
 		line = readline("minishell$ ");
-		if (!ft_strncmp(line, "exit", 4))
-		{
-			cmd_args = simple_parse(line, env);
-			exec_builtin(*cmd_args);
-			printf("exit\n");
-			exit (0);
-		}
+		cmd_args = simple_parse(line, env);
+		exec_builtin(*cmd_args);
 		if (line[0])
 			add_history(line);
 		free(line);

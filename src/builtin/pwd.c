@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:14:22 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 11:37:14 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/13 11:51:01 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/13 11:55:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "builtins.h"
 
-int	ft_arr_len(char **arr)
+void	on_pwd(t_exec e)
 {
-	int	i;
+	char	*cwd;
 
-	i = 0;
-	while (arr && arr[i])
-		i++;
-	return (i);
-}
-
-// TODO:validate if exit arg valid int
-int	is_valid_int(char *arg)
-{
-	(void)arg;
-	return (1);
+	(void)e;
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
 }

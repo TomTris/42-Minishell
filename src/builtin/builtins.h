@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:14:22 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 11:37:14 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/13 11:39:48 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/13 11:52:40 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-int	ft_arr_len(char **arr)
-{
-	int	i;
+# include <minishell.h>
 
-	i = 0;
-	while (arr && arr[i])
-		i++;
-	return (i);
-}
+void	on_exit(t_exec e);
+void	on_cd(t_exec e);
+void	on_pwd(t_exec e);
 
-// TODO:validate if exit arg valid int
-int	is_valid_int(char *arg)
-{
-	(void)arg;
-	return (1);
-}
+#endif
