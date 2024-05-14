@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/14 13:00:15 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:39:49 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,11 @@ int	set_env(char **env)
 {
 	t_shared	*vars;
 	int			res;
-	// char		*cwd;
-	// char		*oldpwd;
 
 	vars = get_env();
 	vars->env_vars = ft_calloc(1, sizeof(t_save));
 	vars->exit_code = ft_calloc(1, sizeof(int *));
 	res = ft_save_path_system_n_env_init(vars->env_vars, env);
-	// cwd = getcwd(NULL, 0);
-	// oldpwd = ft_strjoin("OLDPWD=", cwd);
-	// ft_create_n_modify_env(vars->env_vars, oldpwd, 1);
-	// free(oldpwd);
-	// free(cwd);
 	return (res);
 }
 

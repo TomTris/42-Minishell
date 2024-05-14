@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 12:32:31 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:38:15 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	ft_rule_add(t_save *save, char *rule_to_add)
 		return (free(ret), perror("ft_strdup"), 0);
 	j = -1;
 	while (++j < i - 1)
-		ret[i] = save->env[i];
+		ret[j] = save->env[j];
 	free(save->env);
 	save->env = ret;
 	return (1);

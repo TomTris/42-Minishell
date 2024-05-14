@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 12:20:21 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:41:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ static int	ft_env_not_exist(t_save *save)
 
 int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
 {
-	int	check;
+	int		check;
+	char	*cwd;
+	char	*oldpwd;
 
 	save->path_system = ft_split("/usr/local/bin:/usr/bin:/bin:\
 		/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin", ":");
@@ -112,6 +114,11 @@ int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
 		check = ft_env_exist(save, env_outside);
 	if (check == 0)
 		return (free(save->path_system), 0);
+	cwd = getcwd(NULL, 0);
+	oldpwd = ft_strjoin("OLDPWD=", cwd);
+	ft_create_n_modify_env(save, oldpwd, 1);
+	free(oldpwd);
+	free(cwd);
 	return (1);
 }
 
