@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 04:02:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/13 20:44:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char	*snjoin(char *dest, char *src, int n);
 char	*sdup_md_del(char *str, int start_del, int end_del);
 int		sncmp(const char *s1, const char *s2, size_t n);
 size_t	slen(const char *a);
-
+void	ft_strncpy(char *dest, char *src, int i);
+char	*sadd(char *str, char c);
 
 /************************   ADVANCED C FUNCTIONS   **************************/
 //ft_split, we have an array of separators, not only a char

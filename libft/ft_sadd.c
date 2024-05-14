@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_sadd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 21:37:56 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 16:13:57 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/13 20:42:35 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/13 20:44:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*sadd(char *str, char c)
 {
-	if ((char)c == '\0')
-	{
-		while (*s != 0)
-			s++;
-		return ((char *)s);
-	}
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	return (NULL);
+	int		i;
+	int		len;
+	char	*ret;
+
+	len = ft_strlen(str);
+	ret = (char *)malloc(len + 2);
+	if (str == 0)
+		return (0);
+	i = -1;
+	while (str[++i])
+		ret[i] = str[i];
+	ret[i] = c;
+	ret[i + 1] = 0;
+	return (ret);
 }
-
-// int main(void)
-// {
-// 	char    *a;
-
-// 	a = malloc(30);
-// 	strcpy(a, "1234567890");
-// 	printf("%s\n", a);
-// 	printf("%s\n", strchr(a, 25));
-// 	return (0);
-// }

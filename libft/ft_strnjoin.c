@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 05:10:28 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 00:36:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/14 15:42:12 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strnjoin(char *dest, char *src, int n)
 	return (ret);
 }
 
-char	*ft_snjoin(char *dest, char *src, int n)
+char	*snjoin(char *dest, char *src, int n)
 {
 	int		i;
 	int		j;

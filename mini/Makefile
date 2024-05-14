@@ -13,7 +13,7 @@ OBJS = $(SRC:.c=.o)
 fast: $(OBJS)
 	cc -o $(NAME) $(OBJS) $(LIBFT_A)
 	make clean
-# ./mini
+	./mini
 all: $(NAME)
 
 $(NAME): $(OBJS)
