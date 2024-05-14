@@ -6,11 +6,11 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 13:19:21 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:32:31 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "shared.h"
 
 //return 1 == find + replace. Return (0) -> need to add.
 static int	ft_replace_rule(t_save *save, char *rule_to_add)

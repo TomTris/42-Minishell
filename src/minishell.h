@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:20 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:33:16 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,7 @@
 # include <readline/history.h>
 # include <string.h> //for strerror
 # include <sys/stat.h> //for stat, for dirs
-
-typedef struct s_save
-{
-	char			**env;
-	char			**path_system;
-}	t_save;
-
-typedef struct s_shared
-{
-	t_save	*env_vars;
-	int		*exit_code;
-}	t_shared;
+# include <shared.h>
 
 typedef struct s_exec
 {
@@ -43,13 +32,6 @@ typedef struct s_exec
 	char			**env;
 	int				exit_code;
 }	t_exec;
-
-//env
-t_shared		*get_env(void );
-int				set_env(char **env);
-char			*get_env_variable(const char *var_name);
-void			free_exit(int signum);
-void			set_exit_code(int code);
 
 // builtins
 int				exec_builtin(t_exec exec);

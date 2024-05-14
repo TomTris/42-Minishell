@@ -1,14 +1,14 @@
 CC				= cc 
 CFLAGS			= -Wall -Werror -Wextra
-HDR_FLAGS		= -I./libft -I./src
+HDR_FLAGS		= -I./libft -I./src -I./src/shared
 LFLAGS			= -Llibft -lreadline
 RM				= rm -rf
 PROMPT_SRC		= prompt/minishell.c
-BUILTIN			= builtin_exec exit cd pwd
+BUILTIN			= builtin_exec exit cd pwd env
 BLTIN_SRC		= $(patsubst %, builtin/%.c, $(BUILTIN))
 UTILS_SRC		= utils/utils.c
 ENV				= ft_env_changing ft_handle_env env
-ENV_SRC			= $(patsubst %, env/%.c, $(ENV))
+ENV_SRC			= $(patsubst %, shared/%.c, $(ENV))
 SRC				= $(PROMPT_SRC) $(BLTIN_SRC) $(UTILS_SRC) $(ENV_SRC)
 TEST_SRC		= minishell.c
 OBJS			= $(patsubst %.c, ./src/%.o, $(SRC))

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 13:46:28 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/14 11:25:04 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/14 12:58:09 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "builtins.h"
 
-# include <minishell.h>
+void	on_env(t_exec e)
+{
+	char	**env;
+	int		i;
 
-int				ft_create_n_modify_env(t_save *save, char *str_of_add_rule,
-					int add_replace_remove);
-int				ft_save_path_system_n_env_init(t_save *save,
-					char **env_outside);
-
-#endif
+	(void)e;
+	i = -1;
+	env = get_env()->env_vars->env;
+	while (env[++i])
+		printf("%s\n", env[i]);
+}

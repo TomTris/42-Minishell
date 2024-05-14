@@ -6,11 +6,12 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 18:21:15 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:01:37 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include <shared.h>
 
 int	is_valid_path(char *path)
 {
@@ -32,10 +33,7 @@ int	is_valid_path(char *path)
 		return (0);
 	}
 	else
-	{
-		//TODO: set OLDPWD
 		return (1);
-	}
 }
 
 void	on_cd(t_exec e)

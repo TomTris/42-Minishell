@@ -6,11 +6,11 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 16:52:53 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:00:15 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "shared.h"
 
 t_shared	*get_env(void )
 {
@@ -37,14 +37,42 @@ void	set_exit_code(int code)
 	*vars->exit_code = code;
 }
 
-int	set_env(char **env)
+void	set_cwd(char *cwd)
 {
 	t_shared	*vars;
 
 	vars = get_env();
+	free(vars->oldcwd);
+	*vars->oldcwd = *vars->cwd;
+	free(vars->cwd);
+	*vars->cwd = cwd;
+}
+
+void	set_oldcwd(char *oldcwd)
+{
+	t_shared	*vars;
+
+	vars = get_env();
+	*vars->oldcwd = oldcwd;
+}
+
+int	set_env(char **env)
+{
+	t_shared	*vars;
+	int			res;
+	// char		*cwd;
+	// char		*oldpwd;
+
+	vars = get_env();
 	vars->env_vars = ft_calloc(1, sizeof(t_save));
 	vars->exit_code = ft_calloc(1, sizeof(int *));
-	return (ft_save_path_system_n_env_init(vars->env_vars, env));
+	res = ft_save_path_system_n_env_init(vars->env_vars, env);
+	// cwd = getcwd(NULL, 0);
+	// oldpwd = ft_strjoin("OLDPWD=", cwd);
+	// ft_create_n_modify_env(vars->env_vars, oldpwd, 1);
+	// free(oldpwd);
+	// free(cwd);
+	return (res);
 }
 
 char	*get_env_variable(const char *var_name)
