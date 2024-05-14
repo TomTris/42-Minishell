@@ -6,35 +6,101 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:48:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 16:33:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 00:50:26 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static int	get_nbr(char *str)
+static void	ft_sort_ascii(char **ret)
 {
-	int	ret;
-	int	i;
+	int		i;
+	int		j;
+	char	*temp;
 
-	ret = 1;
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (ret[i])
+		i++;
+	while (i-- > 1)
 	{
-		if (str[i] == ret)
+		j = 0;
+		while ((j + 1) <= i - 1)
 		{
-			i = -1;
-			ret++;
+			if (ft_strncmp(ret[j], ret[j + 1], ft_strlen(ret[i]) + 1) > 0)
+			{
+				temp = ret[j];
+				ret[j] = ret[j + 1];
+				ret[j + 1] = temp;
+			}
+			j++;
 		}
 	}
+}
+
+static char	**get_cwd_name(void)
+{
+	DIR				*dir;
+	struct dirent	*ent;
+	char			**ret;
+
+	dir = opendir(".");
+	if (dir == NULL)
+		return (perror("open dir"), NULL);
+	ret = smerge(0, "");
+	if (ret == 0)
+		return (closedir(dir), NULL);
+	while (1)
+	{
+		ent = readdir(dir);
+		if (ent == 0)
+			break ;
+		if (ent->d_name[0] != '.')
+		{
+			ret = smerge(ret, ent->d_name);
+			if (ret == 0)
+				return (closedir(dir), NULL);
+		}
+	}
+	closedir(dir);
+	ft_sort_ascii(ret);
 	return (ret);
+}
+
+//j = 0, nbr
+static int	ft_wc_expa_check(char *name, char *str, int j, int nbr)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && name[j])
+	{
+		if (str[i] == nbr)
+		{
+			while (str[i] == nbr)
+				i++;
+			if (str[i] == 0)
+				return (1);
+			while (name[j] != 0 && name[j] != str[i])
+				j++;
+			if (name[j] == 0)
+				return (0);
+		}
+		else
+			if (name[j++] != str[i++])
+				return (0);
+	}
+	while (str[i] == nbr)
+		i++;
+	if (str[i] == 0 && name[j] == 0)
+		return (1);
+	return (0);
 }
 
 static void	ft_recovery(char **ret, int nbr)
 {
 	int	i;
 
-	if (ret == 0 && ret[0] != 0)
+	if (ret == 0 || ret[0] == 0)
 		return ;
 	i = -1;
 	while (ret[0][++i])
@@ -42,104 +108,32 @@ static void	ft_recovery(char **ret, int nbr)
 			ret[0][i] = '*';
 }
 
-//free old ret and return new ret
-static char	*ft_dequo2(char *str, char *ret, int *i)
+//if str[0] = 0 -> return str
+char	**wildcard_expand(char *str, int nbr)
 {
-	int		j;
-	char	*temp;
-
-	temp = ret;
-	j = *i;
-	if (str[j] == '\'')
-	{
-		(*i) += ft_strchr(str + j + 1, '\'') - str - j + 1;
-		ret = snjoin(ret, str + j + 1, *i - j - 2);
-	}
-	else
-	{
-		ret = snjoin(ret, str + *i, 1);
-		(*i)++;
-	}
-	free(temp);
-	if (ret == 0)
-		return (perror("snjoin"), NULL);
-	return (ret);
-}
-
-//must free str and return ret
-static char	*ft_dequo(char *str)
-{
+	char	**cwd_ns;
 	int		i;
-	int		j;
-	char	*ret;
-	char	*temp;
-
-	ret = ft_strdup("");
-	if (ret == 0)
-		return (free(str), perror("ft_strdup"), NULL);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-		{
-			j = i;
-			i += ft_strchr(str + i + 1, '\"') - str - i + 1;
-			temp = ret;
-			ret = snjoin(ret, str + j + 1, i - j - 2);
-			free(temp);
-			if (ret == 0)
-				return (free(str), perror("snjoin"), NULL);
-		}
-		else
-		{
-			ret = ft_dequo2(str, ret, &i);
-			if (ret == 0)
-				return (free(str), NULL);
-		}
-	}
-	free(str);
-	return (ret);
-}
-
-char	**wc_expand(char *str_ori)
-{
 	char	**ret;
-	int		i;
-	char	*str;
-	int		nbr;
 
-	str = ft_strdup(str_ori);
-	if (str == 0)
-		return (perror("ft_strdup"), NULL);
-	nbr = get_nbr(str_ori);
-	i = 0;
-	while (str[i])
+	cwd_ns = get_cwd_name();
+	if (cwd_ns == 0)
+		return (0);
+	ret = smerge(0, 0);
+	if (ret == 0)
+		return (free_split(cwd_ns), NULL);
+	i = -1;
+	while (cwd_ns[++i])
 	{
-		if (str[i] == '\'' || str[i] == '"')
-			i += ft_strchr(str + 1, str[i]) - str + 1;
-		else if (str[i] == '*')
-			str[i] = nbr;
-		else
-			i++;
+		if (ft_wc_expa_check(cwd_ns[i], str, 0, nbr) == 1)
+		{
+			ret = smerge(ret, cwd_ns[i]);
+			if (ret == 0)
+				return (free_split(ret), free_split(cwd_ns), NULL);
+		}
 	}
-	str = ft_dequo(str);
-	if (str == 0)
-		return (NULL);
-	ret = wc_expand2(str, nbr);
+	free_split(cwd_ns);
+	if (ret[0] == 0)
+		ret = smerge(ret, str);
 	ft_recovery(ret, nbr);
-	return (free(str), ret);
-}
-
-int	main(void)
-{
-	int	i;
-	char**ret;
-	i = 0;
-
-	ret = wc_expand("*");
-	while (ret[i])
-	{
-		printf("%s ", ret[i]);
-		i++;
-	}
+	return (ret);
 }
