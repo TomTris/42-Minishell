@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 00:06:32 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/14 13:37:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char			**smerge(char **dest, char *src);
 
 
 
+char			**str_replace(char *str_ori, char **env);
 
 char			*dollar_handler(char *str_ori, char **env);
 int				after_1_dollar(char *str);

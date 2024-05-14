@@ -6,44 +6,122 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 00:21:31 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/14 19:46:09 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	main(int ac, char **av, char **env)
+static int	ft_ambigious(char *str) 
 {
-	char 	*str1;
-	char	*str2;
-	char	*temp;
+	int	i;
+
+	if (str[0] != '$')
+		return (0);
+	if (ft_isdigit(str[1]) == 1 || ft_isalnum_(str[i + 1]) != 1)
+		return (0);
+	i = 2;
+	while (str[i])
+	{
+		if (ft_isalnum_(str[i]) != 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	get_nbr(char *str)
+{
+	int	ret;
+	int	i;
+
+	ret = 1;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ret)
+		{
+			i = -1;
+			ret++;
+		}
+	}
+	return (ret);
+}
+
+static void	ft_change_star(char *str, int nbr)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			i += ft_strchr(str + 1, str[i]) - str + 1;
+		else if (str[i] == '*')
+			str[i] = nbr;
+		else
+			i++;
+	}
+}
+
+// if there is nothing left -> ret[0] = NULL, like < $aaafeff
+char	**str_replace(char *str_ori, char **env)
+{
+	int		i;
+	int		nbr;
+	char	*str;
+	char	**str2;
+	char	**ret;
+
+	if (ft_ambigious_0() == 1)
+		return (smerge(0, 0));
+	str = ft_strdup(str_ori);
+	nbr = get_nbr(str);
+	ft_change_star(str, nbr);
+	str2 = dollar_handler(str, env);
+	ret = merge_with_wildcard(str, nbr);
+}
+
+char	**make_env(char **env)
+{
 	char	**ret;
 	int		i;
 
-	if (ac == 1)
-		return (printf("put input\n"), 0);
-	str1 = ft_strdup(av[1]);
-	i = 1;
-	while (av[++i])
+	ret = smerge(0, 0);
+	if (ret == 0)
+		return (0);
+	i = -1;
+	while (env[++i])
 	{
-		temp = str1;
-		str2 = ft_strdup(av[i]);
-		str1 = ft_strjoin(str2, temp);
-		free(temp);
-		free(str2);
+		ret = smerge(ret, env[i]);
+		if (ret == 0)
+			return (0);
 	}
-	str2 = dollar_handler(str1, env);
-	// printf("str2 = {%s}\n", str2);
-	ret = wc_expand(str2);
-	i = 0;
-	while (ret[i])
-		printf("%s\n", ret[i++]);
-	free(str1);
-	free(str2);
-	free_split(ret);
-	ret = 0;
-	str1 = 0;
-	str2 = 0;
-	// system("leaks mini");
-	return(0);
+	return (ret);
+}
+
+int	main(int ac, char **av, char **env_ori)
+{
+	char	*str;
+	char	**env;
+	char	**str_rpl;
+	int		i;
+
+ac = 0;
+av = 0;
+	str = "\"$HOME'$HOME'\"";
+	env = make_env(env_ori);
+	if (env == 0)
+		return (0);
+	str_rpl = str_replace(str, env);
+	if (str_rpl == 0)
+		return (free_split(env), 0);
+	i = -1;
+	// printf("%s\n", str_rpl[0]);
+	while (str_rpl[++i] != 0)
+		printf("%s ", str_rpl[i]);
+	printf("\n");
+	free_split(env);
+	free_split(str_rpl);
+	return (0);
 }
