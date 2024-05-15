@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 23:37:26 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:59:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static char	*ft_del_quo2(char *str2_i, char *ret)
+char	*ft_del_quo2(char *str2_i, char *ret)
 {
 	int		j;
 	int		k;

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 00:12:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 23:50:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define APPEND 9
 # define NEWLINE 10
 
+# define HERE_DOC_FILE ".heredoc.Qdo&&Bori@42Heilbronn.de"
+
 typedef struct s_mini	t_mini;
 //sign 0 nothing
 //sign 1 = <
@@ -36,9 +38,16 @@ typedef struct s_mini	t_mini;
 
 typedef struct s_redirection
 {
+	int		fd;
 	int		type_re;
 	char	*str;
 }	t_redirection;
+
+typedef struct s_fd_heredoc
+{
+	int		fd;
+	char	*limiter;
+}	t_fd_heredoc;
 
 typedef struct s_mini_unit
 {
@@ -46,7 +55,7 @@ typedef struct s_mini_unit
 	int				nbr_sum;
 	int				lvl;
 	char			*str;
-	char			*cmd;
+	char			**cmd;
 	char			**args;
 	t_redirection	*redi;
 	char			***env_ori;
@@ -69,6 +78,7 @@ typedef struct s_mini
 	char		*str;
 	char		***env;
 	int			lvl;
+	int			fd_heredoc;
 	t_sub_mini	*sub_mini;
 }	t_mini;
 
@@ -77,7 +87,7 @@ typedef struct s_mini
 t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);
 int				mini_unit0(t_sub_mini *sub_mini);
-
+int				ft_lvl_cnt(int lvl_outside);
 /*************************Syntax check *********************************/
 
 int				syntax_check(t_mini_unit *mini_unit, char *str);
@@ -111,20 +121,22 @@ char			*dollar_siquo(char *str, char *ret, int *i);
 char			*dollar_doquo(char *str, char *ret, char **env, int *i);
 
 //dollar_expand2
+char			*dollar_doquo2(char *str, char *ret, char **env, int *i);
 int				after_1_dollar(char *str);
 char			*f_add(char *ori, char *to_add, int n);
 
 //dollar_expand3
-char			*dollar_doquo2(char *str, char *ret, char **env, int *i);
 char			*dollar_out(char *str, char *ret, char **env, int *i);
 char			*dollar_in(char *str, char **env, int *i);
 char			*dollar_replace(char *str, char **env, int *i);
 char			*make_dollar_sign(void);
+char			*dollar_replace2(char *str, int *i, int *cnt);
 //ft_split_after_dollar_expansion.c
 char			**ft_split_after_dollar_expansion(char *str);
 
 //ft_del_quote.c
 char			**ft_del_quo(char **str2);
+char			*ft_del_quo2(char *str2_i, char *ret);
 
 //wildcard_expand.c
 char			**wildcard_expand(char *str, int nbr);

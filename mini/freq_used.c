@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:24:52 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 04:52:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:47:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	after_quote(char *str)
 
 int	after_mlt_parent(char *str)
 {
-	if (str[0] != '(')
+	if (str[0] || str[0] != '(')
 		return (0);
 	return (after_1_parent(str)
 		+ after_mlt_parent(str + after_1_parent(str) + 1));

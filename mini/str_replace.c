@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 00:49:36 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 14:20:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ static void	ft_change_star(char *str, int nbr)
 }
 
 
-// if there is nothing left -> ret[0] = NULL, like < $aaafeff
+// if there is nothing left -> ret[0] = NULL, like < $aaafeff or nothing.
+// if it's like "" -> ret[0][0] = 0, ret[1] = 0.
 char	**str_replace(char *str_ori, char **env)
 {
 	int		nbr;
@@ -102,23 +103,46 @@ char	**str_replace(char *str_ori, char **env)
 	return (ret);
 }
 
+// // ambigious or ret = str_replace("", env) -> ret[0] = NULL
+// // ret = str_replace("\"\"") or ("\'\'") -> ret[0][0] = '\0'
+// int	main(int ac, char **av, char **env)
+// {
+// 	char	**ret;
+// ac = 0;
+// av = 0;
+// 	ret = str_replace("33$a$1$BGHH$a\"$AAA\"", env);
+// 	printf("str = {%s}\n", ret[0]);
+// 	while (ret[ac])
+// 	{
+// 		printf("%s ", ret[ac++]);
+// 	}
+// 	printf("\n");
+// 	free_split(ret);
+// 	ret = 0;
+// 	// system("leaks mini");
+// 	return (0);
+// }
 
-int	main(int ac, char **av, char **env)
-{
-	char	**ret;
-ac = 0;
-av = 0;
-	ret = str_replace("*", env);
-	while (ret[ac])
-	{
-		printf("%s ", ret[ac++]);
-	}
-	printf("\n");
-	free_split(ret);
-	ret = 0;
-	system("leaks mini");
-	return (0);
-}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // char	**make_env(char **env)
 // {
 // 	char	**ret;

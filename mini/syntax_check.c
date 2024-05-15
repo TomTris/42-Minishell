@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 18:10:25 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 21:07:51 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	syntax_check(t_mini_unit *mini_unit, char *str)
 	tke.cmd = 0;
 	tke.redi = 0;
 	tke.paren = 0;
+	ft_lvl_cnt(mini_unit->lvl);
 	while (str[i])
 	{
 		k = syntax_check_2(mini_unit, &tke, str, &i);
