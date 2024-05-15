@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/14 12:57:10 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:46:40 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ typedef struct s_shared
 {
 	t_save	*env_vars;
 	int		*exit_code;
-	char	**cwd;
-	char	**oldcwd;
+	char	*cwd;
+	char	*oldcwd;
 }	t_shared;
 
 int				ft_create_n_modify_env(t_save *save, char *rule, int mode);
 int				ft_save_path_system_n_env_init(t_save *save, char **env_outside);
-void			set_oldcwd(char *oldcwd);
+void			set_oldpwd(char *oldcwd);
 void			set_cwd(char *cwd);
 t_shared		*get_env(void );
 int				set_env(char **env);

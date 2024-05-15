@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/14 13:01:37 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:36:18 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	on_cd(t_exec e)
 		set_exit_code(1);
 		return ;
 	}
-	cwd = getcwd(NULL, 0);
 	home = get_env_variable("HOME");
 	if (e.argc == 1)
 		dest_path = ft_strdup(home);
@@ -64,6 +63,11 @@ void	on_cd(t_exec e)
 	}
 	free(home);
 	if (is_valid_path(dest_path))
+	{
 		res = chdir(dest_path);
+		cwd = getcwd(NULL, 0);
+		set_cwd(cwd);
+		free(cwd);
+	}
 	free(dest_path);
 }
