@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_expand2.c                                   :+:      :+:    :+:   */
+/*   dollar_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 22:36:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 21:05:12 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ char	*make_dollar_sign(void)
 	return (ret);
 }
 
+char	*dollar_replace2(char *str, int *i, int *cnt)
+{
+	char	*ret;
+
+	ret = sndup("", 0);
+	if (ret == 0)
+		return (perror("sndup"), NULL);
+	*cnt = 0;
+	while (ft_isalnum_(str[*i]))
+	{
+		(*cnt) += 1;
+		*i = *i + 1;
+	}
+	return (ret);
+}
+
 char	*dollar_replace(char *str, char **env, int *i)
 {
 	int		j;
@@ -31,16 +47,12 @@ char	*dollar_replace(char *str, char **env, int *i)
 	char	*temp;
 	char	*ret;
 
-	ret = sndup("", 0);
-	cnt = 0;
-	while (ft_isalnum_(str[*i]))
-	{
-		cnt++;
-		*i = *i + 1;
-	}
+	ret = dollar_replace2(str, i, &cnt);
+	if (ret == 0)
+		return (NULL);
 	temp = (char *)malloc(cnt + 1);
 	if (temp == 0)
-		return (perror("Malloc failed"), NULL);
+		return (perror("Malloc failed"), free(ret), NULL);
 	ft_strncpy(temp, str + *i - cnt, cnt);
 	j = -1;
 	cnt = ft_strlen(temp);
@@ -91,33 +103,5 @@ char	*dollar_out(char *str, char *ret, char **env, int *i)
 	free(temp);
 	if (ret == 0)
 		perror("ft_strjoin");
-	return (ret);
-}
-
-char	*dollar_doquo2(char *str, char *ret, char **env, int *i)
-{
-	char	*temp;
-
-	while (str[*i] != '"')
-	{
-		if (str[*i] == '$')
-		{
-			*i += 1;
-			temp = dollar_in(str, env, i);
-			if (temp == 0)
-				return (free(ret), NULL);
-			ret = f_add(ret, temp, ft_strlen(temp));
-			free(temp);
-			if (ret == 0)
-				return (ret);
-		}
-		else
-		{
-			ret = f_add(ret, str + *i, 1);
-			if (ret == 0)
-				return (ret);
-			*i = *i + 1;
-		}
-	}
 	return (ret);
 }

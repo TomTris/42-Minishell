@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 05:58:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:14:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,10 @@ int	sub_mini0(t_mini *mini)
 	if (ft_init_sub_mini(mini->sub_mini, mini->str) == 0)
 		return (0);
 	i = 0;
-	// while (++i <= mini->sub_mini[0].nbr)
-	// {
-	// 	printf("str = {%s}\n", mini->sub_mini[i].str)
-	// }
 	while (++i <= mini->sub_mini[0].nbr)
 	{
-		// printf("sub[%d]:\n", i);
-		// printf("str = {%s}\n", mini->sub_mini[i].str);
 		if (mini_unit0(&mini->sub_mini[i]) == 0)
-		{
-			// printf("sub_mini returns\n");
 			return (0);
-		}
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 14:02:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 23:26:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	free_mini_unit(t_mini_unit *mini_unit)
 	int	i;
 
 	i = 0;
-	// printf("nbr = {%d}\n", mini_unit[0].nbr);
 	while (++i <= mini_unit[0].nbr)
 	{
+		// printf("str = {%s}\n", mini_unit[i].str);
 		free(mini_unit[i].str);
 		free(mini_unit[i].cmd);
 		free_split(mini_unit[i].args);
@@ -52,14 +52,11 @@ static int	free_sub_mini(t_sub_mini *sub_mini)
 	int			i;
 
 	i = 0;
-	free(sub_mini[0].str);
 	while (++i <= sub_mini[0].nbr)
 	{
 		free(sub_mini[i].str);
-// printf("--sub_mini i = {%d}\n", i);
 		if (sub_mini[i].mini_unit != 0)
 			free_mini_unit(sub_mini[i].mini_unit);
-		// sub_mini[i].mini_unit = 0;
 	}
 	free(sub_mini);
 	return (0);
@@ -67,9 +64,9 @@ static int	free_sub_mini(t_sub_mini *sub_mini)
 
 int	free_mini(t_mini *mini)
 {
-	int			i;
-// printf("1\n");
-	i = 0;
+	// int			i;
+
+	// i = 0;
 	free(mini->str);
 	free_sub_mini(mini->sub_mini);
 	return (0);

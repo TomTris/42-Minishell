@@ -1,16 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_expand.c                                    :+:      :+:    :+:   */
+/*   dollar_expand2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:00:36 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 22:42:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 21:04:00 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+char	*dollar_doquo2(char *str, char *ret, char **env, int *i)
+{
+	char	*temp;
+
+	while (str[*i] != '"')
+	{
+		if (str[*i] == '$')
+		{
+			*i += 1;
+			temp = dollar_in(str, env, i);
+			if (temp == 0)
+				return (free(ret), NULL);
+			ret = f_add(ret, temp, ft_strlen(temp));
+			free(temp);
+			if (ret == 0)
+				return (ret);
+		}
+		else
+		{
+			ret = f_add(ret, str + *i, 1);
+			if (ret == 0)
+				return (ret);
+			*i = *i + 1;
+		}
+	}
+	return (ret);
+}
 
 char	*f_add(char *ori, char *to_add, int n)
 {

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard.h                                         :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 23:40:18 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 17:09:44 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/15 16:26:58 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/15 21:23:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WILDCARD_H
-# define WILDCARD_H
+#include "mini.h"
 
-# include "../libft/libft.h"
-# include <dirent.h>
+int	main(void)
+{
+	unlink(HERE_DOC_FILE);
+	int fd_truncate = open(HERE_DOC_FILE, O_CREAT, 0644);
 
-
-char	**wc_expand(char *str);
-
-#endif
+	printf("%d\n", fd_truncate);
+	return (0);
+}
