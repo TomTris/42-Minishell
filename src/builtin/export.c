@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exec.c                                     :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 17:04:24 by bpisak-l         ###   ########.fr       */
+/*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
+/*   Updated: 2024/05/15 17:10:04 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	exec_builtin(t_exec exec)
+void	on_export(t_exec e)
 {
-	if (!ft_strlen(exec.cmd))
-		return (0);
-	if (!ft_strcmp(exec.cmd, "exit"))
-		on_exit(exec);
-	if (!ft_strcmp(exec.cmd, "cd"))
-		on_cd(exec);
-	if (!ft_strcmp(exec.cmd, "pwd"))
-		on_pwd(exec);
-	if (!ft_strcmp(exec.cmd, "env"))
-		on_env(exec);
-	if (!ft_strcmp(exec.cmd, "export"))
-		on_export(exec);
-	return (0);
+	(void)e;
+	// if (e.argc == 1)
+	// 	printf("exit\n");
+	// else if (e.argc > 2)
+	// {
+	// 	printf("exit: too many arguments\n");
+	// 	set_exit_code(1);
+	// }
+	// else if (!is_valid_int(e.argv[1]))
+	// {
+	// 	printf("exit: %s: numeric argument required\n", e.argv[0]);
+	// 	set_exit_code(2);
+	// }
+	// else
+	// {
+	// 	set_exit_code(ft_atoi(e.argv[1]));
+	// 	printf("exit\n");
+	// }
+	// free_exit(0);
 }

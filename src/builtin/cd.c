@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 16:36:18 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:40:25 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ void	on_cd(t_exec e)
 		{
 			free(dest_path);
 			dest_path = ft_strjoin(home, e.argv[1] + 1);
+		}
+		if (e.argv[1][0] == '-')
+		{
+			dest_path = get_env_variable("OLDPWD");
+			if (!dest_path[0])
+			{
+				printf("minishell: cd: OLDPWD not set\n");
+				set_exit_code(1);
+				return ;
+			}
+			else
+				printf("%s\n", dest_path);
 		}
 	}
 	free(home);
