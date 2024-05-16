@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 04:27:58 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 18:33:19 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);;
 int				mini_unit0(t_sub_mini *sub_mini);
 
+int				ft_lvl_cnt(int lvl_outside);
 /*************************Syntax check *********************************/
 int				syntax_precheck(char *str);
 int				syntax_check(t_mini_unit *mini_unit, char *str);
 
 /*************************ft_free *********************************/
-void			free_mini_unit_redi(t_mini_unit *mini_unit);
 int				free_split(char **to_free2);
 int				free_mini(t_mini *mini);
 // int				free_sub_mini(t_sub_mini *sub_mini);
@@ -110,15 +110,8 @@ char			*ft_del_quo2(char *str2_i, char *ret);
 /*************************  ft_clean *********************************/
 //ft_clean1
 int				ft_fd_heredoc(int fd_new);
-int				*ft_fd_add(int *fd, int fd_new);
-int				*ft_fd_heredoc_default(int fd_new);
 int				ft_clean_programm(t_mini *mini_outside,
 					int exit_nbr, int leaks_check);
-//ft_clean2
-int				ft_init_heredoc(t_mini *mini);
-int				get_fd_heredoc_ori(int fd);
-int				ft_lvl_cnt(int lvl_outside);
-int				ft_cnt_line_heredoc(void);
 
 /*************************	String replace *********************************/
 //expansion_0
@@ -172,5 +165,9 @@ int				ft_mini_redi_init(t_mini_unit *mini_unit,
 					char **temp, int type);
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
+//break_input5
+int				ft_init_heredoc(t_mini *mini);
+int				get_fd_heredoc_ori(int fd);
+int				ft_cnt_line_heredoc(void);
 
 #endif

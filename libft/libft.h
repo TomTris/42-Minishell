@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 20:44:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 19:16:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>

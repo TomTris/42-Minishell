@@ -6,39 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 05:37:42 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 19:21:28 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-// char	*make_input(int ac, char **av)
-// {
-// 	char	*str2;
-// 	char	*str1;
-// 	char	*temp;
-// 	int		i;
-
-// 	if (ac == 1)
-// 		return (printf("put input\n"), NULL);
-// 	str1 = ft_strdup(av[1]);
-// 	if (str1 == 0)
-// 		return (perror("ft_strdup"), NULL);
-// 	i = 1;
-// 	while (av[++i])
-// 	{
-// 		temp = str1;
-// 		str2 = ft_strdup(av[i]);
-// 		if (str2 == 0)
-// 			return (free(temp), perror("ft_strdup"), NULL);
-// 		str1 = ft_strjoin(str2, temp);
-// 		free(temp);
-// 		free(str2);
-// 		if (str1 == 0)
-// 			return (perror("ft_strjoin"), NULL);
-// 	}
-// 	return (str1);
-// }
 
 static char	**make_env(char **env)
 {
@@ -58,6 +30,15 @@ static char	**make_env(char **env)
 	return (ret);
 }
 
+int	ft_lvl_cnt(int lvl_outside)
+{
+	static int	lvl = 0;
+
+	if (lvl_outside > lvl)
+		lvl = lvl_outside;
+	return (lvl);
+}
+
 t_mini	*mini0(char *str, char ***env, int lvl)
 {
 	t_mini	*mini;
@@ -72,6 +53,7 @@ t_mini	*mini0(char *str, char ***env, int lvl)
 	mini->str = str;
 	mini->lvl = lvl;
 	mini->fd_heredoc = -1;
+	ft_lvl_cnt(mini->lvl);
 	if (sub_mini0(mini) == 0)
 	{
 		free_mini(mini);
@@ -89,9 +71,11 @@ int	main(int ac, char **av, char **env_ori)
 
 	(void)ac;
 	(void)av;
-	str = " << 33 << 33 << 44 << 44($23 | "" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11";
+	// str = " << 11 << 22 << 33 << 44($23 | "" <<a) <b <d <e <f < g >hh>jj>k>ll >> mm >> nn >> pp";
 	// str = "  << 44($23 | \"\" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11";
 	// str = "( 2|4 )";
+	str = ">33 > 44 << 11 <<33 << 44";
+	// str = "<1 <2 <3 <4";
 	if (syntax_precheck(str) == 0)
 		return (perror("syntax_pre wrong"), 1);
 	env = make_env(env_ori);
@@ -103,7 +87,7 @@ int	main(int ac, char **av, char **env_ori)
 	ft_clean_programm(mini, 0, 0);
 	ft_init_heredoc(mini);
 	if (break_input(mini) == 0)
-		print_err("break input sthwrong\n");
-	ft_clean_programm(0, 0, 0);
+		print_err("break input sthwrong");
+	ft_clean_programm(0, 0, 1);
 	return (0);
 }

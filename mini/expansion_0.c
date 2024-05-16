@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 04:35:48 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 18:41:22 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char	**str_replace(char *str_ori, char **env)
 // 	printf("\n");
 // 	free_split(ret);
 // 	ret = 0;
-// 	// system("leaks mini");
+// 	system("leaks mini");
 // 	return (0);
 // }
 
