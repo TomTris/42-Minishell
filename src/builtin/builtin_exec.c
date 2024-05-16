@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 15:28:46 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:41:33 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ int	exec_builtin(t_exec exec)
 		on_export(exec);
 	if (!ft_strcmp(exec.cmd, "echo"))
 		on_echo(exec);
+	if (!ft_strcmp(exec.cmd, "unset"))
+		on_unset(exec);
 	return (0);
 }
