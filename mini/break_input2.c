@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 01:29:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 04:49:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 17:46:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_take_string(char *str, int *i)
 	int	cnt;
 
 	cnt = 0;
-	while (token(str + *i) == 0 && ft_isempty(str[*i]) != 1 && str[*i])
+	while (str[*i] && token(str + *i) == 0 && ft_isempty(str[*i]) != 1)
 	{
 		if (str[*i] == '\'' || str[*i] == '"')
 		{

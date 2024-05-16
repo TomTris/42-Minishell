@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 05:32:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 18:17:53 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static int	ft_redi(t_mini_unit *mini_unit, char *str, int *i)
 static int	syntax_check_3(t_mini_unit *mini_unit,
 		t_token_expect *tke, char *str, int *i)
 {
-	if (token(str + *i) == C_PARENT)
+	/*if (token(str + *i) == C_PARENT)
 	{
 		if (tke->cmd == 0 && tke->redi == 0 && tke->paren == 0)
 			return (print_err("syntax error near unexpected token `)'"));
 		return (2);
 	}
-	else if (token(str + *i) == O_PARENT)
+	else */if (token(str + *i) == O_PARENT)
 	{
 		if (tke->cmd != 0)
 			return (print_err("syntax error near unexpected token `('"));
@@ -126,7 +126,6 @@ int	syntax_check(t_mini_unit *mini_unit, char *str)
 	tke.cmd = 0;
 	tke.redi = 0;
 	tke.paren = 0;
-	ft_lvl_cnt(mini_unit->lvl);
 	while (str[i])
 	{
 		k = syntax_check_2(mini_unit, &tke, str, &i);

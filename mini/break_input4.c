@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:37:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 05:07:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 19:10:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,29 @@ t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re)
 	return (mini_unit->redi);
 }
 
+int	ft_mini_redi_init2(t_mini_unit *mini_unit, t_redirection *mini_redi,
+	char *ret, int type)
+{
+	int	i;
+
+	i = 0;
+	while (++i <= mini_unit->redi[0].type_re)
+	{
+		mini_redi[i].type_re = mini_unit->redi[i].type_re;
+		mini_redi[i].str = mini_unit->redi[i].str;
+	}
+	mini_redi[i].type_re = type;
+	mini_redi[i].str = ret;
+	free(mini_unit->redi);
+	mini_unit->redi = mini_redi;
+	return (1);
+}
+
+
 int	ft_mini_redi_init(t_mini_unit *mini_unit, char **temp, int type)
 {
 	char			*ret;
 	t_redirection	*mini_redi;
-	int				i;
 
 	ret = mini_redi_get_ret(temp);
 	if (mini_unit->redi == 0)
@@ -54,18 +72,11 @@ int	ft_mini_redi_init(t_mini_unit *mini_unit, char **temp, int type)
 		return (1);
 	}
 	mini_redi = (t_redirection *)malloc
-		((mini_unit->redi[0].type_re + 2)* sizeof(t_redirection));
+		((mini_unit->redi[0].type_re + 2) * sizeof(t_redirection));
 	if (mini_redi == 0)
 		return (free(ret), 0);
 	mini_redi[0].type_re = mini_unit->redi[0].type_re + 1;
-	i = 0;	
-	while (++i <= mini_unit->redi[0].type_re)
-		mini_redi[i].type_re = mini_unit->redi[i].type_re;
-	mini_redi[i].type_re = type;
-	mini_redi[i].str = ret;
-	free_mini_unit_redi(mini_unit);
-	mini_unit->redi = mini_redi;
-	return (1);
+	return (ft_mini_redi_init2(mini_unit, mini_redi, ret, type));
 }
 
 int	ft_redi_gen(t_mini_unit *mini_unit, char *str, int *i, int type)

@@ -1,1 +1,0 @@
-file: syntax_check, func: syntax_check3, we can remove the C_PARENT

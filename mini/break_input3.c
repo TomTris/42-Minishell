@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 04:15:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 19:00:28 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,31 @@ int	ft_reach_end_of_file(char *limiter)
 	return (1);
 }
 
-// do we need to closed the read end when we write into write end?
-// so i need to fork, and child process will write into pipe.
 int	ft_fd_heredoc_new2(char *limiter, int write_end)
 {
 	int		fd_heredoc_ori;
 	char	*temp;
-	int		temp_len;
+	int		limiter_len;
 
-	temp = get_next_line(STDIN_FILENO);
-	temp_len = ft_strlen(temp);
+	limiter_len = ft_strlen(limiter);
 	fd_heredoc_ori = get_fd_heredoc_ori(-1);
 	if (fd_heredoc_ori == -1)
 		return (perror("sthwrong in ft_fd_heredoc_new"), 0);
+	temp = get_next_line(STDIN_FILENO);
 	while (temp != 0
-		&&(sncmp(limiter, temp, temp_len) != 1 || temp[temp_len] != '\n'))
+		&& (sncmp(limiter, temp, limiter_len) != 1
+			|| temp[limiter_len] != '\n'))
 	{
 		if (print_fd(fd_heredoc_ori, temp) == -1
 			|| print_fd(write_end, temp) == -1)
-				return (free(temp), 0);
+			return (free(temp), 0);
 		ft_cnt_line_heredoc();
 		free(temp);
 		temp = get_next_line(STDIN_FILENO);
 	}
 	if (temp == 0)
 		if (ft_reach_end_of_file(limiter) == 0)
-			return (free(temp), 0);
+			return (0);
 	free(temp);
 	return (1);
 }
@@ -86,8 +85,14 @@ int	ft_fd_heredoc_new(char *limiter)
 
 	if (pipe(fd_pipe) == -1)
 		return (-1);
+	if (ft_fd_heredoc(fd_pipe[0]) == -1)
+	{
+		close (fd_pipe[0]);
+		close (fd_pipe[1]);
+		return (-1);
+	}
 	if (ft_fd_heredoc_new2(limiter, fd_pipe[1]) == 0)
-		return (close(fd_pipe[0]), -1);
+		return (-1);
 	return (fd_pipe[0]);
 }
 
