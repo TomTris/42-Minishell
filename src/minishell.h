@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 11:33:16 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:33:18 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,4 @@ typedef struct s_exec
 // builtins
 int				exec_builtin(t_exec exec);
 
-// utils
-int				ft_arr_len(char **arr);
-int				is_valid_int(char *arg);
 #endif

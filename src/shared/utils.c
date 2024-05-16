@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:14:22 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/13 14:17:14 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:32:00 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,7 @@ int	is_valid_int(char *arg)
 	return (1);
 }
 
+void	print_prompt(void)
+{
+	printf("minishell: ");
+}

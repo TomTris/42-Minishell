@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 12:11:06 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:57:56 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_shared
 	int		*exit_code;
 	char	*cwd;
 	char	*oldcwd;
+	char	*home;
 }	t_shared;
 
 int				ft_create_n_modify_env(t_save *save, char *rule, int mode);
@@ -47,4 +48,8 @@ void			free_exit(int signum);
 void			set_exit_code(int code);
 t_env_var		*get_name_value(char *env_line);
 
+// utils
+void			print_prompt(void);
+int				ft_arr_len(char **arr);
+int				is_valid_int(char *arg);
 #endif

@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 12:17:51 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:36:15 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	is_valid_path(char *path)
 	y = stat(path, &buf);
 	if (y)
 	{
-		printf("minishell$: cd: %s: No such file or directory\n", path);
+		print_prompt();
+		printf("cd: %s: No such file or directory\n", path);
 		set_exit_code(1);
 		return (0);
 	}
 	else if (!S_ISDIR(buf.st_mode))
 	{
-		printf("minishell$: cd: %s: Not a directory\n", path);
+		print_prompt();
+		printf("cd: %s: Not a directory\n", path);
 		set_exit_code(1);
 		return (0);
 	}
@@ -54,13 +56,14 @@ void	navigate_to_oldpwd()
 	dest_path = get_env_variable("OLDPWD");
 	if (!dest_path[0])
 	{
-		printf("minishell: cd: OLDPWD not set\n");
+		print_prompt();
+		printf("cd: OLDPWD not set\n");
 		set_exit_code(1);
 		return ;
 	}
 	else
 		printf("%s\n", dest_path);
-	free ((dest_path));
+	free (dest_path);
 }
 
 void	on_cd(t_exec e)
@@ -70,7 +73,8 @@ void	on_cd(t_exec e)
 
 	if (e.argc > 2)
 	{
-		printf("minishell$: cd: too many arguments\n");
+		print_prompt();
+		printf("cd: too many arguments\n");
 		set_exit_code(1);
 		return ;
 	}
