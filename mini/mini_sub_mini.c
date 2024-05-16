@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sub_mini0.c                                        :+:      :+:    :+:   */
+/*   mini_sub_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 20:14:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 05:34:19 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int	sub_mini0(t_mini *mini)
 {
 	int		i;
 
-	mini->sub_mini = sub_mini_cre(ft_cnt_sub_mini(mini->str), mini->env, mini->lvl);
+	mini->sub_mini = sub_mini_cre
+		(ft_cnt_sub_mini(mini->str), mini->env, mini->lvl);
 	if (mini->sub_mini == NULL)
 		return (0);
 	if (ft_init_sub_mini(mini->sub_mini, mini->str) == 0)

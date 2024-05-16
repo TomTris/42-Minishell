@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 21:07:51 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 05:32:53 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ static int	syntax_check_3(t_mini_unit *mini_unit,
 	{
 		if (tke->cmd != 0)
 			return (print_err("syntax error near unexpected token `('"));
+		// printf("str = {%s}, n = %d\n", str + *i , after_1_parent(str + *i) - 2);
 		mini_unit->mini = mini0(sndup(str + *i + 1,
-					after_1_parent(str + *i) - 2),
+					after_1_parent(str + *i ) - 2),
 				mini_unit->env_ori, mini_unit->lvl + 1);
 		if (mini_unit->mini == 0)
 			return (0);

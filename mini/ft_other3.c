@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 20:59:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 01:41:01 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_del_quo2(char *str2_i, char *ret)
 char	**ft_del_quo(char **str2)
 {
 	int		i;
+	char	*temp;
 	char	*ret;
 
 	i = 0;
@@ -51,12 +52,17 @@ char	**ft_del_quo(char **str2)
 		ret = ft_strdup("");
 		if (ret == 0)
 			return (free_split(str2), perror("ft_strdup"), NULL);
-		str2[i] = ft_del_quo2(str2[i], ret);
-		if (str2[i] == 0)
+		temp = ft_strdup(str2[i]);
+		if (temp == 0)
+			return (free_split(str2), free(ret), perror("ft_strdup"), NULL);
+		temp = ft_del_quo2(temp, ret);
+		if (temp == 0)
 		{
 			free_split(str2);
 			return (NULL);
 		}
+		free(str2[i]);
+		str2[i] = temp;
 		i++;
 	}
 	return (str2);
