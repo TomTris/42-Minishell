@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 17:40:25 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:44:53 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	on_cd(t_exec e)
 		cwd = getcwd(NULL, 0);
 		set_cwd(cwd);
 		free(cwd);
+		set_exit_code(0);
 	}
 	free(dest_path);
 }

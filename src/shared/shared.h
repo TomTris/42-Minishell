@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 17:30:25 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:55:30 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef struct s_save
 	char			**env;
 	char			**path_system;
 }	t_save;
+
+typedef struct s_env_var
+{
+	char		*name;
+	char		*value;
+}	t_env_var;
 
 typedef struct s_shared
 {
