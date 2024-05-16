@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 12:03:11 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:10:34 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,17 @@ int	is_valid_name(char *name)
 
 }
 
-t_env_var	*get_name_value(char *env_line)
-{
-	char		*eq;
-	int			eq_index;
-	t_env_var	*res;
-
-	eq = ft_strchr(env_line, '=');
-	res = ft_calloc(1, sizeof(t_env_var));
-	if (!eq)
-	{
-		res->name = ft_strdup(env_line);
-		res->value = ft_strdup("");
-	}
-	else
-	{
-		eq_index = eq - env_line;
-		res->name = ft_strndup(env_line, eq_index);
-		res->value = ft_strndup(eq + 1, ft_strlen(env_line) - eq_index - 1);
-	}
-	return (res);
-}
-
 int	export_arg(char *arg)
 {
-	t_env_var	*env_var;
+	t_env_var	*v;
 
-	env_var = get_name_value(arg);
-	if (!is_valid_name(env_var->name))
+	v = get_name_value(arg);
+	if (!is_valid_name(v->name))
 		return (0);
-	set_env_variable(env_var->name, env_var->value);
+	set_env_variable(v->name, v->value);
+	free(v->name);
+	free(v->value);
+	free(v);
 	return (1);
 }
 

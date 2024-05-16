@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 11:55:30 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:11:06 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char			*get_env_variable(const char *var_name);
 int				set_env_variable(char *var_name, char	*var_value);
 void			free_exit(int signum);
 void			set_exit_code(int code);
+t_env_var		*get_name_value(char *env_line);
 
 #endif

@@ -6,11 +6,33 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:43:56 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 16:48:40 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:24:55 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
+
+t_env_var	*get_name_value(char *env_line)
+{
+	char		*eq;
+	int			eq_index;
+	t_env_var	*res;
+
+	eq = ft_strchr(env_line, '=');
+	res = ft_calloc(1, sizeof(t_env_var));
+	if (!eq)
+	{
+		res->name = ft_strdup(env_line);
+		res->value = ft_strdup("");
+	}
+	else
+	{
+		eq_index = eq - env_line;
+		res->name = ft_strndup(env_line, eq_index);
+		res->value = ft_strndup(eq + 1, ft_strlen(env_line) - eq_index - 1);
+	}
+	return (res);
+}
 
 int	set_env_variable(char *var_name, char	*var_value)
 {
@@ -51,7 +73,8 @@ char	*get_env_variable(const char *var_name)
 				value = ft_strndup(env[i] + name_len + 1, line_len - name_len);
 		}
 	}
-	return (value);
+	free(value);
+	return (NULL);
 }
 
 void	set_oldpwd(char *oldcwd)

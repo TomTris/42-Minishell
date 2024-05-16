@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:05:00 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/15 17:44:53 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:17:51 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 int	is_valid_path(char *path)
 {
-	// char 	*oldpwd;
-	struct 	stat buf;
-	int		y;
+	struct stat	buf;
+	int			y;
 
 	y = stat(path, &buf);
 	if (y)
@@ -36,12 +35,38 @@ int	is_valid_path(char *path)
 		return (1);
 }
 
+void	navigate_to_path(char *path)
+{
+	int		res;
+	char	*cwd;
+
+	res = chdir(path);
+	cwd = getcwd(NULL, 0);
+	set_cwd(cwd);
+	free(cwd);
+	set_exit_code(0);
+}
+
+void	navigate_to_oldpwd()
+{
+	char	*dest_path;
+
+	dest_path = get_env_variable("OLDPWD");
+	if (!dest_path[0])
+	{
+		printf("minishell: cd: OLDPWD not set\n");
+		set_exit_code(1);
+		return ;
+	}
+	else
+		printf("%s\n", dest_path);
+	free ((dest_path));
+}
+
 void	on_cd(t_exec e)
 {
-	char	*cwd;
 	char	*dest_path;
 	char	*home;
-	int		res;
 
 	if (e.argc > 2)
 	{
@@ -61,26 +86,10 @@ void	on_cd(t_exec e)
 			dest_path = ft_strjoin(home, e.argv[1] + 1);
 		}
 		if (e.argv[1][0] == '-')
-		{
-			dest_path = get_env_variable("OLDPWD");
-			if (!dest_path[0])
-			{
-				printf("minishell: cd: OLDPWD not set\n");
-				set_exit_code(1);
-				return ;
-			}
-			else
-				printf("%s\n", dest_path);
-		}
+			return (navigate_to_oldpwd());
 	}
 	free(home);
 	if (is_valid_path(dest_path))
-	{
-		res = chdir(dest_path);
-		cwd = getcwd(NULL, 0);
-		set_cwd(cwd);
-		free(cwd);
-		set_exit_code(0);
-	}
+		navigate_to_path(dest_path);
 	free(dest_path);
 }
