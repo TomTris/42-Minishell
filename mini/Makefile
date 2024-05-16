@@ -3,13 +3,15 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = mini
 LIBFT_DIR = ../libft
 LIBFT_A = ../libft/libft.a
-SRC = 	mini0.c 				sub_mini0.c				mini_unit0.c		\
-		ft_isclosed.c 			syntax_check.c								\
-		freq_used.c 			freq_used2.c 			ft_free.c			\
-		dollar_handler.c		dollar_expand.c 		dollar_expand2.c	\
-		ft_split_after_dollar_expansion.c 				ft_del_quote.c		\
-		wildcard_expand.c		wildcard_expand2.c	\
-		str_replace.c
+SRC = 	\
+		mini_mini.c				mini_sub_mini.c			mini_mini_unit.c													\
+		syntax_precheck.c		syntax_check.c																				\
+		expansion_0.c			expansion_dollar1.c		expansion_dollar2.c		expansion_dollar3.c							\
+		expansion_dollar4.c		expansion_wildcard1.c	expansion_wildcard2.c												\
+		break_input.c			break_input2.c			break_input3.c			break_input4.c								\
+		ft_free.c				ft_other1.c				ft_other2.c				ft_other3.c									\
+		ft_clean1.c				ft_clean2.c
+
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freq_used.c                                        :+:      :+:    :+:   */
+/*   ft_other1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:24:52 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 20:47:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 05:36:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	after_quote(char *str)
 
 int	after_mlt_parent(char *str)
 {
-	if (str[0] || str[0] != '(')
+	if (str[0] == 0 || str[0] != '(')
 		return (0);
 	return (after_1_parent(str)
 		+ after_mlt_parent(str + after_1_parent(str) + 1));
@@ -59,10 +59,10 @@ int	after_1_parent(char *str)
 {
 	int	i;
 	int	cnt;
-
 	cnt = 0;
 	if (str[0] != '(')
 		return (0);
+// printf("str = {%s}\n", str);
 	i = -1;
 	while (str[++i])
 	{
@@ -75,7 +75,7 @@ int	after_1_parent(char *str)
 			return (i + 1);
 	}
 	print_err("sth wrong in ater_1_parent");
-	return (-1);
+	return (0);
 }
 
 int	print_err(char *str)

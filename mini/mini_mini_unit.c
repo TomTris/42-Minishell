@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_unit0.c                                       :+:      :+:    :+:   */
+/*   mini_mini_unit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/13 15:14:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 05:36:46 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign, int lvl)
 	while (++i <= nbr)
 	{
 		ret[i].nbr = i;
+		ret[i].nbr_sum = nbr;
 		ret[i].cmd = 0;
-		ret[i].args = 0;
-		ret[i].env_ori = 0;
 		ret[i].mini = 0;
 		ret[i].env_ori = env;
 		ret[i].sign_sub = sign;
-		ret[i].nbr_sum = nbr;
 		ret[i].lvl = lvl;
+		ret[i].redi = 0;
+		ret[i].fd_heredoc = 0;
 	}
 	ret[0].nbr = nbr;
 	return (ret);

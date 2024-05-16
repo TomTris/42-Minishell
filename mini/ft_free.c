@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 23:26:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 05:08:07 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ int	free_split(char **to_free2)
 	return (0);
 }
 
+void	free_mini_unit_redi(t_mini_unit *mini_unit)
+{
+	int	i;
+
+	i = 0;
+	while (++i <= mini_unit->redi[0].type_re)
+	{
+		free(mini_unit->redi[i].str);
+	}
+	free(mini_unit->redi);
+	mini_unit->redi = 0;
+}
+
 static int	free_mini_unit(t_mini_unit *mini_unit)
 {
 	int	i;
@@ -36,7 +49,6 @@ static int	free_mini_unit(t_mini_unit *mini_unit)
 		// printf("str = {%s}\n", mini_unit[i].str);
 		free(mini_unit[i].str);
 		free(mini_unit[i].cmd);
-		free_split(mini_unit[i].args);
 		if (mini_unit[i].mini != 0)
 		{
 			free_mini(mini_unit[i].mini);
@@ -64,9 +76,6 @@ static int	free_sub_mini(t_sub_mini *sub_mini)
 
 int	free_mini(t_mini *mini)
 {
-	// int			i;
-
-	// i = 0;
 	free(mini->str);
 	free_sub_mini(mini->sub_mini);
 	return (0);
