@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 18:41:22 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 00:35:15 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,25 +103,26 @@ char	**str_replace(char *str_ori, char **env)
 	return (ret);
 }
 
-// // ambigious or ret = str_replace("", env) -> ret[0] = NULL
-// // ret = str_replace("\"\"") or ("\'\'") -> ret[0][0] = '\0'
-// int	main(int ac, char **av, char **env)
-// {
-// 	char	**ret;
-// ac = 0;
-// av = 0;
-// 	ret = str_replace("33$a$1$BGHH$a\"$AAA\"", env);
-// 	printf("str = {%s}\n", ret[0]);
-// 	while (ret[ac])
-// 	{
-// 		printf("%s ", ret[ac++]);
-// 	}
-// 	printf("\n");
-// 	free_split(ret);
-// 	ret = 0;
-// 	system("leaks mini");
-// 	return (0);
-// }
+// ambigious or ret = str_replace("", env) -> ret[0] = NULL
+// ret = str_replace("\"\"") or ("\'\'") -> ret[0][0] = '\0'
+int	main(int ac, char **av, char **env)
+{
+	char	**ret;
+ac = 0;
+av = 0;
+	printf("--------------------\n\n\n\n\n\n");
+	ret = str_replace("$_", env);
+	// printf("str = {%s}\n", ret[0]);
+	while (ret[ac])
+	{
+		printf("%s \n", ret[ac++]);
+	}
+	// printf("\n");
+	free_split(ret);
+	ret = 0;
+	// system("leaks mini");
+	return (0);
+}
 
 //
 //

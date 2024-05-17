@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 18:33:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 02:05:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_redirection
 // i use pipe to store heredoc -> limit 512 bytes.
 typedef struct s_mini_unit
 {
+	// int				is_child;
 	int				nbr;
 	int				nbr_sum;
 	int				lvl;
@@ -108,8 +109,11 @@ char			**ft_del_quo(char **str2);
 char			*ft_del_quo2(char *str2_i, char *ret);
 
 /*************************  ft_clean *********************************/
-//ft_clean1
+//ft_clean1 && 2
 int				ft_fd_heredoc(int fd_new);
+int				ft_fd_dup(int fd_new);
+int				ft_fd_redi_dup(int fd_new);
+
 int				ft_clean_programm(t_mini *mini_outside,
 					int exit_nbr, int leaks_check);
 
@@ -152,22 +156,28 @@ int				ft_cmd_gen(t_mini_unit *mini_unit, char *str, int *i);
 char			**ft_cmd_create(char **cmd, char *str, char **env);
 char			**smerge2(char **s1, char **s2);
 int				ft_take_string(char *str, int *i);
-//break_input3
+//break_input3_herd
 int				ft_heredoc_gen(t_mini_unit *mini_unit, char *str, int *i);
+char			*rm_dollar_before_quote(char *str, int i, char *ret);
 int				ft_fd_heredoc_new(char *limiter);
 int				ft_fd_heredoc_new2(char *limiter, int write_end);
+
+//break_input4_heredoc
+int				ft_init_heredoc(t_mini *mini);
+int				get_fd_heredoc_ori(int fd);
+int				ft_cnt_line_heredoc(void);
 int				ft_reach_end_of_file(char *limiter);
-int				ft_here_doc_add(t_mini_unit *mini_unit, int fd_new_to_add);
-//break_input4
+int				ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add);
+
+//break_input5_redi
 int				ft_redi_gen(t_mini_unit *mini_unit,
 					char *str, int *i, int type);
 int				ft_mini_redi_init(t_mini_unit *mini_unit,
 					char **temp, int type);
+int				ft_mini_redi_init2(t_mini_unit *mini_unit,
+					t_redirection *mini_redi, char *ret, int type);
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
-//break_input5
-int				ft_init_heredoc(t_mini *mini);
-int				get_fd_heredoc_ori(int fd);
-int				ft_cnt_line_heredoc(void);
+
 
 #endif
