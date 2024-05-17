@@ -12,7 +12,7 @@ SRC = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c f
 		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\
 		\
-		ft_isempty.c ft_strcmp.c ft_trim_white_space.c ft_strdup_middle_del.c\
+		ft_isempty.c scmp.c ft_trim_white_space.c ft_strdup_middle_del.c\
 		ft_isalnum_.c ft_is_valid_word.c ft_empty_cnt.c ft_cnt_valid_word.c ft_strnjoin.c ft_sadd.c\
 		\
 		get_next_line.c\

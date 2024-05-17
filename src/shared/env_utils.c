@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:43:56 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 15:24:55 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:50:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_env_var	*get_name_value(char *env_line)
 	else
 	{
 		eq_index = eq - env_line;
-		res->name = ft_strndup(env_line, eq_index);
-		res->value = ft_strndup(eq + 1, ft_strlen(env_line) - eq_index - 1);
+		res->name = sndup(env_line, eq_index);
+		res->value = sndup(eq + 1, ft_strlen(env_line) - eq_index - 1);
 	}
 	return (res);
 }
@@ -70,7 +70,7 @@ char	*get_env_variable(const char *var_name)
 			if (line_len == name_len)
 				return (value);
 			if (env[i][name_len] == '=')
-				value = ft_strndup(env[i] + name_len + 1, line_len - name_len);
+				value = sndup(env[i] + name_len + 1, line_len - name_len);
 		}
 	}
 	free(value);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 19:16:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 14:59:16 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		ft_toupper(int c);
 /************************   Functions that i added   **************************/
 int		ft_isempty(int c);
 int		ft_isalnum_(int c);
-int		ft_strcmp(char *str1, char *str2);
+int		scmp(char *str1, char *str2);
 char	*ft_strdup_middle_del(char *str, int start_del, int end_del);
 char	*ft_trim_whitespace(char *str);
 int		ft_is_valid_word(char *str, int i);

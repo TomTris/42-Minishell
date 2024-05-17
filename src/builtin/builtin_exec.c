@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 16:41:33 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:59:16 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int	exec_builtin(t_exec exec)
 {
 	if (!ft_strlen(exec.cmd))
 		return (0);
-	if (!ft_strcmp(exec.cmd, "exit"))
+	if (!scmp(exec.cmd, "exit"))
 		on_exit(exec);
-	if (!ft_strcmp(exec.cmd, "cd"))
+	if (!scmp(exec.cmd, "cd"))
 		on_cd(exec);
-	if (!ft_strcmp(exec.cmd, "pwd"))
+	if (!scmp(exec.cmd, "pwd"))
 		on_pwd(exec);
-	if (!ft_strcmp(exec.cmd, "env"))
+	if (!scmp(exec.cmd, "env"))
 		on_env(exec);
-	if (!ft_strcmp(exec.cmd, "export"))
+	if (!scmp(exec.cmd, "export"))
 		on_export(exec);
-	if (!ft_strcmp(exec.cmd, "echo"))
+	if (!scmp(exec.cmd, "echo"))
 		on_echo(exec);
-	if (!ft_strcmp(exec.cmd, "unset"))
+	if (!scmp(exec.cmd, "unset"))
 		on_unset(exec);
 	return (0);
 }

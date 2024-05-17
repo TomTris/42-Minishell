@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 17:29:56 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:50:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_set_shell_lvl_2(t_save *save, int i)
 	temp = ft_itoa(ft_atoi(save->env[i] + 6) + 1);
 	if (temp == 0)
 		return (0);
-	temp2 = ft_strndup(save->env[i], 6);
+	temp2 = sndup(save->env[i], 6);
 	if (temp2 == 0)
 		return (free(temp), 0);
 	temp3 = ft_strjoin(temp2, temp);

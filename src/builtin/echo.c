@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:27:44 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 16:44:12 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:59:16 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_n_flag(char *option)
 
 void	print_arg(char *arg)
 {
-	if (ft_strcmp(arg, "~"))
+	if (scmp(arg, "~"))
 		printf("%s", arg);
 	else
 		printf("%s", get_env()->home);
