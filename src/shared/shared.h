@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 15:57:56 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:41:53 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ t_env_var		*get_name_value(char *env_line);
 void			print_prompt(void);
 int				ft_arr_len(char **arr);
 int				is_valid_int(char *arg);
+void			ft_sort_ascii(char **ret);
 #endif

@@ -1,41 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard_expand.c                                  :+:      :+:    :+:   */
+/*   expansion_wildcard1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:48:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 00:50:26 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 17:41:11 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-static void	ft_sort_ascii(char **ret)
-{
-	int		i;
-	int		j;
-	char	*temp;
-
-	i = 0;
-	while (ret[i])
-		i++;
-	while (i-- > 1)
-	{
-		j = 0;
-		while ((j + 1) <= i - 1)
-		{
-			if (ft_strncmp(ret[j], ret[j + 1], ft_strlen(ret[i]) + 1) > 0)
-			{
-				temp = ret[j];
-				ret[j] = ret[j + 1];
-				ret[j + 1] = temp;
-			}
-			j++;
-		}
-	}
-}
 
 static char	**get_cwd_name(void)
 {

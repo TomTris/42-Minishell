@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 15:40:24 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:42:30 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <libft.h>
 # include <dirent.h> //opendir
+# include <minishell.h>
 
 # define OR 1
 # define AND 2

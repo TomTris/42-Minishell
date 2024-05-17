@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 16:58:17 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:01:24 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,28 @@ int	export_arg(char *arg)
 
 void	print_all_exported(void)
 {
-	char	**env;
-	int		i;
+	char		**env;
+	char		**copy;
+	int			i;
+	int			len;
 	t_env_var	*env_var;
 
 	env = get_env()->env_vars->env;
 	i = -1;
+	len = ft_arr_len(env);
+	copy = ft_calloc(len + 1, sizeof(char *));
 	while (env[++i])
+		copy[i] = env[i];
+	copy[i] = 0;
+	ft_sort_ascii(copy);
+	i = -1;
+	while (copy[++i])
 	{
-		env_var = get_name_value(env[i]);
+		env_var = get_name_value(copy[i]);
 		printf("declare -x %s=\"%s\"\n", env_var->name, env_var->value);
 	}
+	free_split(copy);
+	free(copy);
 }
 
 // If no names are supplied, a list of names of 

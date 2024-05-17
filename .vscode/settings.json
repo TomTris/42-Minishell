@@ -2,6 +2,7 @@
 	"files.associations": {
 		"parser.h": "c",
 		"env.h": "c",
-		"readline.h": "c"
+		"readline.h": "c",
+		"mini.h": "c"
 	}
 }
