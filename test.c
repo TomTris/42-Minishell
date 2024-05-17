@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 19:47:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 00:42:56 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/10 15:22:13 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/17 14:34:48 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-int	scmp(char *str1, char *str2)
+int	main(int ac, char **av, char **env)
 {
 	int	i;
 
-	i = 0;
-	while (str1[i] && str2[i])
-	{
-		if (str1[i] != str2[i])
-			return (1);
-		i++;
-	}
-	if (str1[i] == 0 && str2[i] == 0)
-		return (0);
+ac = 0;
+av = 0;
+	char **a = (char **)malloc(5 * sizeof(char *));
+	a[0] = (char *)"ls";
+	a[1] = NULL;
+	
+	execve(NULL, NULL, env);
+	perror("");
+	printf("5\n");
 	return (1);
 }

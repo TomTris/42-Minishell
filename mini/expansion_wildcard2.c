@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puts_fd.c                                       :+:      :+:    :+:   */
+/*   wildcard_expand2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 18:51:38 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 20:23:51 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/15 00:10:45 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/15 00:11:01 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini.h"
 
-static int	ft_putstr1_null(int fd)
+char	**merge_with_wildcard(char **str2, int nbr)
 {
-	if (write(fd, "(null)", 6) < 0)
-		return (-1);
-	else
-		return (6);
-}
-
-int	ft_puts_fd(char *s, int fd)
-{
-	int		len;
-	int		len2;
 	int		i;
+	int		j;
+	char	**ret;
+	char	**wc_expand;
 
-	if (s == NULL)
+	ret = smerge(0, 0);
+	i = -1;
+	while (str2[++i])
 	{
-		return (ft_putstr1_null(fd));
-	}
-	i = 0;
-	len = (int) ft_strlen(s);
-	len2 = len;
-	while (len > 0)
-	{
-		if (write(fd, s + i, 1) < 0)
-			return (-1);
-		else
+		wc_expand = wildcard_expand(str2[i], nbr);
+		if (wc_expand == 0)
+			return (free_split(ret), NULL);
+		j = -1;
+		while (wc_expand[++j])
 		{
-			len--;
-			i++;
+			ret = smerge(ret, wc_expand[j]);
+			if (ret == 0)
+				return (free_split(wc_expand), NULL);
 		}
+		free_split(wc_expand);
 	}
-	return (len2);
+	return (ret);
 }

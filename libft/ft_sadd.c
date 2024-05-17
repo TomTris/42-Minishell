@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_sadd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/13 20:42:35 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/13 20:44:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+char	*sadd(char *str, char c)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
+	int		i;
+	int		len;
+	char	*ret;
 
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	len = ft_strlen(str);
+	ret = (char *)malloc(len + 2);
+	if (str == 0)
+		return (0);
+	i = -1;
+	while (str[++i])
+		ret[i] = str[i];
+	ret[i] = c;
+	ret[i + 1] = 0;
+	return (ret);
 }

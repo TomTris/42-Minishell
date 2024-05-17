@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/16 15:54:39 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/16 16:02:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+int	main(void)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
+	int		i;
+	char	*temp;
+	int		fd_pipe[2];
 
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	pipe(fd_pipe);
+	temp = get_next_line(STDIN_FILENO);
+	while (temp != 0 && sncmp(temp, "LIMTTER\n", 8) != 1)
+	{
+		print_fd(fd_pipe[1], "%s\n", temp);
+		temp = get_next_line(STDIN_FILENO);
+	}
 }

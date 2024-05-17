@@ -2,9 +2,6 @@ Bori:
 01 - create prompt
 02 - deal with history
 03 - deal with signals
-increase SHLVL when running minishell ?
-cd ~
-history when line not empty
-fix behavior on ctrl+d and ctrl+\
-fix cd no_args
-understand OLDPWD
+
+Tom:
+04 - continue parsing

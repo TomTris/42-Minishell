@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum_.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/10 22:04:43 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/14 00:29:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+// is alphabet / num or underscore
+int	ft_isalnum_(int a)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
-
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	if (((a > 47) && (a < 58))
+		|| ((a > 64) && (a < 91))
+		|| ((a > 96) && (a < 123))
+		|| a == '_')
+		return (1);
+	else
+		return (0);
 }
