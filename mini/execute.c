@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 02:15:07 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 15:57:03 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+#include <minishell.h>
 
 
 void	ft_sig_ter(pid_t *pid, int nbr)
@@ -29,6 +30,7 @@ pid_t	*pid_arr_create(int i)
 	ret = (pid_t *)malloc(i * sizeof(pid_t));
 	if (ret == 0)
 		return (perror("malloc failed"), NULL);
+	return (ret);
 }
 
 int	ft_wait_pid(pid_t *pid, int nbr)
@@ -74,14 +76,18 @@ int	ft_redi_execute(t_mini_unit *mini_unit)
 
 int	ft_execv(t_mini_unit *mini_unit, int fd_close)
 {
-	int		i;
-	char	**path;
+	// int		i;
+	// char	**path;
+	t_exec	*cmd_args;
 
-	ft_execv_relativ(mini_unit);
-	path = ft_path_gen(mini_unit);
-	ft_execv_absolut(mini_unit, path);
+	cmd_args = simple_parse(mini_unit->str);
+	exec_builtin(*cmd_args);
+	// ft_execv_relativ(mini_unit);
+	// path = ft_path_gen(mini_unit);
+	// ft_execv_absolut(mini_unit, path);
 	close(fd_close);
 	ft_clean_programm(0, EXIT_FAILURE, 0);
+	return (1); //TODO:
 }
 
 int	ft_execute_mini_unit(t_mini_unit	*mini_unit, int fd_in, int fd_out)
@@ -105,7 +111,7 @@ int	ft_recursion_fork_pid(pid_t *pid_arr, t_mini_unit *mini_unit, int fd_in)
 	int		fd_new[2];
 	pid_t	pid;
 
-	if (pipe(fd_new[2]) == 0)
+	if (pipe(fd_new) == 0)
 		return (perror("pipe"), -1);
 	pid = fork();
 	if (pid == 0)
@@ -126,7 +132,7 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 
 	pid = pid_arr_create(sub_mini->mini_unit[0].nbr);
 	if (pid == NULL)
-		return (NULL);
+		return (0);
 	fd_in = -2;
 	i = 0;
 	while (++i <= sub_mini->mini_unit[0].nbr && fd_in != -1)

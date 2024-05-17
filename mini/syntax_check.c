@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 18:17:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 15:09:11 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	print_err_eof(t_mini_unit *mini_unit)
 	if (mini_unit->sign_sub == 0)
 	{
 		if (mini_unit->lvl == 0)
-			return (syn_err(0, NEWLINE));
+			return (syn_err(0, NEW_LINE));
 		return (syn_err(")", 0));
 	}
 	if (mini_unit->sign_sub == 1)

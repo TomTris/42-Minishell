@@ -15,7 +15,8 @@ MINI			= 	mini_mini				mini_sub_mini			mini_mini_unit							\
 					break_input			break_input2			break_input3_heredoc	break_input4_heredoc\
 					break_input5_redi																		\
 					ft_free				ft_other1				ft_other2				ft_other3			\
-					ft_clean1				ft_clean2 ft_clean3
+					ft_clean1				ft_clean2 ft_clean3\
+					execute
 MINI_SRC		= $(patsubst %, ./mini/%.c, $(MINI))
 MINI_OBJ		= $(patsubst %.c, %.o, $(MINI_SRC))
 SRC				= $(PROMPT_SRC) $(BLTIN_SRC) $(ENV_SRC)
@@ -29,7 +30,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(HDR_FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) $(HDR_FLAGS) -o $(NAME) $(OBJS) $(LIBFT) && ./minishell
+	@$(CC) $(CFLAGS) $(LFLAGS) $(HDR_FLAGS) -o $(NAME) $(OBJS) $(LIBFT) 
 
 test:  $(NAME)
 	./minishell

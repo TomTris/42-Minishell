@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 15:33:18 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:43:38 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h> //for strerror
 # include <sys/stat.h> //for stat, for dirs
 # include <shared.h>
+# include <mini.h>
 
 typedef struct s_exec
 {
@@ -35,5 +36,6 @@ typedef struct s_exec
 
 // builtins
 int				exec_builtin(t_exec exec);
+t_exec	*simple_parse(char *line);
 
 #endif

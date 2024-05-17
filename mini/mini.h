@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 14:58:00 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:40:24 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define RE_OUT 7
 # define HERE_DOC 8
 # define APPEND 9
-# define NEWLINE 10
+# define NEW_LINE 10
 
 # define HERE_DOC_FILE ".heredoc.Qdo&&Bori@42Heilbronn.de"
 
@@ -178,6 +178,9 @@ int				ft_mini_redi_init2(t_mini_unit *mini_unit,
 					t_redirection *mini_redi, char *ret, int type);
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
+
+// execute
+int	ft_execute_mini(t_mini *mini);
 
 
 #endif

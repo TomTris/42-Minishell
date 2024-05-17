@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freq_used2.c                                       :+:      :+:    :+:   */
+/*   ft_other2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 00:06:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/17 15:09:11 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	syn_err(char *str, int sign)
 		return (print_err("syntax error near unexpected token `>>'"));
 	if (sign == HERE_DOC)
 		return (print_err("syntax error near unexpected token `<<'"));
-	if (sign == NEWLINE)
+	if (sign == NEW_LINE)
 		return (print_err("syntax error near unexpected token `new line'"));
 	if (sign == O_PARENT)
 		return (print_err("syntax error near unexpected token `('"));
