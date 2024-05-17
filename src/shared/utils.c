@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:14:22 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 17:41:35 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_valid_int(char *arg)
 
 void	print_prompt(void)
 {
-	printf("minishell: ");
+	ft_printf("minishell: ");
 }
 
 void	ft_sort_ascii(char **ret)

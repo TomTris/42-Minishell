@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 18:01:24 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_all_exported(void)
 	while (copy[++i])
 	{
 		env_var = get_name_value(copy[i]);
-		printf("declare -x %s=\"%s\"\n", env_var->name, env_var->value);
+		ft_printf("declare -x %s=\"%s\"\n", env_var->name, env_var->value);
 	}
 	free_split(copy);
 	free(copy);
@@ -72,7 +72,7 @@ void	on_export(t_exec e)
 		if (!export_arg(e.argv[i]))
 		{
 			print_prompt();
-			printf("export: `%s': not a valid identifier\n", e.argv[i]);
+			ft_printf("export: `%s': not a valid identifier\n", e.argv[i]);
 			all_correct = 0;
 		}
 	}

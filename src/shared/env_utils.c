@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:43:56 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 14:50:23 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:23:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_env_variable(const char *var_name)
 	i = -1;
 	name_len = ft_strlen((const char *)var_name);
 	env = get_env()->env_vars->env;
-	value = ft_calloc(1, sizeof(char));
+	value = NULL;
 	while (env[++i])
 	{
 		if (!ft_strncmp(var_name, env[i], name_len))
@@ -73,8 +73,7 @@ char	*get_env_variable(const char *var_name)
 				value = sndup(env[i] + name_len + 1, line_len - name_len);
 		}
 	}
-	free(value);
-	return (NULL);
+	return (value);
 }
 
 void	set_oldpwd(char *oldcwd)

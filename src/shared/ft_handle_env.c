@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 14:50:23 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,16 @@ int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
 
 // 	i = -1;
 // 	while (save.env[++i] != 0)
-// 		printf("%s\n", save.env[i]);
-// 	printf("%d\n", i);
+// 		ft_printf("%s\n", save.env[i]);
+// 	ft_printf("%d\n", i);
 // 	if (ft_create_n_modify_env(&save, "PATH=abbbbfbfbf", 2) == 0)
 // 		return (1);
 // 	// int	i;
 
 // 	i = -1;
 // 	while (save.env[++i] != 0)
-// 		printf("%s\n", save.env[i]);
-// 	printf("%d\n", i);
+// 		ft_printf("%s\n", save.env[i]);
+// 	ft_printf("%d\n", i);
 // }
 
 // this file is about: ft_save_path_system_n_env_init

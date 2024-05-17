@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/16 12:04:53 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_exit(int signum)
 	t_shared	*vars;
 
 	if (signum == SIGQUIT)
-		printf("exit\n");
+		ft_printf("exit\n");
 	vars = get_env();
 	exit (*vars->exit_code);
 }

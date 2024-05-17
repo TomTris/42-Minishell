@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:25:04 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/14 12:58:09 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	on_env(t_exec e)
 	i = -1;
 	env = get_env()->env_vars->env;
 	while (env[++i])
-		printf("%s\n", env[i]);
+		ft_printf("%s\n", env[i]);
 }
