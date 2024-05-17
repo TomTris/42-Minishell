@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_expand2.c                                   :+:      :+:    :+:   */
+/*   expansion_dollar3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:00:36 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 21:04:00 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/16 20:26:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*dollar_doquo2(char *str, char *ret, char **env, int *i)
 	return (ret);
 }
 
+//f_add free ori, return ret.
 char	*f_add(char *ori, char *to_add, int n)
 {
 	int		i;
