@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 01:37:27 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:55:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 		if (sub_mini->mini_unit[1].cmd == 0 && sub_mini->mini_unit[1].mini != 0)
 			return (ft_execute_mini(sub_mini->mini_unit[1].mini));
 		if (ft_is_builtin(&sub_mini->mini_unit[1]) == 1)
-			return (ft_builtin(sub_mini->mini_unit[1].cmd));
+			return (ft_builtin(&(sub_mini->mini_unit[1].cmd)));
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), ft_clean_programm(0, EXIT_FAILURE));
