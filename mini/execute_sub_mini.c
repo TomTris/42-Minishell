@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:55:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 16:52:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 	free(pid);
 	return (0);
 }
-
 
 int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 {

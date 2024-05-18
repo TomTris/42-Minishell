@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:39:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:00:18 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,17 @@ int	ft_redi_execute_heredoc(t_mini_unit *mini_unit)
 int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi)
 {
 	int	i;
-// dprintf(2, "get in\n");
+
 	if (fd_redi == -1)
-		return (dprintf(2, "getout!\n"), perror(redi->str), 0);
+		return (perror(redi->str), 0);
 	if (redi->type_re == RE_IN)
 		i = dup2(fd_redi, STDIN_FILENO);
 	else
 		i = dup2(fd_redi, STDOUT_FILENO);
 	if (redi->type_re == RE_IN)
-	{
-		// dprintf(2, "wtf?");
 		close(fd_redi);
-		// printf("1\n");
-	}
 	else if (redi->type_re != RE_IN)
-	{
-		// dprintf(2, "fd_redi = %d\n", fd_redi);
 		ft_fd_out(fd_redi);
-		// dprintf(2, "done save\n");
-	}
-	// else
-	// 	dprintf(2, "???\n");
 	if (i == -1)
 		return (perror("dup2"), 0);
 	return (1);
@@ -76,14 +66,7 @@ int	ft_redi_execute_redi(t_redirection *redi, char **env)
 	else if (redi->type_re == RE_OUT)
 		fd_redi = open(str2, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	else
-	{
-		// if (redi->type_re == RE_IN)
-			// printf("true\n\n");
 		fd_redi = open(str2, O_RDONLY, 0644);
-		// printf("str = %s\n", redi->str);
-		// printf("type = %d\n", redi->type_re);
-	}
-	printf("fd infile  = %d\n", fd_redi);
 	free(str2);
 	return (ft_redi_execute_redi2(redi, fd_redi));
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 22:32:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:02:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	ft_change_star(char *str, int nbr)
 			i++;
 	}
 }
-
 
 // if there is nothing left -> ret[0] = NULL, like < $aaafeff or nothing.
 // if it's like "" -> ret[0][0] = 0, ret[1] = 0.

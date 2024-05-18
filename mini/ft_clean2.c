@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:50:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 02:56:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:36:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,13 @@ int	ft_fd_dup(int fd_new)
 	if (fd_temp == NULL)
 		return (-1);
 	return (free(fd), fd = fd_temp, fd_new);
+}
+
+int	ft_fd_out(int fd_new)
+{
+	static int	fd = -1;
+
+	close(fd);
+	fd = fd_new;
+	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:49:15 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:02:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	main2(int ac, char **av, char **env_ori, char *str)
 	if (break_input(mini) == 0)
 		print_err("break input sthwrong");
 	ft_execute_mini(mini);
-	unlink(HERE_DOC_FILE);
 	ft_clean_programm(0, 0);
 	return (0);
 }
@@ -115,8 +114,8 @@ int	main2(int ac, char **av, char **env_ori, char *str)
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	rl_initialize();
 
+	rl_initialize();
 	while (1)
 	{
 		str = readline("minishell> ");
