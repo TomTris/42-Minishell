@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 21:38:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:47:19 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	ft_fd_heredoc_new(char *limiter)
 		return (-1);
 	}
 	if (ft_fd_heredoc_new2(limiter, fd_pipe[1]) == 0)
-		return (-1);
+		return (close (fd_pipe[0]), close (fd_pipe[1]), -1);
+	close(fd_pipe[1]);
 	return (fd_pipe[0]);
 }
 

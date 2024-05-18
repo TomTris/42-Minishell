@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 16:36:46 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 01:05:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int lvl)
 	i = -1;
 	while (++i <= nbr)
 	{
-		ret[i].nbr = 0;
+		ret[i].nbr = i;
 		ret[i].sign_after = 0;
 		ret[i].lvl = lvl;
 		ret[i].str = 0;
