@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:51:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 02:07:07 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:36:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	*ft_fd_add(int *fd, int fd_new)
 
 	fd_arr_new = (int *)malloc((fd[0] + 2) * sizeof(int));
 	if (fd_arr_new == NULL)
-		return (NULL);
+		return (perror("malloc"), NULL);
 	fd_arr_new[0] = fd[0] + 1;
 	i = 0;
 	while (++i <= fd[0])
@@ -66,7 +66,7 @@ int	ft_fd_heredoc(int fd_new)
 		if (fd != 0)
 			while (++i <= fd[0])
 				close(fd[i]);
-		return (free(fd), fd = 0, -1);
+		return (free(fd), fd = NULL, -1);
 	}
 	fd_temp = ft_fd_add(fd, fd_new);
 	if (fd_temp == NULL)
@@ -75,7 +75,7 @@ int	ft_fd_heredoc(int fd_new)
 }
 
 //heredoc delete - only ctrl D // exit.
-int	ft_clean_programm(t_mini *mini_outside, int exit_nbr, int leaks_check)
+int	ft_clean_programm(t_mini *mini_outside, int exit_nbr)
 {
 	static t_mini	*mini = NULL;
 
@@ -90,13 +90,10 @@ int	ft_clean_programm(t_mini *mini_outside, int exit_nbr, int leaks_check)
 			free_split(*(mini->env));
 		free_mini(mini);
 		free(mini);
+		close(mini->fd_heredoc);
 		ft_fd_heredoc(-1);
 		ft_fd_dup(-1);
-		ft_fd_redi_dup(-1);
-		unlink(HERE_DOC_FILE);
-		if (leaks_check != 0)
-			system("leaks mini");
-		exit(exit_nbr);
-		return (1);
+		ft_fd_out(-3);
+		return (exit_nbr);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 18:17:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 01:14:43 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	print_err_eof(t_mini_unit *mini_unit)
 		return (syn_err(0, PIPE));
 	if (mini_unit->sign_sub == 0)
 	{
-		if (mini_unit->lvl == 0)
-			return (syn_err(0, NEWLINE));
+		if (mini_unit->lvl == 1)
+			return (syn_err(0, NL));
 		return (syn_err(")", 0));
 	}
 	if (mini_unit->sign_sub == 1)

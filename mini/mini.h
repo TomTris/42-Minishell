@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 02:05:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:28:31 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define MINI_H
 
 # include "../libft/libft.h"
-# include <dirent.h> //opendir
+# include <dirent.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+
 
 # define OR 1
 # define AND 2
@@ -25,7 +29,7 @@
 # define RE_OUT 7
 # define HERE_DOC 8
 # define APPEND 9
-# define NEWLINE 10
+# define NL 10
 
 # define HERE_DOC_FILE ".heredoc.Qdo&&Bori@42Heilbronn.de"
 
@@ -38,7 +42,7 @@ typedef struct s_mini	t_mini;
 
 typedef struct s_redirection
 {
-	int		fd;
+	// int		fd;
 	int		type_re;
 	char	*str;
 }	t_redirection;
@@ -113,9 +117,9 @@ char			*ft_del_quo2(char *str2_i, char *ret);
 int				ft_fd_heredoc(int fd_new);
 int				ft_fd_dup(int fd_new);
 int				ft_fd_redi_dup(int fd_new);
+int				ft_fd_redi_dup(int fd_new);
 
-int				ft_clean_programm(t_mini *mini_outside,
-					int exit_nbr, int leaks_check);
+int				ft_clean_programm(t_mini *mini_outside, int exit_nbr);
 
 /*************************	String replace *********************************/
 //expansion_0
@@ -172,12 +176,39 @@ int				ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add);
 //break_input5_redi
 int				ft_redi_gen(t_mini_unit *mini_unit,
 					char *str, int *i, int type);
-int				ft_mini_redi_init(t_mini_unit *mini_unit,
-					char **temp, int type);
+int				ft_mini_redi_init(t_mini_unit *mini_unit, char *ret, int type);
 int				ft_mini_redi_init2(t_mini_unit *mini_unit,
 					t_redirection *mini_redi, char *ret, int type);
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
 
+
+//execute mini_unit
+int				ft_recursion_muni_unit_create(
+					pid_t *pid_arr, t_mini_unit *mini_unit, int fd_in);
+int				ft_execute_mini_unit(
+					t_mini_unit *mini_unit, int fd_in, int fd_out);
+int				ft_is_builtin(t_mini_unit *mini_unit);
+int				ft_builtin(char **cmd);
+//execute mini.c
+int				ft_execute_mini(t_mini *mini);
+int				ft_execute_mini2(t_mini *mini, int i, int j);
+//execute_sub_mini.c
+int				ft_execute_sub_mini(t_sub_mini *sub_mini);
+int				ft_execute_sub_mini2(t_sub_mini *sub_mini);
+pid_t			*pid_arr_create(int i);
+int				ft_wait_pid(pid_t *pid, int nbr);
+void			ft_sig_ter(pid_t *pid, int nbr);
+//execute_mini_unit_redi
+int				ft_redi_execute(t_mini_unit *mini_unit);
+int				ft_redi_execute_redi(t_redirection *redi, char **env);
+int				ft_redi_execute_heredoc(t_mini_unit *mini_unit);
+//execute mini_unit_ft_execve
+int				ft_execve(t_mini_unit *mini_unit, int fd_close);
+char			**ft_path_gen(char **env);
+int				ft_execve_absolut(
+					char *cmd, char **args, char **path, char **env);
+char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
+int				ft_fd_out(int fd_new);
 
 #endif

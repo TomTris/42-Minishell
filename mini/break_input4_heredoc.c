@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:52:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 21:06:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:49:09 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int	get_fd_heredoc_ori(int fd)
 int	ft_init_heredoc(t_mini *mini)
 {
 	unlink(HERE_DOC_FILE);
-	mini->fd_heredoc = open(HERE_DOC_FILE, O_TRUNC | O_RDWR | O_CREAT, 0644);
+	mini->fd_heredoc = open(HERE_DOC_FILE, O_CREAT | O_TRUNC | O_RDWR , 0644);
 	if (mini->fd_heredoc == -1)
-		return (perror("open"), ft_clean_programm(0, 1, 0), -99);
+		return (perror("open"), ft_clean_programm(0, 1), -99);
 	get_fd_heredoc_ori(mini->fd_heredoc);
 	return (1);
 }

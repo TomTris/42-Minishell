@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 01:54:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 01:06:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign, int lvl)
 	i = -1;
 	while (++i <= nbr)
 	{
-		// ret[i].is_child = 0;
 		ret[i].nbr = i;
 		ret[i].nbr_sum = nbr;
 		ret[i].lvl = lvl;

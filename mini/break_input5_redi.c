@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   break_input4.c                                     :+:      :+:    :+:   */
+/*   break_input5_redi.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:37:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 19:10:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 02:06:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-char	*mini_redi_get_ret(char **temp)
-{
-	char	*ret;
-
-	if (temp[0] == 0 || temp[1] != 0)
-	{
-		free_split(temp);
-		ret = 0;
-	}
-	else
-	{
-		ret = temp[0];
-		free(temp);
-	}
-	return (ret);
-}
 
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re)
 {
@@ -59,12 +42,10 @@ int	ft_mini_redi_init2(t_mini_unit *mini_unit, t_redirection *mini_redi,
 }
 
 
-int	ft_mini_redi_init(t_mini_unit *mini_unit, char **temp, int type)
+int	ft_mini_redi_init(t_mini_unit *mini_unit, char *ret, int type)
 {
-	char			*ret;
 	t_redirection	*mini_redi;
 
-	ret = mini_redi_get_ret(temp);
 	if (mini_unit->redi == 0)
 	{
 		if (mini_redi_init(mini_unit, ret, type) == 0)
@@ -83,7 +64,6 @@ int	ft_redi_gen(t_mini_unit *mini_unit, char *str, int *i, int type)
 {
 	int				cnt;
 	char			*ret;
-	char			**temp;
 
 	*i += 1;
 	if (type == APPEND)
@@ -94,9 +74,5 @@ int	ft_redi_gen(t_mini_unit *mini_unit, char *str, int *i, int type)
 	ret = sndup(str + *i - cnt, cnt);
 	if (ret == 0)
 		return (perror("sndup"), 0);
-	temp = str_replace(ret, *(mini_unit->env_ori));
-	free(ret);
-	if (temp == 0)
-		return (0);
-	return (ft_mini_redi_init(mini_unit, temp, type));
+	return (ft_mini_redi_init(mini_unit, ret, type));
 }
