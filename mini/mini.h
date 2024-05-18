@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:28:31 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:03:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
-
 
 # define OR 1
 # define AND 2
@@ -42,7 +41,6 @@ typedef struct s_mini	t_mini;
 
 typedef struct s_redirection
 {
-	// int		fd;
 	int		type_re;
 	char	*str;
 }	t_redirection;
@@ -50,7 +48,6 @@ typedef struct s_redirection
 // i use pipe to store heredoc -> limit 512 bytes.
 typedef struct s_mini_unit
 {
-	// int				is_child;
 	int				nbr;
 	int				nbr_sum;
 	int				lvl;
@@ -189,7 +186,7 @@ int				ft_recursion_muni_unit_create(
 int				ft_execute_mini_unit(
 					t_mini_unit *mini_unit, int fd_in, int fd_out);
 int				ft_is_builtin(t_mini_unit *mini_unit);
-int				ft_builtin(char **cmd);
+int				ft_builtin(char ***cmd);
 //execute mini.c
 int				ft_execute_mini(t_mini *mini);
 int				ft_execute_mini2(t_mini *mini, int i, int j);

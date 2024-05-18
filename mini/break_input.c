@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:51:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 15:52:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:02:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,5 @@ int	break_input(t_mini *mini)
 {
 	if (make_input_mini(mini) == 0)
 		return (0);
-	// ft_heredoc_create(mini);
-	// ft_execute();
 	return (1);
 }

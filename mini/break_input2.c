@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 01:29:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 01:03:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:02:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_take_string(char *str, int *i)
 }
 
 //merge s2 to s1 in append oder, s2 will be freed
-
 char	**smerge2(char **s1, char **s2)
 {
 	int		i;
