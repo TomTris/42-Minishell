@@ -6,13 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 00:46:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:55:58 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_builtin(char **cmd)
+int	ft_builtin(char ***cmd)
 {
 	printf("get inside builtin\n");
 	if (cmd == 0)
