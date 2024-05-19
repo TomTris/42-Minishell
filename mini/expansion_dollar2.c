@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_expand.c                                    :+:      :+:    :+:   */
+/*   expansion_dollar2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 21:05:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:36:45 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ char	*dollar_replace2(char *str, int *i, int *cnt)
 	return (ret);
 }
 
+size_t	ft_strlen2(const char *a)
+{
+	int		cnt;
+	char	*b;
+
+	cnt = 0;
+	b = (char *)a;
+	while (*b != '\0')
+	{
+		b++;
+		cnt++;
+	}
+	return (cnt);
+}
+
 char	*dollar_replace(char *str, char **env, int *i)
 {
 	int		j;
@@ -55,7 +70,8 @@ char	*dollar_replace(char *str, char **env, int *i)
 		return (perror("Malloc failed"), free(ret), NULL);
 	ft_strncpy(temp, str + *i - cnt, cnt);
 	j = -1;
-	cnt = ft_strlen(temp);
+	cnt = ft_strlen2(temp);
+	printf("temp = {%s}, cnt = {%d}\n", temp, cnt);
 	while (env[++j])
 	{
 		if (sncmp(env[j], temp, cnt) == 1 && env[j][cnt] == '=')

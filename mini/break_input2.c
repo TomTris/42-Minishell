@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 01:29:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 17:02:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:30:36 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**smerge2(char **s1, char **s2)
 char	**ft_cmd_create(char **cmd, char *str, char **env)
 {
 	char	**temp2;
-	// printf("32323\n");
+
 // printf("***%s\n", str);
 	temp2 = str_replace(str, env);
 	if (temp2 == 0)

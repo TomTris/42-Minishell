@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:51:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:36:38 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:29:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ int	ft_clean_programm(t_mini *mini_outside, int exit_nbr)
 	}
 	else
 	{
+		ft_fd_heredoc(-1);
+		ft_fd_dup(-1);
+		ft_fd_out(-3);
+		close(mini->fd_heredoc);
 		if (mini->env != 0)
 			free_split(*(mini->env));
 		free_mini(mini);
 		free(mini);
-		close(mini->fd_heredoc);
-		ft_fd_heredoc(-1);
-		ft_fd_dup(-1);
-		ft_fd_out(-3);
-		return (exit_nbr);
+		if (exit_nbr >= 0)
+			exit (exit_nbr);
+		return (0);
 	}
 }

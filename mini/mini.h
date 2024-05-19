@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 17:03:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:08:46 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,9 @@ int				ft_clean_programm(t_mini *mini_outside, int exit_nbr);
 /*************************	String replace *********************************/
 //expansion_0
 char			**str_replace(char *str_ori, char **env);
+void			ft_change_star(char *str, int nbr);
 //expansion_dollar1
-char			**dollar_handler(char *str_ori, char **env);
+char			**dollar_handler(char *str_ori, char **env, int nbr);
 char			*dollar_handler2(char *str, char *ret, char **env);
 char			*dollar_handler3(char *str, char *ret, char **env, int *i);
 char			*dollar_siquo(char *str, char *ret, int *i);
@@ -178,7 +179,6 @@ int				ft_mini_redi_init2(t_mini_unit *mini_unit,
 					t_redirection *mini_redi, char *ret, int type);
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
-
 
 //execute mini_unit
 int				ft_recursion_muni_unit_create(
