@@ -21,14 +21,15 @@ SRC = 	\
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)
-	cc -o $(NAME) $(LDFLAGS)  $(CFLAGS) $(OBJS) $(LIBFT_A)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS)
 	make clean
 	./mini
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make re -C $(LIBFT_DIR)
-	cc -o $(NAME) $(LDFLAGS) $(CFLAGS) $(OBJS) $(LIBFT_A)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJS)

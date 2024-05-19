@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:29:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 20:54:27 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,22 @@ char	**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close)
 
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (close(fd_close), NULL);
+	{
+		if (fd_close >= 0)
+			close(fd_close);
+		return (NULL);
+	}
 	ret = smerge(ret, cmd);
 	i = 0;
 	while (mini_unit->cmd[++i])
 	{
 		ret = smerge(ret, mini_unit->cmd[i]);
 		if (ret == 0)
-			return (close(fd_close), NULL);
+		{
+			if (fd_close >= 0)
+				close(fd_close);
+			return (NULL);
+		}
 	}
 	return (ret);
 }
@@ -102,7 +110,8 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 	ft_execve_absolut(
 		mini_unit->cmd[0], mini_unit->cmd, path, *(mini_unit->env_ori));
 	free_split(path);
-	close(fd_close);
+	if (fd_close >= 0)
+		close(fd_close);
 	ft_clean_programm(0, EXIT_FAILURE);
 	return (-9);
 }
