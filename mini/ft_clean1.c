@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:51:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:29:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 20:59:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	ft_clean_programm(t_mini *mini_outside, int exit_nbr)
 		free(mini);
 		if (exit_nbr >= 0)
 			exit (exit_nbr);
+		mini = NULL;
 		return (0);
 	}
 }

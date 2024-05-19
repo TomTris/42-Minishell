@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 16:52:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 21:10:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 	}
 	if (fd_in == -1)
 		return (ft_sig_ter(pid, i - 1), free(pid), 0);
+	close(fd_in);
 	status = ft_wait_pid(pid, i - 1);
 	if (WIFEXITED(status))
 		return (free(pid), WEXITSTATUS(status) + 1);
