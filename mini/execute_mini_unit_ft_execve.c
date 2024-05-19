@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 01:35:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:29:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,15 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 {
 	char	**path;
 
-	execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori));
+	if (mini_unit->cmd[0][0] == '\0')
+	{
+		print_fd(2, ": Command not found\n");
+		if (fd_close >= 0)
+			close(fd_close);
+		ft_clean_programm(0, EXIT_FAILURE);
+	}
+	if (mini_unit->cmd[0][0] == '.' || mini_unit->cmd[0][0] == '/')
+		execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori));
 	path = ft_path_gen(*(mini_unit->env_ori));
 	if (path == 0)
 		ft_clean_programm(0, EXIT_FAILURE);

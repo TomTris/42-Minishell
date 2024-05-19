@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 16:58:09 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:24:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	ft_execute_mini_unit(t_mini_unit *mini_unit, int fd_in, int fd_out)
 	if (fd_in >= 0)
 		if (dup2(fd_in, STDIN_FILENO) == -1)
 			return (perror("dup2"), ft_clean_programm(0, EXIT_FAILURE));
-	close(fd_in);
+	if (fd_in >= 0)
+		close(fd_in);
 	if (mini_unit->nbr != mini_unit->nbr_sum)
 		if (dup2(fd_out, STDOUT_FILENO) == -1)
 			return (perror("dup2"), ft_clean_programm(0, EXIT_FAILURE));

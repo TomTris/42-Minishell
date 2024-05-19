@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 17:02:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:07:52 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	get_nbr(char *str)
 	return (ret);
 }
 
-static void	ft_change_star(char *str, int nbr)
+void	ft_change_star(char *str, int nbr)
 {
 	int	i;
 
@@ -91,7 +91,7 @@ char	**str_replace(char *str_ori, char **env)
 		return (perror("ft_strdup"), NULL);
 	nbr = get_nbr(str);
 	ft_change_star(str, nbr);
-	str2 = dollar_handler(str, env);
+	str2 = dollar_handler(str, env, nbr);
 	free(str);
 	if (str2 == NULL)
 		return (NULL);

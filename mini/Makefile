@@ -12,7 +12,7 @@ SRC = 	\
 		break_input.c			break_input2.c			break_input3_heredoc.c	break_input4_heredoc.c						\
 		break_input5_redi.c																									\
 		ft_free.c				ft_other1.c				ft_other2.c				ft_other3.c									\
-		ft_clean1.c				ft_clean2.c				ft_clean3.c															\
+		ft_clean1.c				ft_clean2.c																					\
 		execute_mini_unit_ft_execve.c\
 		execute_mini_unit_redi.c\
 		execute_mini_unit.c\
