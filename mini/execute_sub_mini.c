@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 21:10:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/20 17:34:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,17 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 			return (0);
 		if (sub_mini->mini_unit[1].cmd == 0 && sub_mini->mini_unit[1].mini == 0)
 			return (1);
-		if (sub_mini->mini_unit[1].cmd == 0 && sub_mini->mini_unit[1].mini != 0)
-			return (ft_execute_mini(sub_mini->mini_unit[1].mini));
 		if (ft_is_builtin(&sub_mini->mini_unit[1]) == 1)
 			return (ft_builtin(&(sub_mini->mini_unit[1].cmd)));
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), ft_clean_programm(0, EXIT_FAILURE));
 		if (pid == 0)
+		{
+			if (sub_mini->mini_unit[1].cmd == 0 && sub_mini->mini_unit[1].mini != 0)
+				return (ft_execute_mini(sub_mini->mini_unit[1].mini));
 			exit(ft_execute_mini_unit(&(sub_mini->mini_unit[1]), -1, -1));
+		}
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status) + 1);
