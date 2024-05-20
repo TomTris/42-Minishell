@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_find_char.c                                     :+:      :+:    :+:   */
+/*   ft_is_valid_word.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 03:35:14 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 03:38:58 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/10 22:07:25 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/11 00:07:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.a"
+#include "libft.h"
 
-// works as ft_strchr, but it takes a string to_find as argument
-int	ft_char_find(char *str, char *to_find1, char *to_find2, char *to_find3)
+// i == -1 => check til the end.
+int	ft_is_valid_word(char *str, int i)
 {
-	if (to_find == 0)
+	if (i <= 0)
 		return (0);
-	if ((char)c == '\0')
+	i--;
+	if (ft_isdigit(str[0]) == 1)
+		return (0);
+	while (--i >= 0)
 	{
-		while (*s != 0)
-			s++;
-		return ((char *)s);
+		if (ft_isalnum_(str[i]) != 1)
+			return (0);
 	}
-	while (*s != '\0')
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	return (NULL);
+	return (1);
 }

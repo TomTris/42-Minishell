@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_cnt_empty.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/10 23:25:36 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/10 23:25:58 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+//return value = :
+//-1 -> it's empty till the end
+//>= 0 -> str + i != empty, could be 0.
+int	ft_empty_cnt(char *str)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
+	int	i;
 
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_isempty(str[i]) != 1)
+			return (i);
+	}
+	return (i);
 }

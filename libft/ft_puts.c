@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:51:38 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 01:00:09 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:23:29 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ int	ft_puts(char *s)
 	int		len;
 	int		len2;
 	int		i;
-	char	*s1;
 
 	if (s == NULL)
 	{
 		return (ft_putstr1_null());
 	}
-	s1 = s;
 	i = 0;
 	len = (int) ft_strlen(s);
 	len2 = len;

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 12:44:42 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/08 01:30:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 00:43:12 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_printf2(char *str, va_list args, int fd)
 	return (cnt);
 }
 
-int	ft_printf_fd(int fd, const char *str_o, ...)
+int	print_fd(int fd, const char *str_o, ...)
 {
 	va_list	args;
 	char	*str;

@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 18:34:00 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/11 20:39:14 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/16 15:54:39 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/18 03:18:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mini.h"
 
-char	*ft_strjoin(char const *dest, char const *src)
+int	main(int ac, char **av, char **env)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*a;
+ac = 0;
+av = 0;
+env = 0;
 
-	s1_len = ft_strlen((char *)dest);
-	s2_len = ft_strlen((char *)src);
-	a = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
-	if (a == 0)
-		return (NULL);
-	ft_strcpy(a, (char *)dest);
-	ft_strcpy((a + s1_len), (char *)src);
-	*(a + s1_len + s2_len) = 0;
-	return (a);
+	int	i;
+	int	j;
+	int	k;
+
+	i = open("ft_other1.c", O_RDONLY);
+	j = open("ft_other2.c", O_RDONLY);
+	k = open("ft_other3.c", O_RDONLY);
+	close(i);
+	close(j);
+	close(k);
+	i = open("ft_other1.c", O_RDONLY);
+	return (0);
 }

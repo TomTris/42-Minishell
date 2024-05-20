@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 07:31:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/03/08 17:30:07 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/12 00:40:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,29 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (*a - *b);
 }
 
-// int	main(void)
-// {
-// 	char	*a;
-// 	char	*b;
+int	sncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*a;
+	unsigned char	*b;
 
-// 	a = malloc(3);
-// 	b = malloc(4);
-// 	a = "123";
-// 	b = "1234";
-// 	// *(a+3) = '\0';
-// 	// *(b+3) = '\0';
-
-// 	printf("%d\n", strncmp("","",5));
-// 	printf("%d\n", ft_strncmp("","",5));
-
-// 	return (0);
-// }
+	a = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (n > 1 && *a != 0 && *b != 0)
+	{
+		n--;
+		if (*a == *b)
+		{
+			a++;
+			b++;
+		}
+		else if (*a - *b == 0)
+			return (1);
+		else
+			return (0);
+	}
+	if (*a - *b != 0)
+		return (0);
+	return (1);
+}

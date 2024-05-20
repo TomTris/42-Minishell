@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:52:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/03/12 15:52:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/15 20:22:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*ft_itoa(int n)
 {
 	char	*ret;
 	size_t	cnt;
-	int		i;
 
 	if (n == -2147483648)
 		return (ft_2147483648());
@@ -71,7 +70,6 @@ char	*ft_itoa(int n)
 	ret = (char *)malloc((cnt +1) * sizeof(char));
 	if (ret == 0)
 		return (NULL);
-	i = 0;
 	if (n < 0)
 	{
 		ft_strcpy((ret), "-");
