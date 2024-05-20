@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 21:15:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/20 16:07:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	main(int ac, char **av, char **env)
 	{
 		str = readline("minishell> ");
 		if (str == 0)
-			return (perror("ds"), 0);
+			break ;
 		if (fft_isempty(str) != 1)
 			main2(ac, av, env, str);
 		free(str);
