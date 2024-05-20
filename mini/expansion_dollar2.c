@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:56:48 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/20 18:05:11 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*dollar_replace(char *str, char **env, int *i)
 	ft_strncpy(temp, str + *i - cnt, cnt);
 	j = -1;
 	cnt = ft_strlen(temp);
-	printf("temp = {%s}, cnt = {%d}\n", temp, cnt);
 	while (env[++j])
 	{
 		if (sncmp(env[j], temp, cnt) == 1 && env[j][cnt] == '=')
