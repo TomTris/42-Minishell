@@ -8,15 +8,19 @@ BUILTIN			= builtin_exec exit cd pwd env export echo unset utils
 BLTIN_SRC		= $(patsubst %, builtin/%.c, $(BUILTIN))
 ENV				= ft_env_changing ft_handle_env env env_utils utils
 ENV_SRC			= $(patsubst %, shared/%.c, $(ENV))
-MINI			= 	mini_mini				mini_sub_mini			mini_mini_unit							\
-					syntax_precheck		syntax_check														\
-					expansion_0			expansion_dollar1		expansion_dollar2		expansion_dollar3	\
-					expansion_dollar4		expansion_wildcard1	expansion_wildcard2							\
-					break_input			break_input2			break_input3_heredoc	break_input4_heredoc\
-					break_input5_redi																		\
-					ft_free				ft_other1				ft_other2				ft_other3			\
-					ft_clean1				ft_clean2 ft_clean3\
-					execute
+MINI			= 			mini_mini				mini_sub_mini			mini_mini_unit								\
+				syntax_precheck		syntax_check																				\
+				expansion_0			expansion_dollar1		expansion_dollar2		expansion_dollar3							\
+				expansion_dollar4		expansion_wildcard1	expansion_wildcard2												\
+				break_input			break_input2			break_input3_heredoc	break_input4_heredoc						\
+				break_input5_redi																									\
+				ft_free				ft_other1				ft_other2				ft_other3									\
+				ft_clean1				ft_clean2																					\
+				execute_mini_unit_ft_execve\
+				execute_mini_unit_redi\
+				execute_mini_unit\
+				execute_mini\
+				execute_sub_mini
 MINI_SRC		= $(patsubst %, ./mini/%.c, $(MINI))
 MINI_OBJ		= $(patsubst %.c, %.o, $(MINI_SRC))
 SRC				= $(PROMPT_SRC) $(BLTIN_SRC) $(ENV_SRC)

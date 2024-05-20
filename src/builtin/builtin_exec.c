@@ -6,29 +6,29 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:40:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 14:59:16 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:36:56 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	exec_builtin(t_exec exec)
+int	exec_builtin(t_exec e)
 {
-	if (!ft_strlen(exec.cmd))
+	if (!ft_strlen(e.argv[0]))
 		return (0);
-	if (!scmp(exec.cmd, "exit"))
-		on_exit(exec);
-	if (!scmp(exec.cmd, "cd"))
-		on_cd(exec);
-	if (!scmp(exec.cmd, "pwd"))
-		on_pwd(exec);
-	if (!scmp(exec.cmd, "env"))
-		on_env(exec);
-	if (!scmp(exec.cmd, "export"))
-		on_export(exec);
-	if (!scmp(exec.cmd, "echo"))
-		on_echo(exec);
-	if (!scmp(exec.cmd, "unset"))
-		on_unset(exec);
+	if (!scmp(e.argv[0], "exit"))
+		on_exit(e);
+	if (!scmp(e.argv[0], "cd"))
+		on_cd(e);
+	if (!scmp(e.argv[0], "pwd"))
+		on_pwd(e);
+	if (!scmp(e.argv[0], "env"))
+		on_env(e);
+	if (!scmp(e.argv[0], "export"))
+		on_export(e);
+	if (!scmp(e.argv[0], "echo"))
+		on_echo(e);
+	if (!scmp(e.argv[0], "unset"))
+		on_unset(e);
 	return (0);
 }

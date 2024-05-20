@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:25:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 16:02:26 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:37:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ void	init_signals()
 	signal(SIGINT, reset_prompt);
 }
 
-t_exec	*simple_parse(char *line)
-{
-	t_exec	*cmd_args;
-	char	**argv;
-	char	**env;
+// t_exec	*simple_parse(char *line)
+// {
+// 	t_exec	*cmd_args;
+// 	char	**argv;
+// 	char	**env;
 
-	env = get_env()->env_vars->env;
-	argv = ft_split(line, " ");
-	cmd_args = ft_calloc(1, sizeof(t_exec));
-	cmd_args->argc = ft_arr_len(argv);
-	cmd_args->argv = argv;
-	cmd_args->env = env;
-	cmd_args->cmd = argv[0];
-	return (cmd_args);
-}
+// 	env = get_env()->env_vars->env;
+// 	argv = ft_split(line, " ");
+// 	cmd_args = ft_calloc(1, sizeof(t_exec));
+// 	cmd_args->argc = ft_arr_len(argv);
+// 	cmd_args->argv = argv;
+// 	cmd_args->env = env;
+// 	cmd_args->cmd = argv[0];
+// 	return (cmd_args);
+// }
 
 // int	process_line(char *str)
 // {
@@ -68,29 +68,29 @@ t_exec	*simple_parse(char *line)
 // 	return (0);
 // }
 
-// ctrl-d exits minishell
-int	main(int argc, char const *argv[], char **env)
-{
-	char	*line;
-	t_exec	*cmd_args;
+// // ctrl-d exits minishell
+// int	main(int argc, char const *argv[], char **env)
+// {
+// 	char	*line;
+// 	t_exec	*cmd_args;
 
-	init_signals();
-	// what's the right exit code???
-	if (!set_env(env))
-		exit (1);
-	(void)argc;
-	(void)argv;
-	using_history();
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (line && line[0])
-		{
-			cmd_args = simple_parse(line);
-			exec_builtin(*cmd_args);
-			add_history(line);
-		}
-		free(line);
-	}
-	return (0);
-}
+// 	init_signals();
+// 	// what's the right exit code???
+// 	if (!set_env(env))
+// 		exit (1);
+// 	(void)argc;
+// 	(void)argv;
+// 	using_history();
+// 	while (1)
+// 	{
+// 		line = readline("minishell$ ");
+// 		if (line && line[0])
+// 		{
+// 			cmd_args = simple_parse(line);
+// 			exec_builtin(*cmd_args);
+// 			add_history(line);
+// 		}
+// 		free(line);
+// 	}
+// 	return (0);
+// }

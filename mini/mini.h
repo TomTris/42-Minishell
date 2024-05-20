@@ -6,11 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/17 17:42:30 by bpisak-l         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/19 19:08:46 by qdo              ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2024/05/20 13:18:52 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +16,7 @@
 # include <libft.h>
 # include <dirent.h> //opendir
 # include <minishell.h>
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
 # include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -187,11 +183,6 @@ int				ft_mini_redi_init2(t_mini_unit *mini_unit,
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
 
-<<<<<<< HEAD
-// execute
-int	ft_execute_mini(t_mini *mini);
-
-=======
 //execute mini_unit
 int				ft_recursion_muni_unit_create(
 					pid_t *pid_arr, t_mini_unit *mini_unit, int fd_in);
@@ -219,6 +210,5 @@ int				ft_execve_absolut(
 					char *cmd, char **args, char **path, char **env);
 char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 int				ft_fd_out(int fd_new);
->>>>>>> master
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 22:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 15:43:38 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:37:09 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@
 
 typedef struct s_exec
 {
-	char			*cmd;
 	int				argc;
 	char			**argv;
-	char			**env;
-	int				exit_code;
 }	t_exec;
 
 // builtins
-int				exec_builtin(t_exec exec);
+int	exec_builtin(t_exec e);
 t_exec	*simple_parse(char *line);
 
 #endif

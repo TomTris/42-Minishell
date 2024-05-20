@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_mini_unit.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:24:41 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/20 13:50:54 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	ft_builtin(char ***cmd)
 {
-	printf("get inside builtin\n");
+	t_exec	e;
+
 	if (cmd == 0)
 		return (perror("ft_builtin"), 0);
+	e = (t_exec){.argc = ft_arr_len(*cmd), .argv = *cmd};
+	exec_builtin(e);
 	return (1);
 }
 
@@ -24,14 +27,19 @@ int	ft_is_builtin(t_mini_unit *mini_unit)
 {
 	if (mini_unit->cmd == 0 || mini_unit->cmd[0] == 0)
 		return (0);
-
 	if (sncmp(mini_unit->cmd[0], "cd", 3) == 1)
-		// || sncmp(mini_unit->cmd[0], "echo", 5) == 1
-		// || sncmp(mini_unit->cmd[0], "pwd", 4) == 1
-		// || sncmp(mini_unit->cmd[0], "export", 7) == 1
-		// || sncmp(mini_unit->cmd[0], "unset", 6) == 1)
-		// || sncmp(mini_unit->cmd[0], "env", 4) == 1
-		// || sncmp(mini_unit->cmd[0], "exit", 5) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "echo", 5) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "pwd", 4) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "export", 7) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "unset", 6) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "env", 4) == 1)
+		return (1);
+	if (sncmp(mini_unit->cmd[0], "exit", 5) == 1)
 		return (1);
 	return (0);
 }
