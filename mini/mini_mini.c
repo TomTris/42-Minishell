@@ -6,7 +6,11 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/05/20 13:55:24 by bpisak-l         ###   ########.fr       */
+=======
+/*   Updated: 2024/05/20 16:07:06 by qdo              ###   ########.fr       */
+>>>>>>> e23faa953686ee4a5dfd1f60501c68ecedbf3b1b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +129,7 @@ int	main(int ac, char **av, char **env)
 	{
 		str = readline("minishell> ");
 		if (str == 0)
-			return (perror("ds"), 0);
+			break ;
 		if (fft_isempty(str) != 1)
 		{
 			add_history(str);
