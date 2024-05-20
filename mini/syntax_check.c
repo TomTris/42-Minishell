@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 11:07:02 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 15:09:11 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:01:40 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	print_err_eof(t_mini_unit *mini_unit)
 		return (syn_err(0, PIPE));
 	if (mini_unit->sign_sub == 0)
 	{
-		if (mini_unit->lvl == 0)
-			return (syn_err(0, NEW_LINE));
+		if (mini_unit->lvl == 1)
+			return (syn_err(0, NL));
 		return (syn_err(")", 0));
 	}
 	if (mini_unit->sign_sub == 1)
@@ -59,22 +59,22 @@ static int	ft_redi(t_mini_unit *mini_unit, char *str, int *i)
 	return (1);
 }
 
-static int	syntax_check_3(t_mini_unit *mini_unit,
-		t_token_expect *tke, char *str, int *i)
-{
-	/*if (token(str + *i) == C_PARENT)
+/*if (token(str + *i) == C_PARENT)
 	{
 		if (tke->cmd == 0 && tke->redi == 0 && tke->paren == 0)
 			return (print_err("syntax error near unexpected token `)'"));
 		return (2);
 	}
-	else */if (token(str + *i) == O_PARENT)
+	else */
+static int	syntax_check_3(t_mini_unit *mini_unit,
+		t_token_expect *tke, char *str, int *i)
+{
+	if (token(str + *i) == O_PARENT)
 	{
 		if (tke->cmd != 0)
 			return (print_err("syntax error near unexpected token `('"));
-		// printf("str = {%s}, n = %d\n", str + *i , after_1_parent(str + *i) - 2);
 		mini_unit->mini = mini0(sndup(str + *i + 1,
-					after_1_parent(str + *i ) - 2),
+					after_1_parent(str + *i) - 2),
 				mini_unit->env_ori, mini_unit->lvl + 1);
 		if (mini_unit->mini == 0)
 			return (0);

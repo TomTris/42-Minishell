@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:05:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 14:59:16 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:02:54 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # include <string.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 
 // there are 1.libft 2.get_next_line 3.ft_printf and 4.ft_printf_fd
-// get_next_line -only 1 file descriptor. call get_next_line(-1) to reset
-// to NULL.
-// ft_printf_fd(int fd, const char *str_o, ...);
+// get_next_line -only 1 file descriptor. call get_next_line(-1) to emmty buffer
+// ft_print_fd(int fd, const char *str_o, ...);
 // ft_printf(const char *str_o, ...);
 // ft_split(char *str, char *separator)
 

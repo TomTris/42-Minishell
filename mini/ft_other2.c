@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 12:31:37 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 15:09:11 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:00:51 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	syn_err(char *str, int sign)
 		return (print_err("syntax error near unexpected token `>>'"));
 	if (sign == HERE_DOC)
 		return (print_err("syntax error near unexpected token `<<'"));
-	if (sign == NEW_LINE)
+	if (sign == NL)
 		return (print_err("syntax error near unexpected token `new line'"));
 	if (sign == O_PARENT)
 		return (print_err("syntax error near unexpected token `('"));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_handler.c                                   :+:      :+:    :+:   */
+/*   expansion_dollar1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:13:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 14:16:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:08:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*dollar_handler2(char *str, char *ret, char **env)
 }
 
 // call this function -> no ambigious_0 anymore
-char	**dollar_handler(char *str_ori, char **env)
+char	**dollar_handler(char *str_ori, char **env, int nbr)
 {
 	char	*str;
 	char	**str2;
@@ -85,6 +85,7 @@ char	**dollar_handler(char *str_ori, char **env)
 	str = dollar_handler2(str_ori, str, env);
 	if (str == 0)
 		return (NULL);
+	ft_change_star(str, nbr);
 	str2 = ft_split_after_dollar_expansion(str);
 	free(str);
 	if (str2 == 0)

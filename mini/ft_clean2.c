@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:50:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 23:59:01 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/19 19:24:21 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	*ft_fd_dup_add(int *fd, int fd_new)
 
 	fd_arr_new = (int *)malloc((fd[0] + 2) * sizeof(int));
 	if (fd_arr_new == NULL)
-		return (NULL);
+		return (perror("malloc"), NULL);
 	fd_arr_new[0] = fd[0] + 1;
 	i = 0;
 	while (++i <= fd[0])
@@ -72,4 +72,14 @@ int	ft_fd_dup(int fd_new)
 	if (fd_temp == NULL)
 		return (-1);
 	return (free(fd), fd = fd_temp, fd_new);
+}
+
+int	ft_fd_out(int fd_new)
+{
+	static int	fd = -1;
+
+	if (fd >= 0)
+		close(fd);
+	fd = fd_new;
+	return (fd);
 }

@@ -6,23 +6,28 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:54:39 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 16:02:14 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 03:18:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	int		i;
-	char	*temp;
-	int		fd_pipe[2];
+ac = 0;
+av = 0;
+env = 0;
 
-	pipe(fd_pipe);
-	temp = get_next_line(STDIN_FILENO);
-	while (temp != 0 && sncmp(temp, "LIMTTER\n", 8) != 1)
-	{
-		print_fd(fd_pipe[1], "%s\n", temp);
-		temp = get_next_line(STDIN_FILENO);
-	}
+	int	i;
+	int	j;
+	int	k;
+
+	i = open("ft_other1.c", O_RDONLY);
+	j = open("ft_other2.c", O_RDONLY);
+	k = open("ft_other3.c", O_RDONLY);
+	close(i);
+	close(j);
+	close(k);
+	i = open("ft_other1.c", O_RDONLY);
+	return (0);
 }

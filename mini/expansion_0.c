@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 15:01:24 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:00:41 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	get_nbr(char *str)
 	return (ret);
 }
 
-static void	ft_change_star(char *str, int nbr)
+void	ft_change_star(char *str, int nbr)
 {
 	int	i;
 
@@ -74,7 +74,6 @@ static void	ft_change_star(char *str, int nbr)
 			i++;
 	}
 }
-
 
 // if there is nothing left -> ret[0] = NULL, like < $aaafeff or nothing.
 // if it's like "" -> ret[0][0] = 0, ret[1] = 0.
@@ -92,7 +91,7 @@ char	**str_replace(char *str_ori, char **env)
 		return (perror("ft_strdup"), NULL);
 	nbr = get_nbr(str);
 	ft_change_star(str, nbr);
-	str2 = dollar_handler(str, env);
+	str2 = dollar_handler(str, env, nbr);
 	free(str);
 	if (str2 == NULL)
 		return (NULL);
@@ -103,15 +102,16 @@ char	**str_replace(char *str_ori, char **env)
 	return (ret);
 }
 
-// ambigious or ret = str_replace("", env) -> ret[0] = NULL
-// ret = str_replace("\"\"") or ("\'\'") -> ret[0][0] = '\0'
+// // ambigious or ret = str_replace("", env) -> ret[0] = NULL
+// // ret = str_replace("\"\"") or ("\'\'") -> ret[0][0] = '\0'
 // int	main(int ac, char **av, char **env)
 // {
 // 	char	**ret;
 // ac = 0;
 // av = 0;
 // 	printf("--------------------\n\n\n\n\n\n");
-// 	ret = str_replace("$_", env);
+// 	ret = str_replace("$3", env);
+// 	printf("ret[0] = {%s}\n", ret[0]);
 // 	// printf("str = {%s}\n", ret[0]);
 // 	while (ret[ac])
 // 	{

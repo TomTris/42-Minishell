@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 01:54:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/18 17:02:03 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign, int lvl)
 	i = -1;
 	while (++i <= nbr)
 	{
-		// ret[i].is_child = 0;
 		ret[i].nbr = i;
 		ret[i].nbr_sum = nbr;
 		ret[i].lvl = lvl;
@@ -112,7 +111,7 @@ static int	ft_mini_unit_str_split(t_sub_mini *sub_mini)
 int	mini_unit0(t_sub_mini *sub_mini)
 {
 	int	cnt;
-// printf("%d\n", sub_mini->lvl);
+
 	cnt = ft_cnt_mini_unit(sub_mini->str);
 	sub_mini->mini_unit = mini_unit_cre(cnt,
 			sub_mini->env_ori, sub_mini->sign_after, sub_mini->lvl);
@@ -121,24 +120,13 @@ int	mini_unit0(t_sub_mini *sub_mini)
 	if (ft_mini_unit_str_split(sub_mini) == 0)
 		return (0);
 	cnt = 0;
-	// while (++cnt <= sub_mini->mini_unit[0].nbr)
-	// 	printf("sub_mini str = {%s}\n", sub_mini->mini_unit[cnt].str);
-	cnt = 0;
 	while (++cnt <= sub_mini->mini_unit[0].nbr)
 	{
 		if (syntax_check(&sub_mini->mini_unit[cnt],
 				sub_mini->mini_unit[cnt].str) == 0)
 		{
-			// printf("mini_unit0 return\n");
 			return (0);
 		}
 	}
-	// cnt = 0;
-	// while (++cnt <= sub_mini->mini_unit[0].nbr)
-	// {
-	// 	if (break_to_input(&sub_mini->mini_unit[cnt],
-	// 			sub_mini->mini_unit[cnt].str) == 0)
-	// 		return (0);
-	// }
 	return (1);
 }
