@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:08:46 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 18:12:32 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,6 @@ int				ft_execve_absolut(
 char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 int				ft_fd_out(int fd_new);
 
+//trying new things
+int				exit_code(int new);
 #endif
