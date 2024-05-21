@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:58:00 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	print_all_exported(void)
 		ft_printf("declare -x %s=\"%s\"\n", env_var->name, env_var->value);
 	}
 	free_split(copy);
-	free(copy);
 }
 
 // If no names are supplied, a list of names of 

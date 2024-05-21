@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:51:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 20:59:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 11:58:33 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ int	ft_clean_programm(t_mini *mini_outside, int exit_nbr)
 		ft_fd_dup(-1);
 		ft_fd_out(-3);
 		close(mini->fd_heredoc);
-		if (mini->env != 0)
-			free_split(*(mini->env));
+		// TODO:
+		// if (mini->env != 0)
+		// 	free_split(*(mini->env));
 		free_mini(mini);
 		free(mini);
 		if (exit_nbr >= 0)

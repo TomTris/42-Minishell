@@ -6,33 +6,11 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/20 13:55:24 by bpisak-l         ###   ########.fr       */
-=======
-/*   Updated: 2024/05/20 16:07:06 by qdo              ###   ########.fr       */
->>>>>>> e23faa953686ee4a5dfd1f60501c68ecedbf3b1b
+/*   Updated: 2024/05/21 11:53:07 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-static char	**make_env(char **env)
-{
-	char	**ret;
-	int		i;
-
-	ret = smerge(0, 0);
-	if (ret == 0)
-		return (0);
-	i = -1;
-	while (env[++i])
-	{
-		ret = smerge(ret, env[i]);
-		if (ret == 0)
-			return (0);
-	}
-	return (ret);
-}
 
 // i think this one is getting useless
 int	ft_lvl_cnt(int lvl_outside)
@@ -85,14 +63,12 @@ int	fft_isempty(char *str)
 	return (0);
 }
 
-int	main2(int ac, char **av, char **env_ori, char *str)
+int	main2(char *str)
 // int	main(int ac, char **av, char **env_ori)
 {
 	t_mini	*mini;
 	char	**env;
 
-	(void)ac;
-	(void)av;
 	//str = " <3 || ls && cat";
 	// str = "  << 44($23 | \"\" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11";
 	// str = "( 2|4 )";
@@ -102,7 +78,7 @@ int	main2(int ac, char **av, char **env_ori, char *str)
 	// char *str = "ls -la | awk '{print $1}' | wc -l | cat -e | tr -d ' '";
 	if (syntax_precheck(str) == 0)
 		return (perror("syntax_pre wrong"), 1);
-	env = make_env(env_ori);
+	env = get_env()->env_vars->env;
 	if (env == 0)
 		return (perror("make_env failed"), 0);
 	mini = mini0(sndup(str, ft_strlen(str)), &env, 1);
@@ -121,6 +97,8 @@ int	main(int ac, char **av, char **env)
 {
 	char	*str;
 
+	(void)ac;
+	(void)av;
 	rl_initialize();
 	using_history();
 	if (!set_env(env))
@@ -133,7 +111,7 @@ int	main(int ac, char **av, char **env)
 		if (fft_isempty(str) != 1)
 		{
 			add_history(str);
-			main2(ac, av, env, str);
+			main2(str);
 		}
 		free(str);
 	}
