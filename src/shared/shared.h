@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:09:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 17:41:53 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:28:04 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define SHARED_H
 
 # include <minishell.h>
-
-typedef struct s_save
-{
-	char			**env;
-	char			**path_system;
-}	t_save;
 
 typedef struct s_env_var
 {
@@ -29,15 +23,15 @@ typedef struct s_env_var
 
 typedef struct s_shared
 {
-	t_save	*env_vars;
+	char	**env;
 	int		*exit_code;
 	char	*cwd;
 	char	*oldcwd;
 	char	*home;
 }	t_shared;
 
-int				ft_create_n_modify_env(t_save *save, char *rule, int mode);
-int				ft_save_path_system_n_env_init(t_save *save, char **env_outside);
+int				ft_create_n_modify_env(t_shared *save, char *rule, int mode);
+int				ft_env_init(t_shared *save, char **env_outside);
 void			set_oldpwd(char *oldcwd);
 void			set_cwd(char *cwd);
 t_shared		*get_env(void );

@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:40:30 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/20 13:34:47 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:27:32 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	on_unset(t_exec e)
 	while (e.argv[++i])
 	{
 		if (is_valid_name(e.argv[i]))
-			ft_create_n_modify_env(get_env()->env_vars, e.argv[i], 2);
+			ft_create_n_modify_env(get_env(), e.argv[i], 2);
 		else
 		{
 			set_exit_code(1);

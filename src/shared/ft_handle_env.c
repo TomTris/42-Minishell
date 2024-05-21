@@ -6,13 +6,13 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 13:21:15 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:26:27 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
 
-static int	ft_set_shell_lvl_2(t_save *save, int i)
+static int	ft_set_shell_lvl_2(t_shared *save, int i)
 {
 	char	*temp;
 	char	*temp2;
@@ -34,7 +34,7 @@ static int	ft_set_shell_lvl_2(t_save *save, int i)
 	return (free(temp3), 1);
 }
 
-static int	ft_set_shell_lvl(t_save *save)
+static int	ft_set_shell_lvl(t_shared *save)
 {
 	int		i;
 
@@ -48,7 +48,7 @@ static int	ft_set_shell_lvl(t_save *save)
 		return (ft_set_shell_lvl_2(save, i));
 }
 
-static int	ft_env_exist(t_save *save, char **env_outside)
+static int	ft_env_exist(t_shared *save, char **env_outside)
 {
 	int	i;
 	int	j;
@@ -76,7 +76,7 @@ static int	ft_env_exist(t_save *save, char **env_outside)
 	return (ft_set_shell_lvl(save));
 }
 
-static int	ft_env_not_exist(t_save *save)
+static int	ft_env_not_exist(t_shared *save)
 {
 	char	temp[2048];
 
@@ -98,19 +98,15 @@ static int	ft_env_not_exist(t_save *save)
 	return (1);
 }
 
-int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
+int	ft_env_init(t_shared *save, char **env_outside)
 {
 	int		check;
 
-	save->path_system = ft_split("/usr/local/bin:/usr/bin:/bin:\
-		/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin", ":");
-	if (save->path_system == 0)
-		return (0);
 	if (env_outside[0] == NULL)
 		check = ft_env_not_exist(save);
 	else
 		check = ft_env_exist(save, env_outside);
 	if (check == 0)
-		return (free(save->path_system), 0);
+		return (0);
 	return (1);
 }

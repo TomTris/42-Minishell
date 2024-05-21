@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:43:56 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/17 18:23:28 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:27:59 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	set_env_variable(char *var_name, char	*var_value)
 	temp = ft_strjoin(var_name, "=");
 	rule = ft_strjoin(temp, var_value);
 	vars = get_env();
-	res = ft_create_n_modify_env(vars->env_vars, rule, 1);
+	res = ft_create_n_modify_env(vars, rule, 1);
 	free(temp);
 	free(rule);
 	return (res);
@@ -60,7 +60,7 @@ char	*get_env_variable(const char *var_name)
 
 	i = -1;
 	name_len = ft_strlen((const char *)var_name);
-	env = get_env()->env_vars->env;
+	env = get_env()->env;
 	value = NULL;
 	while (env[++i])
 	{

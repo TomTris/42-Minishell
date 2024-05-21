@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 13:25:14 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/20 13:37:23 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:27:12 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_signals()
 // 	char	**argv;
 // 	char	**env;
 
-// 	env = get_env()->env_vars->env;
+// 	env = get_env()->env;
 // 	argv = ft_split(line, " ");
 // 	cmd_args = ft_calloc(1, sizeof(t_exec));
 // 	cmd_args->argc = ft_arr_len(argv);
@@ -53,7 +53,7 @@ void	init_signals()
 
 // 	if (syntax_precheck(str) == 0)
 // 		return (perror("syntax_pre wrong"), 1);
-// 	env = get_env()->env_vars->env;
+// 	env = get_env()->env;
 // 	if (env == 0)
 // 		return (perror("make_env failed"), 0);
 // 	mini = mini0(sndup(str, ft_strlen(str)), &env, 1);

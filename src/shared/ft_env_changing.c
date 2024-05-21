@@ -6,14 +6,14 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 14:38:15 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:28:23 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
 
 //return 1 == find + replace. Return (0) -> need to add.
-static int	ft_replace_rule(t_save *save, char *rule_to_add)
+static int	ft_replace_rule(t_shared *save, char *rule_to_add)
 {
 	int	i;
 	int	len_to_cmp;
@@ -37,7 +37,7 @@ static int	ft_replace_rule(t_save *save, char *rule_to_add)
 }
 
 //add successful return 1. elsereturn 0
-static int	ft_rule_add(t_save *save, char *rule_to_add)
+static int	ft_rule_add(t_shared *save, char *rule_to_add)
 {
 	int		i;
 	int		j;
@@ -64,7 +64,7 @@ static int	ft_rule_add(t_save *save, char *rule_to_add)
 	return (1);
 }
 
-static int	ft_rule_remove(t_save *save, char *rule_to_remove)
+static int	ft_rule_remove(t_shared *save, char *rule_to_remove)
 {
 	int		i;
 	char	**ret;
@@ -99,7 +99,7 @@ static int	ft_rule_remove(t_save *save, char *rule_to_remove)
 //if malloc failed or stuff like that,
 //this function will clean only, what's created here and
 //make save->env safe to free from a to z with function ft_free_env
-int	ft_create_n_modify_env(t_save *save, char *rule,
+int	ft_create_n_modify_env(t_shared *save, char *rule,
 		int add_replace_remove)
 {
 	if (save == 0 || save->env == 0 || rule == 0)

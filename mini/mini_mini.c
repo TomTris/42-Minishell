@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 13:06:50 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:27:12 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main2(char *str)
 
 	if (syntax_precheck(str) == 0)
 		return (perror("syntax_pre wrong"), 1);
-	env = get_env()->env_vars->env;
+	env = get_env()->env;
 	mini = mini0(sndup(str, ft_strlen(str)), &env, 1);
 	if (mini == 0)
 		return (free_split(env), perror("mini0 call failed, syntax faied"), 1);

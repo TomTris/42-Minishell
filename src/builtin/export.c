@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:03:11 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/21 11:58:00 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:27:12 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_all_exported(void)
 	int			len;
 	t_env_var	*env_var;
 
-	env = get_env()->env_vars->env;
+	env = get_env()->env;
 	i = -1;
 	len = ft_arr_len(env);
 	copy = ft_calloc(len + 1, sizeof(char *));
