@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:43:56 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/21 13:27:59 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:52:58 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,37 @@ int	set_env_variable(char *var_name, char	*var_value)
 	return (res);
 }
 
-char	*get_env_variable(const char *var_name)
+char	*found_variable(int name_len, char *line)
+{
+	int		line_len;
+
+	line_len = ft_strlen(line);
+	if (line_len == name_len)
+		return (NULL);
+	if (line[name_len] == '=')
+		return (sndup(line + name_len + 1, line_len - name_len));
+	return (NULL);
+}
+
+char	*get_env_variable(char *var_name)
 {
 	char	**env;
 	int		i;
 	int		name_len;
-	int		line_len;
-	char	*value;
 
 	i = -1;
 	name_len = ft_strlen((const char *)var_name);
 	env = get_env()->env;
-	value = NULL;
+	if (!scmp(var_name, "_"))
+		return (get_env()->last_arg);
+	else if (!scmp(var_name, "?"))
+		return (ft_itoa(get_env()->exit_code));
 	while (env[++i])
 	{
 		if (!ft_strncmp(var_name, env[i], name_len))
-		{
-			line_len = ft_strlen(env[i]);
-			if (line_len == name_len)
-				return (value);
-			if (env[i][name_len] == '=')
-				value = sndup(env[i] + name_len + 1, line_len - name_len);
-		}
+			return (found_variable(name_len, env[i]));
 	}
-	return (value);
+	return (NULL);
 }
 
 void	set_oldpwd(char *oldcwd)

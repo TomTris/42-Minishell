@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:27:06 by bpisak-l          #+#    #+#             */
-/*   Updated: 2024/05/21 13:27:53 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:52:58 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_exit(int signum)
 	if (signum == SIGQUIT)
 		ft_printf("exit\n");
 	vars = get_env();
-	exit (*vars->exit_code);
+	exit (vars->exit_code);
 }
 
 void	set_exit_code(int code)
@@ -34,7 +34,15 @@ void	set_exit_code(int code)
 	t_shared	*vars;
 
 	vars = get_env();
-	*vars->exit_code = code;
+	vars->exit_code = code;
+}
+
+void	set_last_arg(char *arg)
+{
+	t_shared	*vars;
+
+	vars = get_env();
+	vars->last_arg = ft_strdup(arg);
 }
 
 int	set_env(char **env)
@@ -44,7 +52,7 @@ int	set_env(char **env)
 	char		*cwd;
 
 	vars = get_env();
-	vars->exit_code = ft_calloc(1, sizeof(int *));
+	vars->exit_code = 0;
 	res = ft_env_init(vars, env);
 	cwd = getcwd(NULL, 0);
 	vars->cwd = cwd;
