@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/20 18:05:11 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 18:08:43 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ char	*dollar_replace(char *str, char **env, int *i)
 	char	*temp;
 	char	*ret;
 
+	if (str[*i] == '?')
+	{
+		*i += 1;
+		ret = ft_itoa(exit_code(5));
+		if (ret == 0)
+			return (perror("ft_itoa"), NULL);
+		return (ret);
+	}
 	ret = dollar_replace2(str, i, &cnt);
 	if (ret == 0)
 		return (NULL);
@@ -72,7 +80,8 @@ char	*dollar_in(char *str, char **env, int *i)
 {
 	char	*temp;
 
-	if (ft_isalnum_(str[*i]) != 1 || ft_isdigit(str[*i]) == 1 || str[*i] == 0)
+	if ((ft_isalnum_(str[*i]) != 1 || ft_isdigit(str[*i]) == 1 || str[*i] == 0)
+		&& str[*i] != '?')
 	{
 		temp = make_dollar_sign();
 		return (temp);
@@ -87,7 +96,8 @@ char	*dollar_out(char *str, char *ret, char **env, int *i)
 
 	if (str[*i] == '\'' || str[*i] == '"')
 		return (ret);
-	if (ft_isalnum_(str[*i]) != 1 || ft_isdigit(str[*i]) == 1 || str[*i] == 0)
+	if ((ft_isalnum_(str[*i]) != 1 || ft_isdigit(str[*i]) == 1 || str[*i] == 0)
+		&& str[*i] != '?')
 	{
 		temp = make_dollar_sign();
 		if (temp == 0)

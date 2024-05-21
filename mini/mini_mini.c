@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/20 16:07:06 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 03:16:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	main(int ac, char **av, char **env)
 	rl_initialize();
 	while (1)
 	{
-		str = readline("minishell> ");
+		str = readline("\x1b[34mQdo&&Bori_Shell> \x1b[0m");
 		if (str == 0)
 			break ;
 		if (fft_isempty(str) != 1)
