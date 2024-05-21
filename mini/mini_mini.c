@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 11:53:07 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:06:50 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_lvl_cnt(int lvl_outside)
 		lvl = lvl_outside;
 	return (lvl);
 }
-
+// initialize mini tree and check syntax
+// initialize the tree, mini, sub_mini, mini_units
 t_mini	*mini0(char *str, char ***env, int lvl)
 {
 	t_mini	*mini;
@@ -64,23 +65,13 @@ int	fft_isempty(char *str)
 }
 
 int	main2(char *str)
-// int	main(int ac, char **av, char **env_ori)
 {
 	t_mini	*mini;
 	char	**env;
 
-	//str = " <3 || ls && cat";
-	// str = "  << 44($23 | \"\" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11";
-	// str = "( 2|4 )";
-	// str = ">33 > 44 << 11 <<33 << 44";
-	// char *str = "< break_input.c a";
-	// char *str = "ls | grep .c | sed 's/.c/.o/'";
-	// char *str = "ls -la | awk '{print $1}' | wc -l | cat -e | tr -d ' '";
 	if (syntax_precheck(str) == 0)
 		return (perror("syntax_pre wrong"), 1);
 	env = get_env()->env_vars->env;
-	if (env == 0)
-		return (perror("make_env failed"), 0);
 	mini = mini0(sndup(str, ft_strlen(str)), &env, 1);
 	if (mini == 0)
 		return (free_split(env), perror("mini0 call failed, syntax faied"), 1);
@@ -93,6 +84,14 @@ int	main2(char *str)
 	return (0);
 }
 
+// Test cases:
+// <3 || ls && cat
+//   << 44($23 | \"\" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11
+// ( 2|4 )
+// >33 > 44 << 11 <<33 << 44
+// < break_input.c a
+// ls | grep .c | sed 's/.c/.o/'
+// ls -la | awk '{print $1}' | wc -l | cat -e | tr -d ' '
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
@@ -102,7 +101,10 @@ int	main(int ac, char **av, char **env)
 	rl_initialize();
 	using_history();
 	if (!set_env(env))
+	{
+		perror("make_env failed");
 		exit (1);
+	}
 	while (1)
 	{
 		str = readline("minishell> ");

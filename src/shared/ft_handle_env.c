@@ -6,7 +6,7 @@
 /*   By: bpisak-l <bpisak-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 04:18:57 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/17 18:03:28 by bpisak-l         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:21:15 by bpisak-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,42 +114,3 @@ int	ft_save_path_system_n_env_init(t_save *save, char **env_outside)
 		return (free(save->path_system), 0);
 	return (1);
 }
-
-//check function to check the env created which is stored in save.env
-// int	main(int ac, char **av, char **env)
-// {
-// 	t_save save;
-
-// 	if (av == 0)
-// 		ac = 0;
-// 	if (ft_save_path_system_n_env_init(&save, env) == 0)
-// 		return (0);
-// 	int	i;
-
-// 	i = -1;
-// 	while (save.env[++i] != 0)
-// 		ft_printf("%s\n", save.env[i]);
-// 	ft_printf("%d\n", i);
-// 	if (ft_create_n_modify_env(&save, "PATH=abbbbfbfbf", 2) == 0)
-// 		return (1);
-// 	// int	i;
-
-// 	i = -1;
-// 	while (save.env[++i] != 0)
-// 		ft_printf("%s\n", save.env[i]);
-// 	ft_printf("%d\n", i);
-// }
-
-// this file is about: ft_save_path_system_n_env_init
-//
-//
-// 1. Create a hidden PATH variable, which is copid from our Computer
-// so that even when our programm don't have env, it will create it own env
-// and it still can execute command
-// 2. create it's own env. 
-// when we call our programm like env -i bash, => bash doesn't get any env from
-// outside but it still have some env. we need to creat it. But, there is 1
-// thing. i haven't handled the PWD yet. Please, when you know how to use pwd,
-// use it, and use file ft_env_changing.c with the func ft_create_n_modify_env
-// to add it to the env.
-//
