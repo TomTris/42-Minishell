@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 08:23:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:37:51 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:34:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_512(char *temp)
 {
 	if (print_fd(2, "Can't store more than 512 bytes, force") == -1
 		|| print_fd (2, " break and keep doing execution!\n") == -1)
-		return (perror("printf_fd"), free(temp), 0);
+		return (exit_code(1), perror("printf_fd"), free(temp), 0);
 	return (free(temp), 1);
 }

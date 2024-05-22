@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 01:29:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 09:10:28 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:32:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**smerge2(char **s1, char **s2)
 	{
 		s1 = smerge(s1, s2[j]);
 		if (s1 == NULL)
-			return (free_split(s2), NULL);
+			return (exit_code(1), free_split(s2), NULL);
 		j++;
 	}
 	free_split(s2);
@@ -63,7 +63,10 @@ char	**ft_cmd_create(char **cmd, char *str, char **env)
 		return (free_split(cmd), NULL);
 	if (temp2[0] == NULL)
 		return (free(temp2), cmd);
-	return (smerge2(cmd, temp2));
+	temp2 = smerge2(cmd, temp2);
+	if (temp2 == 0)
+		exit_code(1);
+	return (temp2);
 }
 
 int	ft_cmd_gen(t_mini_unit *mini_unit, char *str, int *i)
@@ -74,7 +77,7 @@ int	ft_cmd_gen(t_mini_unit *mini_unit, char *str, int *i)
 	cnt = ft_take_string(str, i);
 	temp = sndup(str + *i - cnt, cnt);
 	if (temp == 0)
-		return (0);
+		return (exit_code(1), 0);
 	if (mini_unit->cmd == NULL)
 	{
 		mini_unit->cmd = smerge(0, 0);

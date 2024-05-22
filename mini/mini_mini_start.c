@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 05:27:48 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 05:31:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:50:27 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ static char	**make_env_empty(void)
 	while (++i < 1024)
 		buf[i] = 0;
 	if (getcwd(buf, 1024) == NULL)
-		return (perror("getcwd"), NULL);
+		return (exit_code(1), perror("getcwd"), NULL);
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (NULL);
+		return (exit_code(1), NULL);
+	ret = smerge(ret, "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
+			"/usr/local/munki:/Library/Apple/usr/bin");
+	if (ret == 0)
+		return (exit_code(1), perror("ft_split"), NULL);
 	ret = smerge(ret, "_=dv");
 	if (ret == 0)
-		return (NULL);
+		return (exit_code(1), NULL);
 	ret = smerge(ret, "SHLVL=1");
 	if (ret == 0)
-		return (NULL);
+		return (exit_code(1), NULL);
 	ret = smerge(ret, buf);
 	return (ret);
 }
@@ -74,13 +78,13 @@ char	**make_env(char **env)
 		return (make_env_empty());
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (0);
+		return (exit_code(1), NULL);
 	i = -1;
 	while (env[++i])
 	{
 		ret = smerge(ret, env[i]);
 		if (ret == 0)
-			return (0);
+			return (exit_code(1), NULL);
 	}
 	return (modify_shlvl(ret));
 }

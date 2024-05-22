@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:06:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 05:57:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:25:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,11 @@ int	ft_check_identifier(char **cmd, int i, int *check, int *check2)
 	return (1);
 }
 
-//ft_export(env, 0) => declare bla bla
-int	ft_export(char ***env_o, char **cmd)
+int	ft_export2(char ***env_o, char **cmd, int *check2)
 {
-	int		i;
-	int		check;
-	int		check2;
+	int	i;
+	int	check;
 
-	if (cmd != 0 && cmd[0] != 0 && cmd[1] == 0)
-		return (export_0_args(*env_o, 0));
-	check2 = 0;
 	i = 0;
 	while (cmd[++i])
 	{
@@ -88,7 +83,7 @@ int	ft_export(char ***env_o, char **cmd)
 		else
 		{
 			check = 0;
-			if (ft_check_identifier(cmd, i, &check, &check2) == 0)
+			if (ft_check_identifier(cmd, i, &check, check2) == 0)
 				return (exit_code(1), 0);
 			if (check == 0)
 				if (ft_strchr(cmd[i], '=') != NULL)
@@ -96,6 +91,18 @@ int	ft_export(char ***env_o, char **cmd)
 						return (exit_code(1), 0);
 		}
 	}
+	return (1);
+}
+
+//ft_export(env, 0) => declare bla bla
+int	ft_export(char ***env_o, char **cmd)
+{
+	int		check2;
+
+	if (cmd != 0 && cmd[0] != 0 && cmd[1] == 0)
+		return (export_0_args(*env_o, 0));
+	if (ft_export2(env_o, cmd, &check2) == 0)
+		return (0);
 	exit_code(1);
 	if (check2 == 0)
 		exit_code(0);

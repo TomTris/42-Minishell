@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:49:51 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:33:26 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 			return (ft_512(temp));
 		if (print_fd(fd_heredoc_ori, "%s\n", temp) == -1
 			|| print_fd(write_end, "%s\n", temp) == -1)
-			return (perror("print_fd"), free(temp), 0);
+			return (exit_code(1), perror("print_fd"), free(temp), 0);
 		++cnt;
 		ft_cnt_line_heredoc();
 		free(temp);
@@ -46,9 +46,10 @@ int	ft_fd_heredoc_new(char *limiter)
 	int		fd_pipe[2];
 
 	if (pipe(fd_pipe) == -1)
-		return (-1);
+		return (exit_code(1), -1);
 	if (ft_fd_heredoc(fd_pipe[0]) == -1)
 	{
+		exit_code(1),
 		close (fd_pipe[0]);
 		close (fd_pipe[1]);
 		return (-1);
@@ -63,7 +64,7 @@ char	*rm_dollar_before_quote(char *str, int i, char *ret)
 {
 	ret = ft_strdup("");
 	if (ret == 0)
-		return (perror("ft_strdup"), free(str), NULL);
+		return (exit_code(1), perror("ft_strdup"), free(str), NULL);
 	while (str[i])
 	{
 		if (str[i] == '$' && (str[i + 1] == '"' || str[i + 1] == '\''))
@@ -113,13 +114,13 @@ int	ft_heredoc_gen(t_mini_unit *mini_unit, char *str, int *i)
 	j = ft_take_string(str, i);
 	ret = sndup(str + *i - j, j);
 	if (ret == 0)
-		return (perror("sndup"), 0);
+		return (exit_code(1), perror("sndup"), 0);
 	ret = rm_dollar_before_quote(ret, 0, 0);
 	if (ret == 0)
 		return (0);
 	temp = ft_strdup("");
 	if (temp == 0)
-		return (free(ret), perror("ft_strdup"), 0);
+		return (exit_code(1), free(ret), perror("ft_strdup"), 0);
 	ret = ft_del_quo2(ret, temp);
 	if (ret == 0)
 		return (0);

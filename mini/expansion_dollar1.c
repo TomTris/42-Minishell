@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:13:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:08:38 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:42:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*dollar_handler2(char *str, char *ret, char **env)
 			ret = snjoin(ret, str + i, 1);
 			free(temp);
 			if (ret == 0)
-				return (perror("snjoin"), NULL);
+				return (exit_code(1), perror("snjoin"), NULL);
 			i++;
 		}
 		else
@@ -81,7 +81,7 @@ char	**dollar_handler(char *str_ori, char **env, int nbr)
 
 	str = ft_strdup("");
 	if (str == 0)
-		return (perror("ft_strdup"), NULL);
+		return (exit_code(1), perror("ft_strdup"), NULL);
 	str = dollar_handler2(str_ori, str, env);
 	if (str == 0)
 		return (NULL);

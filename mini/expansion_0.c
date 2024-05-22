@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 19:07:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:42:30 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**str_replace(char *str_ori, char **env)
 		return (smerge(0, 0));
 	str = ft_strdup(str_ori);
 	if (str == 0)
-		return (perror("ft_strdup"), NULL);
+		return (exit_code(1), perror("ft_strdup"), NULL);
 	nbr = get_nbr(str);
 	ft_change_star(str, nbr);
 	str2 = dollar_handler(str, env, nbr);

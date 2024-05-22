@@ -20,7 +20,7 @@ SRC = 	\
 		ft_builtin_unset.c\
 		ft_builtin_export.c ft_builtin_export2.c ft_builtin_echo.c\
 		ft_builtin_pwd.c ft_builtin_exit.c ft_builtin_add_rm.c\
-		execute_sub_mini_env_underscore.c
+		execute_sub_mini_env_underscore.c		execute_mini_unit_ft_execve_gen.c
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)

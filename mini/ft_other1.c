@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:24:52 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 19:28:30 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:48:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ int	after_1_parent(char *str)
 int	print_err(char *str)
 {
 	if (print_fd(2, "%s\n", str) == -1)
+	{
+		exit_code(1);
 		perror("print_fd");
+	}
 	return (0);
 }

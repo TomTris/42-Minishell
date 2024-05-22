@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 06:22:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 06:58:28 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:47:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ int	ft_print_rest(char **cmd, int i, int option)
 	if (cmd[i] != 0)
 	{
 		if (printf("%s", cmd[i]) == -1)
-			return (perror("printf"), 0);
+			return (exit_code(1), perror("printf"), 0);
 		while (cmd[++i])
 			if (printf(" %s", cmd[i]) == -1)
-				return (perror("printf"), 0);
+				return (exit_code(1), perror("printf"), 0);
 		if (option == 0)
 			if (printf("\n") == -1)
-				return (perror("printf"), 0);
+				return (exit_code(1), perror("printf"), 0);
+		exit_code(0);
 		return (1);
 	}
+	exit_code(0);
 	return (1);
 }
 
