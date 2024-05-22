@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 04:10:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:10:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,33 @@
 
 int	ft_builtin(char **cmd, char ***env_o)
 {
-	printf("get inside builtin\n");
 	if (sncmp(cmd[0], "export", 7) == 1)
 		return (ft_export(env_o, cmd));
 	if (sncmp(cmd[0], "unset", 6) == 1)
 		return (ft_unset(env_o, cmd));
-	return (1);
+	if (sncmp(cmd[0], "echo", 5) == 1)
+		return (ft_echo(cmd));
+	if (sncmp(cmd[0], "pwd", 4) == 1)
+		return (ft_pwd());
+	if (sncmp(cmd[0], "env", 4) == 1)
+		return (ft_builtin_env(*env_o));
+	if (sncmp(cmd[0], "exit", 5) == 1)
+		return (ft_exit(cmd));
+	perror("sthwrong in ft_builtin\n");
+	return (0);
 }
 
 int	ft_is_builtin(t_mini_unit *mini_unit)
 {
 	if (mini_unit->cmd == 0 || mini_unit->cmd[0] == 0)
 		return (0);
-
 	if (sncmp(mini_unit->cmd[0], "cd", 3) == 1
-		// || sncmp(mini_unit->cmd[0], "echo", 5) == 1
-		// || sncmp(mini_unit->cmd[0], "pwd", 4) == 1
+		|| sncmp(mini_unit->cmd[0], "echo", 5) == 1
+		|| sncmp(mini_unit->cmd[0], "pwd", 4) == 1
 		|| sncmp(mini_unit->cmd[0], "export", 7) == 1
-		|| sncmp(mini_unit->cmd[0], "unset", 6) == 1)
-		// || sncmp(mini_unit->cmd[0], "env", 4) == 1
-		// || sncmp(mini_unit->cmd[0], "exit", 5) == 1)
+		|| sncmp(mini_unit->cmd[0], "unset", 6) == 1
+		|| sncmp(mini_unit->cmd[0], "env", 4) == 1
+		|| sncmp(mini_unit->cmd[0], "exit", 5) == 1)
 		return (1);
 	return (0);
 }

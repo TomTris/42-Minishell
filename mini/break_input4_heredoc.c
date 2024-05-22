@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:52:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 03:49:09 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 08:15:12 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int	ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add)
 	return (1);
 }
 
-int	ft_reach_end_of_file(char *limiter)
+int	ft_reach_end_of_file(char *limiter, int cnt)
 {
 	int	i;
 
 	i = STDERR_FILENO;
 	if (print_fd(i, "warning: here-document  ") == -1
-		|| print_fd(i, "at line %d delimited", ft_cnt_line_heredoc()) == -1
+		|| print_fd(i, "at line %d delimited",
+			ft_cnt_line_heredoc() - cnt) == -1
 		|| print_fd(i, " by end-of-file (wanted `%s')\n", limiter) == -1)
 		return (perror("print_fd"), 0);
 	return (1);
@@ -72,7 +73,7 @@ int	get_fd_heredoc_ori(int fd)
 int	ft_init_heredoc(t_mini *mini)
 {
 	unlink(HERE_DOC_FILE);
-	mini->fd_heredoc = open(HERE_DOC_FILE, O_CREAT | O_TRUNC | O_RDWR , 0644);
+	mini->fd_heredoc = open(HERE_DOC_FILE, O_CREAT | O_APPEND | O_RDWR, 0644);
 	if (mini->fd_heredoc == -1)
 		return (perror("open"), ft_clean_programm(0, 1), -99);
 	get_fd_heredoc_ori(mini->fd_heredoc);

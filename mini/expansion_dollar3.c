@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:00:36 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 20:26:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:11:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ int	after_1_dollar(char *str)
 	while (ft_isalnum_(str[i]) == 1 && str[i] != 0)
 		i++;
 	return (i);
+}
+
+
+char	*make_dollar_sign(void)
+{
+	char	*ret;
+
+	ret = (char *)malloc(2);
+	if (ret == 0)
+		return (perror("Malloc failed"), NULL);
+	ret[0] = '$';
+	ret[1] = 0;
+	return (ret);
 }
 
 // int	main(int ac, char **av, char **env)

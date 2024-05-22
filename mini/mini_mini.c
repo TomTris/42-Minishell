@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 05:30:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 06:21:52 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ int	main(int ac, char **av, char **env_ori)
 		free(str);
 	}
 	dollar_underscore(0, 0, 1);
+	free_split(env);
 	unlink(HERE_DOC_FILE);
+	return(exit_code(-1));
 }
