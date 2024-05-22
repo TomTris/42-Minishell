@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:37:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 20:51:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:08:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	ft_execute_mini(t_mini *mini)
 	while (i <= mini->sub_mini[0].nbr)
 	{
 		j = ft_execute_sub_mini(&(mini->sub_mini[i]));
-		if (j == 0)
-			return (0);
 		if (dup2(fd_reserve, STDIN_FILENO) == -1
 			|| dup2(fd_reserve2, STDOUT_FILENO) == -1)
+			return (perror("dup2"), 0);
+		if (j == 0)
 			return (0);
 		i = ft_execute_mini2(mini, i, j);
 	}

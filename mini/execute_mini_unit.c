@@ -6,17 +6,19 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/20 16:01:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 04:10:34 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_builtin(char ***cmd)
+int	ft_builtin(char **cmd, char ***env_o)
 {
 	printf("get inside builtin\n");
-	if (cmd == 0)
-		return (perror("ft_builtin"), 0);
+	if (sncmp(cmd[0], "export", 7) == 1)
+		return (ft_export(env_o, cmd));
+	if (sncmp(cmd[0], "unset", 6) == 1)
+		return (ft_unset(env_o, cmd));
 	return (1);
 }
 
@@ -25,11 +27,11 @@ int	ft_is_builtin(t_mini_unit *mini_unit)
 	if (mini_unit->cmd == 0 || mini_unit->cmd[0] == 0)
 		return (0);
 
-	if (sncmp(mini_unit->cmd[0], "cd", 3) == 1)
+	if (sncmp(mini_unit->cmd[0], "cd", 3) == 1
 		// || sncmp(mini_unit->cmd[0], "echo", 5) == 1
 		// || sncmp(mini_unit->cmd[0], "pwd", 4) == 1
-		// || sncmp(mini_unit->cmd[0], "export", 7) == 1
-		// || sncmp(mini_unit->cmd[0], "unset", 6) == 1)
+		|| sncmp(mini_unit->cmd[0], "export", 7) == 1
+		|| sncmp(mini_unit->cmd[0], "unset", 6) == 1)
 		// || sncmp(mini_unit->cmd[0], "env", 4) == 1
 		// || sncmp(mini_unit->cmd[0], "exit", 5) == 1)
 		return (1);
@@ -53,7 +55,7 @@ int	ft_execute_mini_unit(t_mini_unit *mini_unit, int fd_in, int fd_out)
 	else if (mini_unit->cmd == 0 && mini_unit->mini == 0)
 		return (1);
 	else if (ft_is_builtin(mini_unit) == 1)
-		return (ft_builtin(&(mini_unit->cmd)));
+		return (ft_builtin(mini_unit->cmd, mini_unit->env_ori));
 	else
 		return (ft_execve(mini_unit, fd_out), -99);
 	return (perror("sth ft_execute_mini_unit"), -99);

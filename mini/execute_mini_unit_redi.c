@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 17:00:18 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:06:52 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,25 @@
 int	ft_redi_execute_heredoc(t_mini_unit *mini_unit)
 {
 	int	i;
+	int	ret;
 
 	i = 0;
+	ret = 1;
 	if (mini_unit->fd_heredoc != NULL)
 	{
 		while (++i <= mini_unit->fd_heredoc[0])
 		{
 			if (dup2(mini_unit->fd_heredoc[i], STDIN_FILENO) == -1)
-				return (perror("dup2"), 0);
+			{
+				perror("dup2");
+				ret = 0;
+				break ;
+			}
 		}
 	}
-	return (1);
+	free(mini_unit->fd_heredoc);
+	mini_unit->fd_heredoc = 0;
+	return (ret);
 }
 
 int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi)
@@ -74,6 +82,7 @@ int	ft_redi_execute_redi(t_redirection *redi, char **env)
 int	ft_redi_execute(t_mini_unit *mini_unit)
 {
 	int	i;
+	int	ret;
 
 	ft_redi_execute_heredoc(mini_unit);
 	if (mini_unit->redi != 0)
@@ -85,9 +94,12 @@ int	ft_redi_execute(t_mini_unit *mini_unit)
 					&(mini_unit->redi[i]), *(mini_unit->env_ori)) == 0)
 				break ;
 		}
+		ret = 0;
 		if (i == mini_unit->redi[0].type_re + 1)
-			return (1);
-		return (0);
+			ret = 1;
+		free(mini_unit->redi);
+		mini_unit->redi = 0;
+		return (ret);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 18:08:43 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 02:26:21 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,20 @@ char	*dollar_replace(char *str, char **env, int *i)
 	if (str[*i] == '?')
 	{
 		*i += 1;
-		ret = ft_itoa(exit_code(5));
+		ret = ft_itoa(exit_code(-1));
 		if (ret == 0)
 			return (perror("ft_itoa"), NULL);
+		return (ret);
+	}
+	if (str[*i] == '_' && (str[*i + 1] == 0 || ft_isalnum_(*i + 1) == 0))
+	{
+		*i += 1;
+		ret = dollar_underscore(0, 1, 0);
+		if (ret == 0)
+			return (NULL);
+		ret = ft_strdup(ret);
+		if (ret == 0)
+			return (perror("ft_strdup"), NULL);
 		return (ret);
 	}
 	ret = dollar_replace2(str, i, &cnt);

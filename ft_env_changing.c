@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 05:14:21 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/09 13:50:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 23:05:04 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,6 @@ static int	ft_rule_remove(t_save *save, char *rule_to_remove)
 	return (save->env = ret, 1);
 }
 
-//add_replace_remove == 1 -> add / replace
-//add_replace_remove == 2 -> remove
-//else: -> code wrong.
-//if malloc failed or stuff like that,
-//this function will clean only, what's created here and
-//make save->env safe to free from a to z with function ft_free_env
 int	ft_create_n_modify_env(t_save *save, char *rule,
 		int add_replace_remove)
 {

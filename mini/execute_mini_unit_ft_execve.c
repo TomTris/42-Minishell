@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 20:54:27 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:50:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_execve_absolut(char *cmd, char **args, char **path, char **env)
 	char	*temp2;
 
 	if (path[0] == 0)
-		return (print_fd(2, " %s: No such file or directory\n", cmd));
+		return (print_fd(2, "%s: No such file or directory\n", cmd));
 	i = -1;
 	while (path[++i])
 	{
@@ -72,7 +72,7 @@ char	**ft_path_gen(char **env)
 	char	**ret;
 	int		i;
 
-	i = 1;
+	i = -1;
 	while (env[++i])
 	{
 		if (sncmp(env[i], "PATH=", 5) == 1)
@@ -102,8 +102,19 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 			close(fd_close);
 		ft_clean_programm(0, EXIT_FAILURE);
 	}
-	if (mini_unit->cmd[0][0] == '.' || mini_unit->cmd[0][0] == '/')
+	if (mini_unit->cmd[0][0] == '/')
+	{
+		dprintf(2, "33\n");
+		if (access(mini_unit->cmd[0], F_OK) == -1)
+			return (perror(mini_unit->cmd[0]), ft_clean_programm(0, EXIT_FAILURE), -9);
 		execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori));
+	}
+	if (mini_unit->cmd[0][0] == '.')
+	{
+		dprintf(2, "22\n");
+		if (execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori)) == -1)
+			return (print_fd(2, "%s: Command not found\n", mini_unit->cmd[0]), ft_clean_programm(0, EXIT_FAILURE), -9);
+	}
 	path = ft_path_gen(*(mini_unit->env_ori));
 	if (path == 0)
 		ft_clean_programm(0, EXIT_FAILURE);

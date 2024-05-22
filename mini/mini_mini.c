@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 03:16:17 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:11:05 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ int	fft_isempty(char *str)
 	return (0);
 }
 
-int	main2(int ac, char **av, char **env_ori, char *str)
+int	main2(int ac, char **av, char ***env, char *str)
 // int	main(int ac, char **av, char **env_ori)
 {
 	t_mini	*mini;
-	char	**env;
 
 	(void)ac;
 	(void)av;
@@ -98,12 +97,9 @@ int	main2(int ac, char **av, char **env_ori, char *str)
 	// char *str = "ls -la | awk '{print $1}' | wc -l | cat -e | tr -d ' '";
 	if (syntax_precheck(str) == 0)
 		return (perror("syntax_pre wrong"), 1);
-	env = make_env(env_ori);
-	if (env == 0)
-		return (perror("make_env failed"), 0);
-	mini = mini0(sndup(str, ft_strlen(str)), &env, 1);
+	mini = mini0(sndup(str, ft_strlen(str)), env, 1);
 	if (mini == 0)
-		return (free_split(env), perror("mini0 call failed, syntax faied"), 1);
+		return (perror("mini0 call failed, syntax faied"), 1);
 	ft_clean_programm(mini, 0);
 	ft_init_heredoc(mini);
 	if (break_input(mini) == 0)
@@ -113,10 +109,14 @@ int	main2(int ac, char **av, char **env_ori, char *str)
 	return (0);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env_ori)
 {
 	char	*str;
+	char	**env;
 
+	env = make_env(env_ori);
+	if (env == 0)
+		return (perror("make_env failed"), 0);
 	rl_initialize();
 	while (1)
 	{
@@ -124,8 +124,9 @@ int	main(int ac, char **av, char **env)
 		if (str == 0)
 			break ;
 		if (fft_isempty(str) != 1)
-			main2(ac, av, env, str);
+			main2(ac, av, &env, str);
 		free(str);
 	}
+	dollar_underscore(0, 0, 1);
 	unlink(HERE_DOC_FILE);
 }

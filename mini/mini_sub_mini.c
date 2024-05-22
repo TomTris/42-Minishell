@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 01:05:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:18:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,21 @@ static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int lvl)
 static int	ft_or_and_finder(t_sub_mini *sub_mini, char *str)
 {
 	int	i;
+	int	i_old;
 
 	i = 0;
 	while (str[i])
 	{
-		if (token(str + i) != OR && token(str + i) != AND)
-			i++;
 		i += after_quote(str + i);
 		i += after_mlt_parent(str + i);
 		if (token(str + i) == OR || token(str + i) == AND)
 		{
-			sub_mini->sign_after = token(str + 1);
+			sub_mini->sign_after = token(str + i);
 			return (i);
 		}
+		if (i == i_old)
+			i++;
+		i_old = i;
 	}
 	return (print_err("sth wrong in ft_init_sub_mini2\n"));
 }

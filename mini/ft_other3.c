@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/16 18:40:28 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 20:32:47 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,40 @@ char	**ft_del_quo(char **str2)
 		i++;
 	}
 	return (str2);
+}
+
+char	*empty_string(void)
+{
+	char	*ret;
+
+	ret = (char *)malloc(1);
+	if (ret == 0)
+		perror("malloc");
+	else
+		ret[0] = 0;
+	return (ret);
+}
+
+char	*dollar_underscore(char **cmd, int only_return, int free_check)
+{
+	static char	*ret = NULL;
+	int			i;
+
+	if (ret == NULL)
+		ret = empty_string();
+	if (only_return == 1)
+		return (ret);
+	free(ret);
+	ret = 0;
+	if (free_check == 1)
+		return (ret = 0, NULL);
+	if (cmd == 0 || cmd[0] == 0)
+		return (dollar_underscore(0, 1, 0));
+	i = 0;
+	while (cmd[i])
+		i++;
+	ret = ft_strdup(cmd[i - 1]);
+	if (ret == 0)
+		return (perror("ret"), NULL);
+	return (ret);
 }

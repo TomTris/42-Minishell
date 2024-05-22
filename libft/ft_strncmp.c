@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 07:31:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/12 00:40:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 23:10:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	sncmp(const char *s1, const char *s2, size_t n)
 	a = (unsigned char *)s1;
 	b = (unsigned char *)s2;
 	if (n == 0)
-		return (0);
+		return (1);
 	while (n > 1 && *a != 0 && *b != 0)
 	{
 		n--;

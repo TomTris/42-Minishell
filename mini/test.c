@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:22:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/20 18:40:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/21 20:37:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	main()
+int	main(int ac, char **av, char **env)
 {
-
-	return (-1);
+ac = -1;
+av = 0;
+	while (env[++ac])
+		printf("%s\n", env[ac]);
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 18:12:32 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 03:22:00 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int				ft_recursion_muni_unit_create(
 int				ft_execute_mini_unit(
 					t_mini_unit *mini_unit, int fd_in, int fd_out);
 int				ft_is_builtin(t_mini_unit *mini_unit);
-int				ft_builtin(char ***cmd);
+int				ft_builtin(char **cmd, char ***env_o);
 //execute mini.c
 int				ft_execute_mini(t_mini *mini);
 int				ft_execute_mini2(t_mini *mini, int i, int j);
@@ -210,4 +210,8 @@ int				ft_fd_out(int fd_new);
 
 //trying new things
 int				exit_code(int new);
+char	*dollar_underscore(char **cmd, int only_return, int free_check);
+int	ft_export(char ***env_o, char **cmd);
+int	ft_unset(char ***env_o, char **cmd);
+int	ft_env(char ***env_o, char *rule, int unset_export);
 #endif
