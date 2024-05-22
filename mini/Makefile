@@ -5,7 +5,7 @@ NAME = mini
 LIBFT_DIR = ../libft
 LIBFT_A = ../libft/libft.a
 SRC = 	\
-		mini_mini.c				mini_sub_mini.c			mini_mini_unit.c													\
+		mini_mini.c				mini_sub_mini.c			mini_mini_unit.c		mini_mini_start.c							\
 		syntax_precheck.c		syntax_check.c																				\
 		expansion_0.c			expansion_dollar1.c		expansion_dollar2.c		expansion_dollar3.c							\
 		expansion_dollar4.c		expansion_wildcard1.c	expansion_wildcard2.c												\
@@ -18,7 +18,7 @@ SRC = 	\
 		execute_sub_mini.c\
 		ft_builtin_env.c\
 		ft_builtin_unset.c\
-		ft_builtin_export.c
+		ft_builtin_export.c ft_builtin_export2.c
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)

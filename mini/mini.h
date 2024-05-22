@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:22:00 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 05:57:36 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,12 @@ int				ft_fd_out(int fd_new);
 
 //trying new things
 int				exit_code(int new);
-char	*dollar_underscore(char **cmd, int only_return, int free_check);
-int	ft_export(char ***env_o, char **cmd);
-int	ft_unset(char ***env_o, char **cmd);
-int	ft_env(char ***env_o, char *rule, int unset_export);
+char			*dollar_underscore(char **cmd, int only_return, int free_check);
+int				ft_export(char ***env_o, char **cmd);
+int				ft_unset(char ***env_o, char **cmd);
+int				ft_env(char ***env_o, char *rule, int unset_export);
+char			**make_env(char **env);
+int	ft_exportpp(char ***env_o, char **cmd, int i);
+int	ft_is_exportpp(char **cmd, int i);
+
 #endif

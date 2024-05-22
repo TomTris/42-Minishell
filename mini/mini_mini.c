@@ -6,39 +6,21 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:11:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 05:30:57 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-static char	**make_env(char **env)
-{
-	char	**ret;
-	int		i;
+// // i think this one is getting useless
+// int	ft_lvl_cnt(int lvl_outside)
+// {
+// 	static int	lvl = 0;
 
-	ret = smerge(0, 0);
-	if (ret == 0)
-		return (0);
-	i = -1;
-	while (env[++i])
-	{
-		ret = smerge(ret, env[i]);
-		if (ret == 0)
-			return (0);
-	}
-	return (ret);
-}
-
-// i think this one is getting useless
-int	ft_lvl_cnt(int lvl_outside)
-{
-	static int	lvl = 0;
-
-	if (lvl_outside > lvl)
-		lvl = lvl_outside;
-	return (lvl);
-}
+// 	if (lvl_outside > lvl)
+// 		lvl = lvl_outside;
+// 	return (lvl);
+// }
 
 t_mini	*mini0(char *str, char ***env, int lvl)
 {
@@ -54,7 +36,7 @@ t_mini	*mini0(char *str, char ***env, int lvl)
 	mini->str = str;
 	mini->lvl = lvl;
 	mini->fd_heredoc = -1;
-	ft_lvl_cnt(mini->lvl);
+	// ft_lvl_cnt(mini->lvl);
 	if (sub_mini0(mini) == 0)
 	{
 		free_mini(mini);
