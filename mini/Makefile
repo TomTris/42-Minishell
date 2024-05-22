@@ -13,11 +13,12 @@ SRC = 	\
 		break_input5_redi.c																									\
 		ft_free.c				ft_other1.c				ft_other2.c				ft_other3.c									\
 		ft_clean1.c				ft_clean2.c																					\
-		execute_mini_unit_ft_execve.c\
-		execute_mini_unit_redi.c\
-		execute_mini_unit.c\
-		execute_mini.c\
-		execute_sub_mini.c
+		execute_mini_unit_ft_execve.c 					execute_mini_unit_redi.c\
+		execute_mini_unit.c								execute_mini.c\
+		execute_sub_mini.c\
+		ft_builtin_env.c\
+		ft_builtin_unset.c\
+		ft_builtin_export.c
 OBJS = $(SRC:.c=.o)
 
 fast: $(OBJS)
