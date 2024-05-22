@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:40:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 11:21:43 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi)
 	else
 		i = dup2(fd_redi, STDOUT_FILENO);
 	if (redi->type_re == RE_IN)
+	{
 		if (close(fd_redi) == -1)
 			return (exit_code(1), perror("close"), 0);
+	}
 	else if (redi->type_re != RE_IN)
 		ft_fd_out(fd_redi);
 	if (i == -1)

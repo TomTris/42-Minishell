@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:50:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 15:02:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,18 @@ int	main2(int ac, char **av, char ***env, char *str)
 	ft_clean_programm(0, -1);
 	return (1);
 }
+// void sigint_handler(int sig)
+// {
+// 	printf("sig= %d QDO\n", sig);
+// }
 
 int	main(int ac, char **av, char **env_ori)
 {
 	char	*str;
 	char	**env;
 
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, SIG_IGN);
 	env = make_env(env_ori);
 	if (env == 0)
 		return (exit_code(1), 0);
