@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:37:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:38:54 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:34:34 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re)
 {
 	mini_unit->redi = (t_redirection *)malloc(2 * sizeof(t_redirection));
 	if (mini_unit->redi == 0)
-		return (free(str), NULL);
+		return (exit_code(1), free(str), NULL);
 	mini_unit->redi[0].type_re = 1;
 	mini_unit->redi[1].type_re = type_re;
 	mini_unit->redi[1].str = str;
@@ -54,7 +54,7 @@ int	ft_mini_redi_init(t_mini_unit *mini_unit, char *ret, int type)
 	mini_redi = (t_redirection *)malloc
 		((mini_unit->redi[0].type_re + 2) * sizeof(t_redirection));
 	if (mini_redi == 0)
-		return (free(ret), 0);
+		return (exit_code(1), free(ret), 0);
 	mini_redi[0].type_re = mini_unit->redi[0].type_re + 1;
 	return (ft_mini_redi_init2(mini_unit, mini_redi, ret, type));
 }
@@ -72,6 +72,6 @@ int	ft_redi_gen(t_mini_unit *mini_unit, char *str, int *i, int type)
 	cnt = ft_take_string(str, i);
 	ret = sndup(str + *i - cnt, cnt);
 	if (ret == 0)
-		return (perror("sndup"), 0);
+		return (exit_code(1), perror("sndup"), 0);
 	return (ft_mini_redi_init(mini_unit, ret, type));
 }

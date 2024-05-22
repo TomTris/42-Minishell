@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:00:36 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 09:11:42 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:43:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*f_add(char *ori, char *to_add, int n)
 	len = ft_strlen(ori);
 	ret = (char *)malloc((len + n + 1));
 	if (ret == 0)
-		return (free(ori), perror("Malloc failed\n"), NULL);
+		return (exit_code(1), free(ori), perror("Malloc failed\n"), NULL);
 	i = -1;
 	while (ori[++i])
 		ret[i] = ori[i];
@@ -77,14 +77,13 @@ int	after_1_dollar(char *str)
 	return (i);
 }
 
-
 char	*make_dollar_sign(void)
 {
 	char	*ret;
 
 	ret = (char *)malloc(2);
 	if (ret == 0)
-		return (perror("Malloc failed"), NULL);
+		return (exit_code(1), perror("Malloc failed"), NULL);
 	ret[0] = '$';
 	ret[1] = 0;
 	return (ret);

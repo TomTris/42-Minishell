@@ -6,38 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 09:10:56 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:37:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-char	**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close)
-{
-	char	**ret;
-	int		i;
-
-	ret = smerge(0, 0);
-	if (ret == 0)
-	{
-		if (fd_close >= 0)
-			close(fd_close);
-		return (NULL);
-	}
-	ret = smerge(ret, cmd);
-	i = 0;
-	while (mini_unit->cmd[++i])
-	{
-		ret = smerge(ret, mini_unit->cmd[i]);
-		if (ret == 0)
-		{
-			if (fd_close >= 0)
-				close(fd_close);
-			return (NULL);
-		}
-	}
-	return (ret);
-}
 
 int	ft_execve_absolut(char *cmd, char **args, char **path, char **env)
 {
@@ -52,43 +25,77 @@ int	ft_execve_absolut(char *cmd, char **args, char **path, char **env)
 	{
 		temp = ft_strjoin(path[i], "/");
 		if (temp == 0)
-			return (0);
+			return (exit_code(1), 0);
 		temp2 = ft_strjoin(temp, cmd);
 		free(temp);
 		if (temp2 == 0)
-			return (0);
+			return (exit_code(1), 0);
 		if (access(temp2, F_OK) == 0)
 		{
 			if (execve(temp2, args, env) == -1)
-				return (perror("execve"), free(temp2), 1);
+				return (exit_code(126), perror("execve"), free(temp2), 1);
 		}
 		free(temp2);
 	}
 	return (print_fd(2, "%s: Command not found\n", cmd));
 }
 
-char	**ft_path_gen(char **env)
+int	ft_execve3(t_mini_unit *mini_unit)
 {
-	char	**ret;
-	int		i;
+	if (mini_unit->cmd[0][0] == '.')
+	{
+		if (mini_unit->cmd[0][1] == 0)
+		{
+			if (print_fd(2, ".: filename argument required\n") == -1
+				|| print_fd(2, ".: usage: . filename [arguments]\n") == -1)
+				return (exit_code(1), ft_clean_programm(0, 1), -9);
+			exit_code(2);
+			ft_clean_programm(0, 1);
+		}
+		if (execve(mini_unit->cmd[0],
+				mini_unit->cmd, *(mini_unit->env_ori)) == -1)
+			return (print_fd(2, "%s: Command not found\n", mini_unit->cmd[0]),
+				exit_code(127), ft_clean_programm(0, 1), -9);
+	}
+	return (1);
+}
 
-	i = -1;
-	while (env[++i])
+int	ft_execve_2_5(t_mini_unit *unit, struct stat *path_stat)
+{
+	if (S_ISDIR((*path_stat).st_mode))
 	{
-		if (sncmp(env[i], "PATH=", 5) == 1)
-			break ;
+		if (print_fd(2, "%s: is a directory\n", unit->cmd[0]) == -1)
+			return (exit_code(1), perror("print_fd"),
+				ft_clean_programm(0, 1), -9);
+		return (exit_code(126), ft_clean_programm(0, 1), -9);
 	}
-	if (env[i] == 0)
+	else if (S_ISREG((*path_stat).st_mode))
 	{
-		ret = smerge(0, 0);
+		if (execve(unit->cmd[0], unit->cmd, *(unit->env_ori)) == -1)
+			return (perror("execve"), exit_code(2),
+				ft_clean_programm(0, 1), -9);
 	}
-	else
+	return (1);
+}
+
+int	ft_execve2(t_mini_unit *unit)
+{
+	struct stat	path_stat;
+
+	if (unit->cmd[0][0] == '/')
 	{
-		ret = ft_split(env[i] + 5, ":");
-		if (ret == NULL)
-			return (exit_code(1), perror("ft_split"), NULL);
+		if (stat(unit->cmd[0], &path_stat) == 0)
+			ft_execve_2_5(unit, &path_stat);
+		else
+			return (exit_code(2), perror("stat"),
+				ft_clean_programm(0, 1), -9);
+		exit_code(127);
+		if (print_fd(2, "%s: No such file or directory\n",unit->cmd[0]) == -1)
+			return (exit_code(1), perror("print_fd"), -9);
+		ft_clean_programm(0, 1);
+		return (ft_execve3(unit));
 	}
-	return (ret);
+	return (ft_execve3(unit));
 }
 
 int	ft_execve(t_mini_unit *mini_unit, int fd_close)
@@ -105,22 +112,7 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 				ft_clean_programm(0, 1), -9);
 		ft_clean_programm(0, 1);
 	}
-	if (mini_unit->cmd[0][0] == '/')
-	{
-		if (access(mini_unit->cmd[0], F_OK) == -1)
-			return (exit_code(126), perror(mini_unit->cmd[0]),
-				ft_clean_programm(0, 1), -9);
-		if (execve(mini_unit->cmd[0],
-				mini_unit->cmd, *(mini_unit->env_ori)) == -1)
-			return (perror("execve"), exit_code(1), ft_clean_programm(0, 1));
-	}
-	if (mini_unit->cmd[0][0] == '.')
-	{
-		if (execve(mini_unit->cmd[0],
-				mini_unit->cmd, *(mini_unit->env_ori)) == -1)
-			return (print_fd(2, "%s: Command not found\n", mini_unit->cmd[0]),
-				exit_code(127), ft_clean_programm(0, 1), -9);
-	}
+	ft_execve2(mini_unit);
 	path = ft_path_gen(*(mini_unit->env_ori));
 	if (path == 0)
 		ft_clean_programm(0, 1);

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 08:39:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:40:57 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:41:22 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	env_underscore2(char *cmd, char **path, char ***env_o)
 		{
 			temp = ft_strjoin("_=", temp2);
 			if (temp == 0)
-				return (free(temp), free(temp2), 0);
+				return (exit_code(1), free(temp), free(temp2), 0);
 			i = ft_env(env_o, temp, 1);
 			return (free(temp), free(temp2), i);
 		}
@@ -48,7 +48,7 @@ int	env_underscore3(char ***env_o, char *cmd)
 
 	temp = ft_strjoin("_=", cmd);
 	if (temp == 0)
-		return (perror("ft_strjoin"), 0);
+		return (exit_code(1), perror("ft_strjoin"), 0);
 	i = ft_env(env_o, temp, 1);
 	free(temp);
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 09:11:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:56:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 # define OR 1
 # define AND 2
@@ -133,6 +134,7 @@ char			*dollar_out(char *str, char *ret, char **env, int *i);
 char			*dollar_in(char *str, char **env, int *i);
 char			*dollar_replace(char *str, char **env, int *i);
 char			*dollar_replace2(char *str, int *i, int *cnt);
+char			*dollar_replace3(char *str, char **env, int *i);
 //expansion_dollar3
 char			*make_dollar_sign(void);
 int				after_1_dollar(char *str);
@@ -219,15 +221,16 @@ int				ft_export(char ***env_o, char **cmd);
 int				ft_unset(char ***env_o, char **cmd);
 int				ft_env(char ***env_o, char *rule, int unset_export);
 char			**make_env(char **env);
-int	ft_exportpp(char ***env_o, char **cmd, int i);
-int	ft_is_exportpp(char **cmd, int i);
-int	ft_echo(char **cmd);
-int	ft_pwd(void);
-int	ft_exit(char **cmd);
-int	ft_builtin_env(char **env);
+int				ft_exportpp(char ***env_o, char **cmd, int i);
+int				ft_is_exportpp(char **cmd, int i);
+int				ft_echo(char **cmd);
+int				ft_pwd(void);
+int				ft_exit(char **cmd);
+int				ft_builtin_env(char **env);
 
-int	env_underscore2(char *cmd, char **path, char ***env_o);
-int	env_underscore3(char ***env_o, char *cmd);
-int	env_underscore(char **cmd, char ***env_o);
-
+int				env_underscore2(char *cmd, char **path, char ***env_o);
+int				env_underscore3(char ***env_o, char *cmd);
+int				env_underscore(char **cmd, char ***env_o);
+char			**ft_path_gen(char **env);
+char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard_expand.c                                  :+:      :+:    :+:   */
+/*   expansion_wildcard1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:48:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/15 00:50:26 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:44:45 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static char	**get_cwd_name(void)
 
 	dir = opendir(".");
 	if (dir == NULL)
-		return (perror("open dir"), NULL);
+		return (exit_code(1), perror("open dir"), NULL);
 	ret = smerge(0, "");
 	if (ret == 0)
-		return (closedir(dir), NULL);
+		return (exit_code(1), closedir(dir), NULL);
 	while (1)
 	{
 		ent = readdir(dir);
@@ -120,7 +120,7 @@ char	**wildcard_expand(char *str, int nbr)
 		return (0);
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (free_split(cwd_ns), NULL);
+		return (exit_code(1), free_split(cwd_ns), NULL);
 	i = -1;
 	while (cwd_ns[++i])
 	{
@@ -128,7 +128,7 @@ char	**wildcard_expand(char *str, int nbr)
 		{
 			ret = smerge(ret, cwd_ns[i]);
 			if (ret == 0)
-				return (free_split(ret), free_split(cwd_ns), NULL);
+				return (exit_code(1), free_split(ret), free_split(cwd_ns), NULL);
 		}
 	}
 	free_split(cwd_ns);

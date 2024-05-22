@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_after_dollar_expansion.c                  :+:      :+:    :+:   */
+/*   expansion_dollar4.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/14 23:38:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:44:10 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	**ft_split_after_dollar_expansion3(char *str,
 	{
 		temp = sndup(str + *i - j, j);
 		if (temp == 0)
-			return (perror("sndup"), free_split(ret), NULL);
+			return (exit_code(1), perror("sndup"), free_split(ret), NULL);
 		ret = smerge(ret, temp);
 		free(temp);
 	}
@@ -58,7 +58,7 @@ char	**ft_split_after_dollar_expansion(char *str)
 
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (0);
+		return (exit_code(1), 0);
 	i = 0;
 	while (str[i])
 	{

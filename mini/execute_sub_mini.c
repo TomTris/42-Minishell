@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:55:34 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:41:55 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	ft_wait_pid(pid_t *pid, int nbr)
 	int	i;
 
 	if (waitpid(pid[nbr - 1], &status, 0) == -1)
-		return (perror("waitpid"), 1);
+		return (exit_code(1), perror("waitpid"), 1);
 	i = 0;
 	while (++i < nbr)
 		if (wait(0) == -1)
-			return (perror("wait"), 1);
+			return (exit_code(1), perror("wait"), 1);
 	return (status);
 }
 
@@ -46,7 +46,7 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 
 	pid = (pid_t *)malloc(sub_mini->mini_unit[0].nbr * sizeof(pid_t));
 	if (pid == 0)
-		return (perror("malloc failed"), 0);
+		return (exit_code(1), perror("malloc failed"), 0);
 	fd_in = -2;
 	i = 0;
 	while (++i <= sub_mini->mini_unit[0].nbr && fd_in != -1)

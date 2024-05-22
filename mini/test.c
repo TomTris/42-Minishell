@@ -6,18 +6,39 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:22:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:00:26 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:42:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "mini.h"
 
-int	main(int ac, char **av, char **env)
-{
-ac = -1;
-av = 0;
-	while (env[++ac])
-		printf("%s\n", env[ac]);
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
+int main() {
+    char	path[1024];
+
+	// getcwd(path, 1024);
+
+    if (access("/", F_OK) == 0) {
+        struct stat path_stat;
+        if (stat("/", &path_stat) == 0) {
+            if (S_ISREG(path_stat.st_mode)) {
+                printf("%s is a regular file.\n", path);
+            } else if (S_ISDIR(path_stat.st_mode)) {
+                printf("%s is a directory.\n", path);
+            } else {
+                printf("%s is neither a regular file nor a directory.\n", path);
+            }
+        } else {
+            perror("stat error");
+            return 1;
+        }
+    } else {
+        perror("access error");
+        return 1;
+    }
+
+    return 0;
 }

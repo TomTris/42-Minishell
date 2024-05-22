@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 20:32:47 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:49:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ char	**ft_del_quo(char **str2)
 	{
 		ret = ft_strdup("");
 		if (ret == 0)
-			return (free_split(str2), perror("ft_strdup"), NULL);
+			return (exit_code(1), free_split(str2), perror("ftstrdup"), NULL);
 		temp = ft_strdup(str2[i]);
 		if (temp == 0)
-			return (free_split(str2), free(ret), perror("ft_strdup"), NULL);
+			return (free_split(str2), free(ret), exit_code(1),
+				perror("ft_strdup"), NULL);
 		temp = ft_del_quo2(temp, ret);
 		if (temp == 0)
 		{
@@ -78,7 +79,10 @@ char	*empty_string(void)
 
 	ret = (char *)malloc(1);
 	if (ret == 0)
+	{
 		perror("malloc");
+		exit_code(1);
+	}
 	else
 		ret[0] = 0;
 	return (ret);
@@ -104,6 +108,6 @@ char	*dollar_underscore(char **cmd, int only_return, int free_check)
 		i++;
 	ret = ft_strdup(cmd[i - 1]);
 	if (ret == 0)
-		return (perror("ret"), NULL);
+		return (exit_code(1), perror("ret"), NULL);
 	return (ret);
 }

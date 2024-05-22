@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 08:52:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:52:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_sub_mini	*sub_mini_cre(int nbr, char ***env, int lvl)
 
 	ret = (t_sub_mini *)malloc((nbr + 1) * sizeof(t_sub_mini));
 	if (ret == 0)
-		return (perror("Malloc failed\n"), NULL);
+		return (exit_code(1), perror("Malloc failed\n"), NULL);
 	i = -1;
 	while (++i <= nbr)
 	{
@@ -90,7 +90,7 @@ static int	ft_init_sub_mini(t_sub_mini	*sub_mini, char *str_ori)
 
 	str = ft_strdup(str_ori);
 	if (str == 0)
-		return (perror("ft_strdup"), 0);
+		return (exit_code(1), perror("ft_strdup"), 0);
 	i = 0;
 	while (++i < sub_mini[0].nbr)
 	{
@@ -99,11 +99,11 @@ static int	ft_init_sub_mini(t_sub_mini	*sub_mini, char *str_ori)
 		sub_mini[i].sign_after = token(str + j);
 		sub_mini[i].str = sndup(str, j);
 		if (sub_mini[i].str == 0)
-			return (perror("sndup"), free(temp), 0);
+			return (exit_code(1), perror("sndup"), free(temp), 0);
 		str = ft_strdup(str + j + 2);
 		free(temp);
 		if (str == 0)
-			return (perror("ft_strdup"), 0);
+			return (exit_code(1), perror("ft_strdup"), 0);
 	}
 	sub_mini[i].str = str;
 	return (1);
@@ -116,7 +116,7 @@ int	sub_mini0(t_mini *mini)
 	mini->sub_mini = sub_mini_cre
 		(ft_cnt_sub_mini(mini->str), mini->env, mini->lvl);
 	if (mini->sub_mini == NULL)
-		return (0);
+		return (exit_code(1), 0);
 	if (ft_init_sub_mini(mini->sub_mini, mini->str) == 0)
 		return (0);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:34:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:56:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:22:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_check_identifier_unset2(char **cmd, int i, int *check, int *check2)
 	{
 		if (ft_isalnum_(cmd[i][j]) != 1)
 		{
-			if (print_fd(2, "unset: `%s': not a valid identifier\n", cmd[i]) == -1)
+			if (print_fd(2, "unset: `%s': not a valid identifier\n",
+					cmd[i]) == -1)
 				return (perror("print_fd"), 0);
 			*check = 1;
 			*check2 = 1;

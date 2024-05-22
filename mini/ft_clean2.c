@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:50:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 18:32:07 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:47:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	*ft_fd_dup_default(int fd_new)
 	if (fd == NULL)
 	{
 		perror("malloc failed fd_create_fd_heredoc");
-		return (NULL);
+		return (exit_code(1), NULL);
 	}
 	fd[0] = 1;
 	fd[1] = fd_new;
@@ -34,7 +34,7 @@ static int	*ft_fd_dup_add(int *fd, int fd_new)
 
 	fd_arr_new = (int *)malloc((fd[0] + 2) * sizeof(int));
 	if (fd_arr_new == NULL)
-		return (perror("malloc"), NULL);
+		return (exit_code(1), perror("malloc"), NULL);
 	fd_arr_new[0] = fd[0] + 1;
 	i = 0;
 	while (++i <= fd[0])

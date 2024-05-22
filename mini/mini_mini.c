@@ -6,21 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 06:21:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:50:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-// // i think this one is getting useless
-// int	ft_lvl_cnt(int lvl_outside)
-// {
-// 	static int	lvl = 0;
-
-// 	if (lvl_outside > lvl)
-// 		lvl = lvl_outside;
-// 	return (lvl);
-// }
 
 t_mini	*mini0(char *str, char ***env, int lvl)
 {
@@ -30,13 +20,12 @@ t_mini	*mini0(char *str, char ***env, int lvl)
 		return (perror("s1ndup"), NULL);
 	mini = (t_mini *)malloc(1 * sizeof(t_mini));
 	if (mini == 0)
-		return (perror("Malloc failed"), free(str), NULL);
+		return (perror("Malloc failed"), exit_code(1), free(str), NULL);
 	mini->env = env;
 	mini->sub_mini = 0;
 	mini->str = str;
 	mini->lvl = lvl;
 	mini->fd_heredoc = -1;
-	// ft_lvl_cnt(mini->lvl);
 	if (sub_mini0(mini) == 0)
 	{
 		free_mini(mini);
@@ -70,25 +59,18 @@ int	main2(int ac, char **av, char ***env, char *str)
 
 	(void)ac;
 	(void)av;
-	//str = " <3 || ls && cat";
-	// str = "  << 44($23 | \"\" <<4) <4 <4 <4 <4 < 4>55>5>5>2/ >> 33 >> 44 >> 11";
-	// str = "( 2|4 )";
-	// str = ">33 > 44 << 11 <<33 << 44";
-	// char *str = "< break_input.c a";
-	// char *str = "ls | grep .c | sed 's/.c/.o/'";
-	// char *str = "ls -la | awk '{print $1}' | wc -l | cat -e | tr -d ' '";
 	if (syntax_precheck(str) == 0)
-		return (perror("syntax_pre wrong"), 1);
+		return (exit_code(2), 1);
 	mini = mini0(sndup(str, ft_strlen(str)), env, 1);
 	if (mini == 0)
-		return (perror("mini0 call failed, syntax faied"), 1);
+		return (1);
 	ft_clean_programm(mini, 0);
 	ft_init_heredoc(mini);
 	if (break_input(mini) == 0)
-		print_err("break input sthwrong");
+		return (ft_clean_programm(0, -1), 1);
 	ft_execute_mini(mini);
 	ft_clean_programm(0, -1);
-	return (0);
+	return (1);
 }
 
 int	main(int ac, char **av, char **env_ori)
@@ -98,7 +80,7 @@ int	main(int ac, char **av, char **env_ori)
 
 	env = make_env(env_ori);
 	if (env == 0)
-		return (perror("make_env failed"), 0);
+		return (exit_code(1), 0);
 	rl_initialize();
 	while (1)
 	{
@@ -107,10 +89,12 @@ int	main(int ac, char **av, char **env_ori)
 			break ;
 		if (fft_isempty(str) != 1)
 			main2(ac, av, &env, str);
+		else
+			exit_code(0);
 		free(str);
 	}
 	dollar_underscore(0, 0, 1);
 	free_split(env);
 	unlink(HERE_DOC_FILE);
-	return(exit_code(-1));
+	return (exit_code(-1));
 }

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 09:28:07 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:12:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:51:27 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_mini_unit	*mini_unit_cre(int nbr, char ***env, int sign, int lvl)
 
 	ret = (t_mini_unit *)malloc((nbr + 1) * sizeof(t_mini_unit));
 	if (ret == 0)
-		return (perror("malloc failed\n"), NULL);
+		return (exit_code(1), perror("malloc failed\n"), NULL);
 	i = -1;
 	while (++i <= nbr)
 	{
@@ -96,12 +96,12 @@ static int	ft_mini_unit_str_split(t_sub_mini *sub_mini)
 		j = ft_pipe_finder(sub_mini->str);
 		sub_mini->mini_unit[i].str = sndup(sub_mini->str, j);
 		if (sub_mini->mini_unit[i].str == 0)
-			return (print_err("sndup"));
+			return (exit_code(1), print_err("sndup"));
 		temp = sub_mini->str;
 		sub_mini->str = ft_strdup(sub_mini->str + j + 1);
 		free(temp);
 		if (sub_mini->mini_unit[i].str == 0)
-			return (print_err("ft_strdup"));
+			return (exit_code(1), print_err("ft_strdup"));
 	}
 	sub_mini->mini_unit[i].str = sub_mini->str;
 	sub_mini->str = 0;

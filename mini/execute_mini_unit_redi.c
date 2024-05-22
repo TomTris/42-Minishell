@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:06:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 10:40:03 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_redi_execute_heredoc(t_mini_unit *mini_unit)
 		{
 			if (dup2(mini_unit->fd_heredoc[i], STDIN_FILENO) == -1)
 			{
+				exit_code(1);
 				perror("dup2");
 				ret = 0;
 				break ;
@@ -41,17 +42,18 @@ int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi)
 	int	i;
 
 	if (fd_redi == -1)
-		return (perror(redi->str), 0);
+		return (exit_code(1), perror(redi->str), 0);
 	if (redi->type_re == RE_IN)
 		i = dup2(fd_redi, STDIN_FILENO);
 	else
 		i = dup2(fd_redi, STDOUT_FILENO);
 	if (redi->type_re == RE_IN)
-		close(fd_redi);
+		if (close(fd_redi) == -1)
+			return (exit_code(1), perror("close"), 0);
 	else if (redi->type_re != RE_IN)
 		ft_fd_out(fd_redi);
 	if (i == -1)
-		return (perror("dup2"), 0);
+		return (exit_code(1), perror("dup2"), 0);
 	return (1);
 }
 
@@ -66,7 +68,7 @@ int	ft_redi_execute_redi(t_redirection *redi, char **env)
 		return (perror("str_replace"), 0);
 	if (str[0] == NULL || str[1] != 0)
 		return (print_fd(2, "%s: ambigious redirect\n",
-				redi->str), free_split(str), 0);
+				redi->str), free_split(str), exit_code(1), 0);
 	str2 = str[0];
 	free(str);
 	if (redi->type_re == APPEND)
