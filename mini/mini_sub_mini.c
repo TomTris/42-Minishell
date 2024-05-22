@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 05:15:05 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:18:06 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 08:52:53 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_cnt_sub_mini(char *str)
 	while (str[i])
 	{
 		i += after_quote(str + i);
-		i += after_mlt_parent(str + i);
+		i += after_1_parent(str + i);
 		if (token(str + i) == OR || token(str + i) == AND)
 		{
 			i++;

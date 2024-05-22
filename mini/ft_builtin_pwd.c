@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_builtin_env.c                                   :+:      :+:    :+:   */
+/*   ft_builtin_pwd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 07:55:54 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 07:57:31 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/22 07:01:22 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/22 07:03:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_builtin_env(char **env)
+int	ft_pwd(void)
 {
-	int	i;
+	char	temp[1024];
+	int		i;
 
 	i = 0;
-	while (env[i])
-	{
-		if (printf("%s\n", env[i++]) == -1)
-			return (perror("printf"), 0);
-	}
+	while (i < 1024)
+		temp[i++] = 0;
+	if (getcwd(temp, 1024) == NULL)
+		return (0);
+	if (printf("%s\n", temp) == -1)
+		return (perror("printf"), 0);
 	return (1);
 }

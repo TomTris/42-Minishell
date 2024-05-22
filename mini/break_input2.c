@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 01:29:03 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/21 21:02:39 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:10:28 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**ft_cmd_create(char **cmd, char *str, char **env)
 {
 	char	**temp2;
 
-// printf("***%s\n", str);
 	temp2 = str_replace(str, env);
 	if (temp2 == 0)
 		return (free_split(cmd), NULL);

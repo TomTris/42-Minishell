@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 05:57:36 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:11:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ char			*dollar_out(char *str, char *ret, char **env, int *i);
 char			*dollar_in(char *str, char **env, int *i);
 char			*dollar_replace(char *str, char **env, int *i);
 char			*dollar_replace2(char *str, int *i, int *cnt);
-char			*make_dollar_sign(void);
 //expansion_dollar3
+char			*make_dollar_sign(void);
 int				after_1_dollar(char *str);
 char			*f_add(char *ori, char *to_add, int n);
 char			*dollar_doquo2(char *str, char *ret, char **env, int *i);
@@ -162,16 +162,20 @@ int				ft_take_string(char *str, int *i);
 int				ft_heredoc_gen(t_mini_unit *mini_unit, char *str, int *i);
 char			*rm_dollar_before_quote(char *str, int i, char *ret);
 int				ft_fd_heredoc_new(char *limiter);
-int				ft_fd_heredoc_new2(char *limiter, int write_end);
+int				ft_fd_heredoc_new2(char *limiter, int write_end,
+					int limiter_len, int cnt);
 
 //break_input4_heredoc
 int				ft_init_heredoc(t_mini *mini);
 int				get_fd_heredoc_ori(int fd);
 int				ft_cnt_line_heredoc(void);
-int				ft_reach_end_of_file(char *limiter);
+int				ft_reach_end_of_file(char *limiter, int i);
 int				ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add);
 
-//break_input5_redi
+//break_input5_heredoc.c
+int				ft_512(char *temp);
+int				ft_init_helper(int *fd_heredoc_ori, int *len);
+//break_input6_redi
 int				ft_redi_gen(t_mini_unit *mini_unit,
 					char *str, int *i, int type);
 int				ft_mini_redi_init(t_mini_unit *mini_unit, char *ret, int type);
@@ -217,5 +221,13 @@ int				ft_env(char ***env_o, char *rule, int unset_export);
 char			**make_env(char **env);
 int	ft_exportpp(char ***env_o, char **cmd, int i);
 int	ft_is_exportpp(char **cmd, int i);
+int	ft_echo(char **cmd);
+int	ft_pwd(void);
+int	ft_exit(char **cmd);
+int	ft_builtin_env(char **env);
+
+int	env_underscore2(char *cmd, char **path, char ***env_o);
+int	env_underscore3(char ***env_o, char *cmd);
+int	env_underscore(char **cmd, char ***env_o);
 
 #endif

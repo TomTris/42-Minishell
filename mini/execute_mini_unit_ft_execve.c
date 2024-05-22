@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 03:50:16 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:10:56 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**ft_path_gen(char **env)
 	{
 		ret = ft_split(env[i] + 5, ":");
 		if (ret == NULL)
-			return (perror("ft_split"), NULL);
+			return (exit_code(1), perror("ft_split"), NULL);
 	}
 	return (ret);
 }
@@ -97,32 +97,39 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 
 	if (mini_unit->cmd[0][0] == '\0')
 	{
-		print_fd(2, ": Command not found\n");
+		exit_code(127);
 		if (fd_close >= 0)
 			close(fd_close);
-		ft_clean_programm(0, EXIT_FAILURE);
+		if (print_fd(2, ": Command not found\n") == -1)
+			return (exit_code(1), perror("print_fd"),
+				ft_clean_programm(0, 1), -9);
+		ft_clean_programm(0, 1);
 	}
 	if (mini_unit->cmd[0][0] == '/')
 	{
-		dprintf(2, "33\n");
 		if (access(mini_unit->cmd[0], F_OK) == -1)
-			return (perror(mini_unit->cmd[0]), ft_clean_programm(0, EXIT_FAILURE), -9);
-		execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori));
+			return (exit_code(126), perror(mini_unit->cmd[0]),
+				ft_clean_programm(0, 1), -9);
+		if (execve(mini_unit->cmd[0],
+				mini_unit->cmd, *(mini_unit->env_ori)) == -1)
+			return (perror("execve"), exit_code(1), ft_clean_programm(0, 1));
 	}
 	if (mini_unit->cmd[0][0] == '.')
 	{
-		dprintf(2, "22\n");
-		if (execve(mini_unit->cmd[0], mini_unit->cmd, *(mini_unit->env_ori)) == -1)
-			return (print_fd(2, "%s: Command not found\n", mini_unit->cmd[0]), ft_clean_programm(0, EXIT_FAILURE), -9);
+		if (execve(mini_unit->cmd[0],
+				mini_unit->cmd, *(mini_unit->env_ori)) == -1)
+			return (print_fd(2, "%s: Command not found\n", mini_unit->cmd[0]),
+				exit_code(127), ft_clean_programm(0, 1), -9);
 	}
 	path = ft_path_gen(*(mini_unit->env_ori));
 	if (path == 0)
-		ft_clean_programm(0, EXIT_FAILURE);
+		ft_clean_programm(0, 1);
 	ft_execve_absolut(
 		mini_unit->cmd[0], mini_unit->cmd, path, *(mini_unit->env_ori));
 	free_split(path);
 	if (fd_close >= 0)
 		close(fd_close);
-	ft_clean_programm(0, EXIT_FAILURE);
+	exit_code(127);
+	ft_clean_programm(0, 1);
 	return (-9);
 }

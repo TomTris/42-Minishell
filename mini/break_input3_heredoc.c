@@ -6,39 +6,39 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/19 20:47:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 08:49:51 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_fd_heredoc_new2(char *limiter, int write_end)
+int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 {
 	int		fd_heredoc_ori;
 	char	*temp;
-	int		limiter_len;
+	int		len;
 
-	limiter_len = ft_strlen(limiter);
-	fd_heredoc_ori = get_fd_heredoc_ori(-1);
-	if (fd_heredoc_ori == -1)
-		return (perror("sthwrong in ft_fd_heredoc_new"), 0);
-	temp = get_next_line(STDIN_FILENO);
+	if (ft_init_helper(&fd_heredoc_ori, &len) == 0)
+		return (0);
+	temp = readline(">");
 	while (temp != 0
-		&& (sncmp(limiter, temp, limiter_len) != 1
-			|| temp[limiter_len] != '\n'))
+		&& (sncmp(limiter, temp, limi_len) != 1 || temp[limi_len] != '\0'))
 	{
-		if (print_fd(fd_heredoc_ori, temp) == -1
-			|| print_fd(write_end, temp) == -1)
-			return (free(temp), 0);
+		len += ft_strlen(temp) + 1;
+		if (len > 512)
+			return (ft_512(temp));
+		if (print_fd(fd_heredoc_ori, "%s\n", temp) == -1
+			|| print_fd(write_end, "%s\n", temp) == -1)
+			return (perror("print_fd"), free(temp), 0);
+		++cnt;
 		ft_cnt_line_heredoc();
 		free(temp);
-		temp = get_next_line(STDIN_FILENO);
+		temp = readline(">");
 	}
 	if (temp == 0)
-		if (ft_reach_end_of_file(limiter) == 0)
+		if (ft_reach_end_of_file(limiter, cnt) == 0)
 			return (0);
-	free(temp);
-	return (1);
+	return (free(temp), 1);
 }
 
 int	ft_fd_heredoc_new(char *limiter)
@@ -53,7 +53,7 @@ int	ft_fd_heredoc_new(char *limiter)
 		close (fd_pipe[1]);
 		return (-1);
 	}
-	if (ft_fd_heredoc_new2(limiter, fd_pipe[1]) == 0)
+	if (ft_fd_heredoc_new2(limiter, fd_pipe[1], ft_strlen(limiter), 0) == 0)
 		return (close (fd_pipe[0]), close (fd_pipe[1]), -1);
 	close(fd_pipe[1]);
 	return (fd_pipe[0]);

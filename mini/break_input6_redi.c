@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   break_input5_redi.c                                :+:      :+:    :+:   */
+/*   break_input6_redi.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:37:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/18 02:06:13 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 08:38:54 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_mini_redi_init2(t_mini_unit *mini_unit, t_redirection *mini_redi,
 	mini_unit->redi = mini_redi;
 	return (1);
 }
-
 
 int	ft_mini_redi_init(t_mini_unit *mini_unit, char *ret, int type)
 {

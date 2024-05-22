@@ -6,23 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:36:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 02:26:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 09:13:07 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-char	*make_dollar_sign(void)
-{
-	char	*ret;
-
-	ret = (char *)malloc(2);
-	if (ret == 0)
-		return (perror("Malloc failed"), NULL);
-	ret[0] = '$';
-	ret[1] = 0;
-	return (ret);
-}
 
 char	*dollar_replace2(char *str, int *i, int *cnt)
 {

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_builtin_env.c                                   :+:      :+:    :+:   */
+/*   break_input5_heredoc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 07:55:54 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 07:57:31 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/22 08:23:32 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/22 08:37:51 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_builtin_env(char **env)
+int	ft_init_helper(int *fd_heredoc_ori, int *len)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (printf("%s\n", env[i++]) == -1)
-			return (perror("printf"), 0);
-	}
+	*fd_heredoc_ori = get_fd_heredoc_ori(-1);
+	if (*fd_heredoc_ori == -1)
+		return (perror("sthwrong in ft_fd_heredoc_new"), 0);
+	*len = 0;
 	return (1);
+}
+
+int	ft_512(char *temp)
+{
+	if (print_fd(2, "Can't store more than 512 bytes, force") == -1
+		|| print_fd (2, " break and keep doing execution!\n") == -1)
+		return (perror("printf_fd"), free(temp), 0);
+	return (free(temp), 1);
 }
