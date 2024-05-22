@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:10:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:46:21 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 11:21:23 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**merge_with_wildcard(char **str2, int nbr)
 		{
 			ret = smerge(ret, wc_expand[j]);
 			if (ret == 0)
-				return (exit_code(1), ree_split(wc_expand), NULL);
+				return (exit_code(1), free_split(wc_expand), NULL);
 		}
 		free_split(wc_expand);
 	}

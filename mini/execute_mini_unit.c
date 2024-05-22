@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:40:52 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 16:16:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_builtin(char **cmd, char ***env_o)
 		return (ft_builtin_env(*env_o));
 	if (sncmp(cmd[0], "exit", 5) == 1)
 		return (ft_exit(cmd));
+	if (sncmp(cmd[0], "cd", 3) == 1)
+		return (ft_cd(cmd, env_o));
 	perror("sthwrong in ft_builtin\n");
 	return (0);
 }

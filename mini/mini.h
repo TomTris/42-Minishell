@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 09:56:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 16:37:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,4 +233,10 @@ int				env_underscore3(char ***env_o, char *cmd);
 int				env_underscore(char **cmd, char ***env_o);
 char			**ft_path_gen(char **env);
 char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
+int				ft_cd(char **cmd, char ***env);
+int				ft_cd_oldpwd(char ***env);
+int				ft_cd_home(char	***env);
+int				ft_cd_relativ(char **cmd, char ***env);
+int				ft_cd_absolut(char *path, char **cmd, char ***env);
+int				ft_pre_set(char **cwd, char **fu_cwd, char *path);
 #endif

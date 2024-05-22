@@ -16,7 +16,7 @@ SRC = 	\
 		execute_mini_unit_ft_execve.c 					execute_mini_unit_redi.c\
 		execute_mini_unit.c								execute_mini.c\
 		execute_sub_mini.c\
-		ft_builtin_env.c\
+		ft_builtin_env.c ft_builtin_cd.c ft_builtin_cd_bonus.c\
 		ft_builtin_unset.c\
 		ft_builtin_export.c ft_builtin_export2.c ft_builtin_echo.c\
 		ft_builtin_pwd.c ft_builtin_exit.c ft_builtin_add_rm.c\

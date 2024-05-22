@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:41:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 15:37:30 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_execute_sub_mini_1(t_sub_mini *sub_mini)
 		return (1);
 	if (ft_is_builtin(&sub_mini->mini_unit[1]) == 1)
 		return (ft_builtin(sub_mini->mini_unit[1].cmd,
-				sub_mini->mini_unit[0].env_ori));
+				sub_mini->mini_unit[0].env_ori), 0);
 	return (2);
 }
 
@@ -93,6 +93,8 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 		i = ft_execute_sub_mini_1(sub_mini);
 		if (i == 0 || i == 1)
 			return (i);
+		// signal(SIGINT, );
+		// signal(SIGQUIT, );
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), ft_clean_programm(0, EXIT_FAILURE));
@@ -104,6 +106,8 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 			exit(ft_execute_mini_unit(&(sub_mini->mini_unit[1]), -1, -1));
 		}
 		waitpid(pid, &status, 0);
+		// signal(SIGINT, sigint_handler);
+		// signal(SIGQUIT, SIG_IGN);
 		if (WIFEXITED(status))
 			return (exit_code(WEXITSTATUS(status)), WEXITSTATUS(status) + 1);
 		return (0);

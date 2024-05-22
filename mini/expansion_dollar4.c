@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:44:10 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 11:21:16 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**ft_split_after_dollar_expansion(char *str)
 
 	ret = smerge(0, 0);
 	if (ret == 0)
-		return (exit_code(1), 0);
+		return (exit_code(1), NULL);
 	i = 0;
 	while (str[i])
 	{
