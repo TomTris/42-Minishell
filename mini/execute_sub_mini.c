@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 15:37:30 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 19:22:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 	if (fd_in == -1)
 		return (ft_sig_ter(pid, i - 1), free(pid), 0);
 	close(fd_in);
+	signal(SIGINT, sigint_handler3);
+	signal(SIGQUIT, sigint_handler3);
 	status = ft_wait_pid(pid, i - 1);
 	if (WIFEXITED(status))
 		return (free(pid), exit_code(WEXITSTATUS(status)),
@@ -82,6 +84,24 @@ int	ft_execute_sub_mini_1(t_sub_mini *sub_mini)
 	return (2);
 }
 
+void	ft_sig_2(int sig)
+{
+	if (sig == SIGINT)
+		exit_code(130);
+	else
+		exit_code(131);
+	ft_clean_programm(0, 1);
+}
+
+// void	ft_sig_3(int sig)
+// {
+// 	if (sig == SIGINT)
+// 		exit_code(130);
+// 	else
+// 		exit_code(131);
+// 	ft_clean_programm(0, -1);
+// }
+
 int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 {
 	pid_t	pid;
@@ -93,23 +113,25 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 		i = ft_execute_sub_mini_1(sub_mini);
 		if (i == 0 || i == 1)
 			return (i);
-		// signal(SIGINT, );
-		// signal(SIGQUIT, );
 		pid = fork();
 		if (pid == -1)
 			return (perror("fork"), ft_clean_programm(0, EXIT_FAILURE));
 		if (pid == 0)
 		{
+			signal(SIGINT, ft_sig_2);
+			signal(SIGQUIT, ft_sig_2);
 			if (sub_mini->mini_unit[1].cmd == 0
 				&& sub_mini->mini_unit[1].mini != 0)
 				return (ft_execute_mini(sub_mini->mini_unit[1].mini));
 			exit(ft_execute_mini_unit(&(sub_mini->mini_unit[1]), -1, -1));
 		}
+		signal(SIGINT, sigint_handler3);
+		signal(SIGQUIT, sigint_handler3);
 		waitpid(pid, &status, 0);
-		// signal(SIGINT, sigint_handler);
-		// signal(SIGQUIT, SIG_IGN);
 		if (WIFEXITED(status))
 			return (exit_code(WEXITSTATUS(status)), WEXITSTATUS(status) + 1);
+		else if (WIFSIGNALED(status))
+			return (0);
 		return (0);
 	}
 	return (ft_execute_sub_mini2(sub_mini));

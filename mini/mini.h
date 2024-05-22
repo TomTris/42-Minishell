@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 16:37:24 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 19:16:19 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,4 +239,10 @@ int				ft_cd_home(char	***env);
 int				ft_cd_relativ(char **cmd, char ***env);
 int				ft_cd_absolut(char *path, char **cmd, char ***env);
 int				ft_pre_set(char **cwd, char **fu_cwd, char *path);
+void sigint_handler1(int sig);
+void	ft_sig_2(int sig);
+void	ft_sig_3(int sig);
+void sigint_handler2(int sig);
+void sigint_handler1(int sig);
+void	sigint_handler3(int sig);
 #endif
