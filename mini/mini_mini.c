@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 15:02:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 19:16:03 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,56 @@ int	main2(int ac, char **av, char ***env, char *str)
 	ft_clean_programm(0, -1);
 	return (1);
 }
-// void sigint_handler(int sig)
-// {
-// 	printf("sig= %d QDO\n", sig);
-// }
 
+void sigint_handler1(int sig)
+{
+	exit_code(sig + 128);
+	rl_replace_line("", 1);
+	printf("\n");
+	rl_on_new_line();
+	rl_redisplay();
+}
+
+void sigint_handler2(int sig)
+{
+	exit_code(sig + 128);
+	rl_replace_line("", 1);
+	printf("\n");
+	rl_on_new_line();
+}
+
+void	sigint_handler3(int sig)
+{
+	exit_code(sig + 128);
+}
 int	main(int ac, char **av, char **env_ori)
 {
 	char	*str;
 	char	**env;
 
-	// signal(SIGINT, sigint_handler);
-	// signal(SIGQUIT, SIG_IGN);
 	env = make_env(env_ori);
 	if (env == 0)
 		return (exit_code(1), 0);
 	rl_initialize();
 	while (1)
 	{
-		str = readline("\x1b[34mQdo&&Bori_Shell> \x1b[0m");
+		signal(SIGINT, sigint_handler1);
+		signal(SIGQUIT, SIG_IGN);
+		str = readline("\x1b[34mQdo_Minishell> \x1b[0m");
 		if (str == 0)
 			break ;
+		signal(SIGINT, sigint_handler2);
+		signal(SIGQUIT, sigint_handler2);
+		if (str[0] != 0)
+			add_history(str);
 		if (fft_isempty(str) != 1)
 			main2(ac, av, &env, str);
 		else
 			exit_code(0);
 		free(str);
 	}
+	printf("exit\n");
+	rl_clear_history();
 	dollar_underscore(0, 0, 1);
 	free_split(env);
 	unlink(HERE_DOC_FILE);

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 16:16:17 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 19:08:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	ft_execute_mini_unit(t_mini_unit *mini_unit, int fd_in, int fd_out)
 	if (fd_in >= 0)
 		if (dup2(fd_in, STDIN_FILENO) == -1)
 			return (exit_code(1), perror("dup2"),
-				ft_clean_programm(0, EXIT_FAILURE));
+				ft_clean_programm(0, 1));
 	if (fd_in >= 0)
 		close(fd_in);
 	if (mini_unit->nbr != mini_unit->nbr_sum)
 		if (dup2(fd_out, STDOUT_FILENO) == -1)
 			return (exit_code(1), perror("dup2"),
-				ft_clean_programm(0, EXIT_FAILURE));
+				ft_clean_programm(0, 1));
 	if (ft_redi_execute(mini_unit) == 0)
 		return (0);
 	if (mini_unit->cmd == 0 && mini_unit->mini != 0)
@@ -83,6 +83,8 @@ int	ft_recursion_muni_unit_create(
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, ft_sig_2);
+		signal(SIGQUIT, ft_sig_2);
 		close(fd_new[0]);
 		exit(ft_execute_mini_unit(mini_unit, fd_in, fd_new[1]));
 	}
