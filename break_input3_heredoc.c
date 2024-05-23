@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 17:55:39 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 08:02:04 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 {
-	int		fd_heredoc_ori;
 	char	*temp;
 	int		len;
 
-	if (ft_init_helper(&fd_heredoc_ori, &len) == 0)
-		return (0);
+	len = 0;
 	temp = readline("\x1b[34m>\x1b[0m");
 	while (temp != 0
 		&& (sncmp(limiter, temp, limi_len) != 1 || temp[limi_len] != '\0'))
@@ -27,8 +25,7 @@ int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 		len += ft_strlen(temp) + 1;
 		if (len > 512)
 			return (ft_512(temp));
-		if (print_fd(fd_heredoc_ori, "%s\n", temp) == -1
-			|| print_fd(write_end, "%s\n", temp) == -1)
+		if (print_fd(write_end, "%s\n", temp) == -1)
 			return (exit_code(1), perror("print_fd"), free(temp), 0);
 		++cnt;
 		ft_cnt_line_heredoc();

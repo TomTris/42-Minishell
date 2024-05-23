@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:10:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 11:21:23 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:27:34 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**merge_with_wildcard(char **str2, int nbr)
 	i = -1;
 	while (str2[++i])
 	{
-		wc_expand = wildcard_expand(str2[i], nbr);
+		wc_expand = wildcard_expand(str2[i], nbr, 0);
 		if (wc_expand == 0)
 			return (free_split(ret), NULL);
 		j = -1;

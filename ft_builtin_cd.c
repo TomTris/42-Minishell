@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:57:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 16:35:29 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 08:04:25 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ int	ft_cd_relativ(char **cmd, char ***env)
 
 int	ft_cd(char **cmd, char ***env)
 {
-	if (cmd[1] == 0 || (cmd[1][0] == '~' && cmd[1][1] == '\0'))
-		return (ft_cd_home(env));
 	if (cmd[2] != 0)
 		return (exit_code(1), print_err("cd: too many arguments\n"), 0);
+	if (cmd[1] == 0 || (cmd[1][0] == '~' && cmd[1][1] == '\0')
+		|| (cmd[1][0] == '-' && cmd[1][1] == '-'))
+		return (ft_cd_home(env));
 	if (cmd[1][0] == '/')
-		return (ft_cd_absolut(cmd[0], cmd, env));
+		return (ft_cd_absolut(cmd[1], cmd, env));
 	if (cmd[1][0] == '-' && cmd[1][1] == '\0')
 		return (ft_cd_oldpwd(env));
 	return (ft_cd_relativ(cmd, env));

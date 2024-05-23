@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:52:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:34:02 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/22 19:26:08 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,4 @@ int	ft_cnt_line_heredoc(void)
 
 	cnt ++;
 	return (cnt);
-}
-
-//get-> call with -1
-//set -> call with value
-int	get_fd_heredoc_ori(int fd)
-{
-	static int	fd_heredoc = -1;
-
-	if (fd != -1)
-		fd_heredoc = fd;
-	return (fd_heredoc);
-}
-
-int	ft_init_heredoc(t_mini *mini)
-{
-	unlink(HERE_DOC_FILE);
-	mini->fd_heredoc = open(HERE_DOC_FILE, O_CREAT | O_APPEND | O_RDWR, 0644);
-	if (mini->fd_heredoc == -1)
-		return (exit_code(1), perror("open"), ft_clean_programm(0, 1), -99);
-	get_fd_heredoc_ori(mini->fd_heredoc);
-	return (1);
 }

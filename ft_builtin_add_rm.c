@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:07:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:46:55 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:23:36 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	ft_remove_rule(char ***env_o, char *rule)
 	while (env_o[0][++i])
 		if (sncmp(rule, env_o[0][i], len) == 1 && env_o[0][i][len] == '=')
 			break ;
+	if (env_o[0][i] == 0)
+		return (1);
 	len = 0;
 	while (env_o[0][len])
 		len++;

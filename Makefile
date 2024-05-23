@@ -1,43 +1,43 @@
-CC				= cc 
-CFLAGS			= -Wall -Werror -Wextra -I./libft
-LIBFT_FLAGS		= -Llibft
-TEST_FLAGS		= -I./libft -I./src/prompt
-LFLAGS			= $(LIBFT_FLAGS)
-RM				= rm -rf
-SRC				= prompt/minishell.c
-TEST_SRC		= minishell.c
-OBJS			= $(patsubst %.c, ./src/%.o, $(SRC))
-TEST_PATH		= ./src/test
-TEST_OBJS		= $(patsubst %.c, $(TEST_PATH)/%.o, $(TEST_SRC))
-LIBFT			= libft/libft.a
-NAME			= minishell
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+LDFLAGS = -lreadline
+NAME = minishell
+LIBFT_DIR = libft
+LIBFT_A = libft/libft.a
+SRC = 	\
+		mini_mini.c				mini_sub_mini.c			mini_mini_unit.c		mini_mini_start.c							\
+		syntax_precheck.c		syntax_check.c																				\
+		expansion_0.c			expansion_dollar1.c		expansion_dollar2.c		expansion_dollar3.c							\
+		expansion_dollar4.c		expansion_wildcard1.c	expansion_wildcard2.c												\
+		break_input.c			break_input2.c			break_input3_heredoc.c	break_input4_heredoc.c						\
+		break_input5_heredoc.c	break_input6_redi.c																			\
+		ft_free.c				ft_other1.c				ft_other2.c				ft_other3.c									\
+		ft_clean1.c				ft_clean2.c																					\
+		execute_mini_unit_ft_execve.c 					execute_mini_unit_redi.c\
+		execute_mini_unit_ft_execve_gen.c execute_mini_unit_ft_execve2.c\
+		execute_mini_unit.c								execute_mini.c\
+		execute_sub_mini.c		execute_sub_mini_helper.c\
+		ft_builtin_env.c		ft_builtin_cd.c			ft_builtin_cd_bonus.c\
+		ft_builtin_unset.c		ft_builtin_export.c 	ft_builtin_export2.c 	ft_builtin_add_rm.c\
+		ft_builtin_echo.c\
+		ft_builtin_pwd.c\
+		ft_builtin_exit.c\
+		signal.c
+OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
-src/test/%.o: src/test/%.c
-	$(CC) $(TEST_FLAGS) -c $< -o $@
-
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
-
-test:  $(OBJS) $(TEST_OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(LFLAGS) $(TEST_FLAGS) -o $(TEST_PATH)/$(NAME) $(TEST_OBJS) $(LIBFT) && ./$(TEST_PATH)/$(NAME)
-
-libft: $(LIBFT)
-
-$(LIBFT):
-	make -C libft
+$(NAME): $(OBJS)
+	make re -C $(LIBFT_DIR)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS)
 
 clean:
-	make clean -C libft
-	rm -rf $(OBJS)
-	rm -rf $(TEST_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C libft
-	rm -rf $(NAME)
-	rm -rf $(TEST_PATH)/$(NAME)
+	make fclean -C $(LIBFT_DIR)
+	rm -f  $(NAME)
 
-re: fclean all
+re: fclean all clean
 
-.PHONY: all clean bonus re fclean
+.PHONY: all clean fclean re bonus
