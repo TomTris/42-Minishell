@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:37:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 23:38:07 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 00:00:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_execute_mini2(t_mini *mini, int i, int status)
 	else if (WIFEXITED(status))
 		code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		code = WEXITSTATUS(status) + 128;
+		code = WTERMSIG(status) + 128;
 	else
 		return (print_err("sth i don't know yet\n"), exit_code(1), -1);
 	exit_code(code);
