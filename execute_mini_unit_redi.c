@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 08:04:15 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 22:31:39 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	ft_redi_execute_heredoc(t_mini_unit *mini_unit)
 	return (ret);
 }
 
-int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi)
+int	ft_redi_execute_redi2(t_redirection *redi, int fd_redi, char *str2)
 {
 	int	i;
 
 	if (fd_redi == -1)
-		return (exit_code(1), perror(redi->str), 0);
+		return (exit_code(1), perror(str2), free(str2), 0);
+	free(str2);
 	if (redi->type_re == RE_IN)
 		i = dup2(fd_redi, STDIN_FILENO);
 	else
@@ -79,8 +80,7 @@ int	ft_redi_execute_redi(t_redirection *redi, char **env)
 		fd_redi = open(str2, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	else
 		fd_redi = open(str2, O_RDONLY, 0644);
-	free(str2);
-	return (ft_redi_execute_redi2(redi, fd_redi));
+	return (ft_redi_execute_redi2(redi, fd_redi, str2));
 }
 
 int	ft_redi_execute(t_mini_unit *mini_unit)
@@ -88,7 +88,8 @@ int	ft_redi_execute(t_mini_unit *mini_unit)
 	int	i;
 	int	ret;
 
-	ft_redi_execute_heredoc(mini_unit);
+	if (ft_redi_execute_heredoc(mini_unit) == 0)
+		return (0);
 	if (mini_unit->redi != 0)
 	{
 		i = 0;
