@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:06:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 08:05:14 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 23:37:40 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ int	ft_export(char ***env_o, char **cmd)
 
 	if (cmd != 0 && cmd[0] != 0 && cmd[1] == 0)
 		return (export_0_args(*env_o, 0));
-	if (ft_export2(env_o, cmd, &check2) == 0)
-		return (0);
+	ft_export2(env_o, cmd, &check2);
 	exit_code(1);
 	if (check2 == 0)
 		exit_code(0);

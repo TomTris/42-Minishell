@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 19:44:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 23:45:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,25 @@ int	ft_execute_mini_unit(t_mini_unit *mini_unit, int fd_in, int fd_out)
 			return (exit_code(1), perror("dup2"),
 				ft_clean_programm(0, 1));
 	if (ft_redi_execute(mini_unit) == 0)
-		return (0);
+		return (ft_clean_programm(0, 1));
 	if (mini_unit->cmd == 0 && mini_unit->mini != 0)
-		return (ft_execute_mini(mini_unit->mini));
+		return (exit_code(ft_execute_mini(mini_unit->mini)),
+			ft_clean_programm(0, 1));
 	else if (mini_unit->cmd == 0 && mini_unit->mini == 0)
 		return (exit_code(0), ft_clean_programm(0, 1));
 	else if (ft_is_builtin(mini_unit) == 1)
-		return (ft_builtin(mini_unit->cmd, mini_unit->env_ori));
+		return (ft_builtin(mini_unit->cmd, mini_unit->env_ori),
+			ft_clean_programm(0, 1));
 	else
 		return (ft_execve(mini_unit, fd_out), -99);
-	return (perror("sth ft_execute_mini_unit"), -99);
+	return (perror("sth ft_execute_mini_unit"), exit_code(99),
+		ft_clean_programm(0, 1), -99);
 }
 
 int	ft_recursion_muni_unit_create(
 		pid_t *pid_arr, t_mini_unit *mini_unit, int fd_in)
 {
 	int		fd_new[2];
-	int		i;
 	pid_t	pid;
 
 	if (pipe(fd_new) == -1)
@@ -87,14 +89,7 @@ int	ft_recursion_muni_unit_create(
 		signal(SIGINT, ft_sig_2);
 		signal(SIGQUIT, ft_sig_2);
 		close(fd_new[0]);
-		i = ft_execute_mini_unit(mini_unit, fd_in, fd_new[1]);
-		if (i == 0)
-			exit_code(1);
-		else if (i == 1)
-			exit_code(0);
-		else
-			exit_code(i);
-		ft_clean_programm(0, 1);
+		ft_execute_mini_unit(mini_unit, fd_in, fd_new[1]);
 	}
 	pid_arr[mini_unit->nbr - 1] = pid;
 	close(fd_new[1]);
