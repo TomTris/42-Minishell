@@ -6,23 +6,13 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 19:22:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:16:39 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	ft_sig_ter(pid_t *pid, int nbr)
-{
-	int	i;
-
-	i = -1;
-	while (++i < nbr)
-		kill(pid[i], SIGTERM);
-}
-
 //status here to check and get exit code
-
 int	ft_wait_pid(pid_t *pid, int nbr)
 {
 	int	status;
@@ -63,9 +53,7 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 	if (WIFEXITED(status))
 		return (free(pid), exit_code(WEXITSTATUS(status)),
 			WEXITSTATUS(status) + 1);
-	ft_sig_ter(pid, i - 1);
-	free(pid);
-	return (0);
+	return (ft_sig_ter(pid, i - 1), free(pid), 0);
 }
 
 int	ft_execute_sub_mini_1(t_sub_mini *sub_mini)
@@ -77,30 +65,22 @@ int	ft_execute_sub_mini_1(t_sub_mini *sub_mini)
 	if (ft_redi_execute(&(sub_mini->mini_unit[1])) == 0)
 		return (0);
 	if (sub_mini->mini_unit[1].cmd == 0 && sub_mini->mini_unit[1].mini == 0)
-		return (1);
+		return (exit_code(0), 1);
 	if (ft_is_builtin(&sub_mini->mini_unit[1]) == 1)
 		return (ft_builtin(sub_mini->mini_unit[1].cmd,
 				sub_mini->mini_unit[0].env_ori), 0);
 	return (2);
 }
 
-void	ft_sig_2(int sig)
+void	ft_child_1(t_sub_mini *sub_mini)
 {
-	if (sig == SIGINT)
-		exit_code(130);
-	else
-		exit_code(131);
-	ft_clean_programm(0, 1);
+	signal(SIGINT, ft_sig_2);
+	signal(SIGQUIT, ft_sig_2);
+	if (sub_mini->mini_unit[1].cmd == 0
+		&& sub_mini->mini_unit[1].mini != 0)
+		ft_execute_mini(sub_mini->mini_unit[1].mini);
+	exit(ft_execute_mini_unit(&(sub_mini->mini_unit[1]), -1, -1));
 }
-
-// void	ft_sig_3(int sig)
-// {
-// 	if (sig == SIGINT)
-// 		exit_code(130);
-// 	else
-// 		exit_code(131);
-// 	ft_clean_programm(0, -1);
-// }
 
 int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 {
@@ -117,14 +97,7 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 		if (pid == -1)
 			return (perror("fork"), ft_clean_programm(0, EXIT_FAILURE));
 		if (pid == 0)
-		{
-			signal(SIGINT, ft_sig_2);
-			signal(SIGQUIT, ft_sig_2);
-			if (sub_mini->mini_unit[1].cmd == 0
-				&& sub_mini->mini_unit[1].mini != 0)
-				return (ft_execute_mini(sub_mini->mini_unit[1].mini));
-			exit(ft_execute_mini_unit(&(sub_mini->mini_unit[1]), -1, -1));
-		}
+			ft_child_1(sub_mini);
 		signal(SIGINT, sigint_handler3);
 		signal(SIGQUIT, sigint_handler3);
 		waitpid(pid, &status, 0);

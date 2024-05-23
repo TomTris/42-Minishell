@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 19:16:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:12:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main2(int ac, char **av, char ***env, char *str)
 	if (mini == 0)
 		return (1);
 	ft_clean_programm(mini, 0);
-	ft_init_heredoc(mini);
 	if (break_input(mini) == 0)
 		return (ft_clean_programm(0, -1), 1);
 	ft_execute_mini(mini);
@@ -73,27 +72,15 @@ int	main2(int ac, char **av, char ***env, char *str)
 	return (1);
 }
 
-void sigint_handler1(int sig)
+int	ft_done(char **env)
 {
-	exit_code(sig + 128);
-	rl_replace_line("", 1);
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
+	printf("exit\n");
+	rl_clear_history();
+	dollar_underscore(0, 0, 1);
+	free_split(env);
+	return (exit_code(-1));
 }
 
-void sigint_handler2(int sig)
-{
-	exit_code(sig + 128);
-	rl_replace_line("", 1);
-	printf("\n");
-	rl_on_new_line();
-}
-
-void	sigint_handler3(int sig)
-{
-	exit_code(sig + 128);
-}
 int	main(int ac, char **av, char **env_ori)
 {
 	char	*str;
@@ -107,7 +94,7 @@ int	main(int ac, char **av, char **env_ori)
 	{
 		signal(SIGINT, sigint_handler1);
 		signal(SIGQUIT, SIG_IGN);
-		str = readline("\x1b[34mQdo_Minishell> \x1b[0m");
+		str = readline("Minishell> ");
 		if (str == 0)
 			break ;
 		signal(SIGINT, sigint_handler2);
@@ -120,10 +107,5 @@ int	main(int ac, char **av, char **env_ori)
 			exit_code(0);
 		free(str);
 	}
-	printf("exit\n");
-	rl_clear_history();
-	dollar_underscore(0, 0, 1);
-	free_split(env);
-	unlink(HERE_DOC_FILE);
-	return (exit_code(-1));
+	return (ft_done(env));
 }

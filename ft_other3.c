@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:49:41 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:30:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**ft_del_quo(char **str2)
 	return (str2);
 }
 
-char	*empty_string(void)
+static char	*empty_string(void)
 {
 	char	*ret;
 

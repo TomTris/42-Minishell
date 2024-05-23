@@ -6,14 +6,14 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 19:16:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:33:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -30,8 +30,6 @@
 # define HERE_DOC 8
 # define APPEND 9
 # define NL 10
-
-# define HERE_DOC_FILE ".heredoc.Qdo&&Bori@42Heilbronn.de"
 
 typedef struct s_mini	t_mini;
 //sign 0 nothing
@@ -85,7 +83,6 @@ t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);;
 int				mini_unit0(t_sub_mini *sub_mini);
 
-int				ft_lvl_cnt(int lvl_outside);
 /*************************Syntax check *********************************/
 int				syntax_precheck(char *str);
 int				syntax_check(t_mini_unit *mini_unit, char *str);
@@ -93,8 +90,6 @@ int				syntax_check(t_mini_unit *mini_unit, char *str);
 /*************************ft_free *********************************/
 int				free_split(char **to_free2);
 int				free_mini(t_mini *mini);
-// int				free_sub_mini(t_sub_mini *sub_mini);
-// int				free_mini_unit(t_mini_unit *mini_unit);
 
 /*************************ft_other *********************************/
 //ft_other1
@@ -107,6 +102,7 @@ int				token(char *str);
 char			**smerge(char **dest, char *src);
 int				syn_err(char *str, int sign);
 //ft_other3
+char			*dollar_underscore(char **cmd, int only_return, int free_check);
 char			**ft_del_quo(char **str2);
 char			*ft_del_quo2(char *str2_i, char *ret);
 
@@ -143,7 +139,7 @@ char			*dollar_doquo2(char *str, char *ret, char **env, int *i);
 //expansion_dollar4
 char			**ft_split_after_dollar_expansion(char *str);
 //expansion_wildcard1 && expansion_wildcard1
-char			**wildcard_expand(char *str, int nbr);
+char			**wildcard_expand(char *str, int nbr, int i);
 char			**merge_with_wildcard(char **str2, int nbr);
 
 /*************************	Input breaking *********************************/
@@ -168,7 +164,6 @@ int				ft_fd_heredoc_new2(char *limiter, int write_end,
 					int limiter_len, int cnt);
 
 //break_input4_heredoc
-int				ft_init_heredoc(t_mini *mini);
 int				get_fd_heredoc_ori(int fd);
 int				ft_cnt_line_heredoc(void);
 int				ft_reach_end_of_file(char *limiter, int i);
@@ -213,10 +208,13 @@ int				ft_execve_absolut(
 					char *cmd, char **args, char **path, char **env);
 char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 int				ft_fd_out(int fd_new);
+//execute mini_unit_ft_execve2
+int				ft_execve_absolut(char *cmd, char **args,
+					char **path, char **env);
+int				ft_execve_dot0(void);
 
-//trying new things
+//builtins
 int				exit_code(int new);
-char			*dollar_underscore(char **cmd, int only_return, int free_check);
 int				ft_export(char ***env_o, char **cmd);
 int				ft_unset(char ***env_o, char **cmd);
 int				ft_env(char ***env_o, char *rule, int unset_export);
@@ -227,22 +225,27 @@ int				ft_echo(char **cmd);
 int				ft_pwd(void);
 int				ft_exit(char **cmd);
 int				ft_builtin_env(char **env);
-
-int				env_underscore2(char *cmd, char **path, char ***env_o);
-int				env_underscore3(char ***env_o, char *cmd);
-int				env_underscore(char **cmd, char ***env_o);
-char			**ft_path_gen(char **env);
-char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 int				ft_cd(char **cmd, char ***env);
 int				ft_cd_oldpwd(char ***env);
 int				ft_cd_home(char	***env);
 int				ft_cd_relativ(char **cmd, char ***env);
 int				ft_cd_absolut(char *path, char **cmd, char ***env);
 int				ft_pre_set(char **cwd, char **fu_cwd, char *path);
-void sigint_handler1(int sig);
-void	ft_sig_2(int sig);
-void	ft_sig_3(int sig);
-void sigint_handler2(int sig);
-void sigint_handler1(int sig);
-void	sigint_handler3(int sig);
+
+//env after command - execute_sub_mini_helper.c
+int				env_underscore2(char *cmd, char **path, char ***env_o);
+int				env_underscore3(char ***env_o, char *cmd);
+int				env_underscore(char **cmd, char ***env_o);
+
+//execute_mini_unit_ft_execve_gen
+char			**ft_path_gen(char **env);
+char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
+
+void			sigint_handler1(int sig);
+void			ft_sig_2(int sig);
+void			ft_sig_3(int sig);
+void			sigint_handler2(int sig);
+void			sigint_handler1(int sig);
+void			sigint_handler3(int sig);
+
 #endif

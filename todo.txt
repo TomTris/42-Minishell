@@ -1,7 +1,0 @@
-Bori:
-01 - create prompt
-02 - deal with history
-03 - deal with signals
-
-Tom:
-04 - continue parsing

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:48:55 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:44:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:27:25 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,9 @@ static void	ft_recovery(char **ret, int nbr)
 }
 
 //if str[0] = 0 -> return str
-char	**wildcard_expand(char *str, int nbr)
+char	**wildcard_expand(char *str, int nbr, int i)
 {
 	char	**cwd_ns;
-	int		i;
 	char	**ret;
 
 	cwd_ns = get_cwd_name();
@@ -128,7 +127,8 @@ char	**wildcard_expand(char *str, int nbr)
 		{
 			ret = smerge(ret, cwd_ns[i]);
 			if (ret == 0)
-				return (exit_code(1), free_split(ret), free_split(cwd_ns), NULL);
+				return (exit_code(1), free_split(ret),
+					free_split(cwd_ns), NULL);
 		}
 	}
 	free_split(cwd_ns);

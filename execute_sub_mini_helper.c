@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_sub_mini_env_underscore.c                  :+:      :+:    :+:   */
+/*   execute_sub_mini_helper.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 08:39:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:41:22 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 09:16:45 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,13 @@ int	env_underscore(char **cmd, char ***env_o)
 	if (i == 0 || i == 1)
 		return (i);
 	return (env_underscore3(env_o, cmd[0]));
+}
+
+void	ft_sig_ter(pid_t *pid, int nbr)
+{
+	int	i;
+
+	i = -1;
+	while (++i < nbr)
+		kill(pid[i], SIGTERM);
 }

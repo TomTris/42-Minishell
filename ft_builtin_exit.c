@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 07:03:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 07:52:08 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/23 08:37:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_exit_first_args_non_numeric(char **cmd)
 	int	i;
 
 	i = 0;
+	if (cmd[1][0] == 0)
+		return (1);
 	if (cmd[1][i] == '-' || cmd[1][i] == '+')
 		i++;
 	while (cmd[1][i])
@@ -63,23 +65,18 @@ int	ft_exit(char **cmd)
 	if (ft_exit_first_args_non_numeric(cmd) == 1
 		|| ft_exit_num_too_big(cmd[1], 0, 0) == 1)
 	{
-		exit_code(255);
-		if (printf("%s: numberic argument required\n", cmd[1]) == -1)
-		{
-			exit_code(1);
-			perror("printf");
-			return (0);
-		}
+		exit_code(2);
+		if (print_fd(2, "%s: numeric argument required\n", cmd[1]) == -1)
+			return (exit_code(1), perror("printf"), 0);
 		ft_clean_programm(0, 1);
 	}
 	if (cmd[2] != 0)
 	{
 		exit_code(1);
-		if (printf("exit: too many arguments\n") == -1)
+		if (print_fd(2, "exit: too many arguments\n") == -1)
 			perror("printf");
 		return (0);
 	}
-	exit_code(((ft_atoi(cmd[1]) % 255) + 255) % 255);
-	ft_clean_programm(0, 1);
-	return (-9);
+	exit_code(((ft_atoi(cmd[1]) % 256) + 256) % 256);
+	return (ft_clean_programm(0, 1), -9);
 }
