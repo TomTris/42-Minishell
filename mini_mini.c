@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 02:38:01 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:26:37 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_mini	*mini0(char *str, char ***env, int lvl)
 	t_mini	*mini;
 
 	if (str == 0)
-		return (perror("s1ndup"), NULL);
+		return (perror("sndup"), NULL);
 	mini = (t_mini *)malloc(1 * sizeof(t_mini));
 	if (mini == 0)
 		return (perror("Malloc failed"), exit_code(1), free(str), NULL);
@@ -93,7 +93,7 @@ int	main(int ac, char **av, char **env_ori)
 	{
 		signal(SIGINT, sigint_handler1);
 		signal(SIGQUIT, SIG_IGN);
-		str = readline("Minishell> ");
+		str = readline("qdo-5.2$ ");
 		if (str == 0)
 			break ;
 		signal(SIGINT, sigint_handler2);

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 23:00:36 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:43:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:29:06 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,25 +88,3 @@ char	*make_dollar_sign(void)
 	ret[1] = 0;
 	return (ret);
 }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	char	*str;
-// 	char	**str2;
-// ac = 0;
-// av = 0;
-// 	str = ft_strdup("");
-// 	str = dollar_handler2("aaa$AAA..?.$BA\"$AAA\'$AAA\'\"", str, env);
-// 	str2 = ft_split_after_dollar_expansion(str);
-// 	free(str);
-// 	while(str2[ac] != 0)
-// 	{
-// 		printf("%s\n", str2[ac++]);
-// 	}
-// 	str2 = ft_del_quo(str2);
-// 	free_split(str2);
-// 	str2 = 0;
-// 	system("leaks a.out");
-// 	str = 0;
-// 	return (0);
-// }

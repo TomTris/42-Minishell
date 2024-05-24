@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 08:02:04 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:18:17 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 	int		len;
 
 	len = 0;
-	temp = readline("\x1b[34m>\x1b[0m");
+	temp = readline("> ");
 	while (temp != 0
 		&& (sncmp(limiter, temp, limi_len) != 1 || temp[limi_len] != '\0'))
 	{
@@ -30,7 +30,7 @@ int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 		++cnt;
 		ft_cnt_line_heredoc();
 		free(temp);
-		temp = readline("\x1b[34m>\x1b[0m");
+		temp = readline("> ");
 	}
 	if (temp == 0)
 		if (ft_reach_end_of_file(limiter, cnt) == 0)

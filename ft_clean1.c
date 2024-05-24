@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 03:51:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:34:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:28:02 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	ft_fd_heredoc(int fd_new)
 	return (free(fd), fd = fd_temp, fd_new);
 }
 
-//heredoc delete - only ctrl D // exit.
 int	ft_clean_programm(t_mini *mini_outside, int exit_nbr)
 {
 	static t_mini	*mini = NULL;
