@@ -21,17 +21,19 @@ SRC = 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c f
 		ft_printf_fd.c ft_putc_fd.c ft_putdi_fd.c ft_putp_fd.c ft_puts_fd.c ft_putu_fd.c ft_putx_fd.c\
 		ft_putxx_fd.c ft_putx_fd.c
 OBJS = $(SRC:.c=.o)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -f  $(NAME)
+	@rm -f  $(NAME)
 
 re: fclean all
 
