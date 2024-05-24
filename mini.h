@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:33:49 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:51:50 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,8 @@
 # define HERE_DOC 8
 # define APPEND 9
 # define NL 10
+// i use pipe to store heredoc -> limit 512 bytes.
 
-typedef struct s_mini	t_mini;
-//sign 0 nothing
-//sign 1 = <
-//sign 2 = >
-//sign 3 = <<
-//sign 4 = >>
 
 typedef struct s_redirection
 {
@@ -44,7 +39,7 @@ typedef struct s_redirection
 	char	*str;
 }	t_redirection;
 
-// i use pipe to store heredoc -> limit 512 bytes.
+typedef struct s_mini	t_mini;
 typedef struct s_mini_unit
 {
 	int				nbr;
@@ -82,7 +77,7 @@ typedef struct s_mini
 t_mini			*mini0(char *str, char ***env, int lvl);
 int				sub_mini0(t_mini *mini);;
 int				mini_unit0(t_sub_mini *sub_mini);
-
+char			**make_env(char **env);
 /*************************Syntax check *********************************/
 int				syntax_precheck(char *str);
 int				syntax_check(t_mini_unit *mini_unit, char *str);
@@ -106,16 +101,15 @@ char			*dollar_underscore(char **cmd, int only_return, int free_check);
 char			**ft_del_quo(char **str2);
 char			*ft_del_quo2(char *str2_i, char *ret);
 
-/*************************  ft_clean *********************************/
+/*******************************  ft_clean ***********************************/
 //ft_clean1 && 2
 int				ft_fd_heredoc(int fd_new);
 int				ft_fd_dup(int fd_new);
-int				ft_fd_redi_dup(int fd_new);
-int				ft_fd_redi_dup(int fd_new);
+int				exit_code(int new);
 
 int				ft_clean_programm(t_mini *mini_outside, int exit_nbr);
 
-/*************************	String replace *********************************/
+/**************************** String replace **********************************/
 //expansion_0
 char			**str_replace(char *str_ori, char **env);
 void			ft_change_star(char *str, int nbr);
@@ -142,7 +136,7 @@ char			**ft_split_after_dollar_expansion(char *str);
 char			**wildcard_expand(char *str, int nbr, int i);
 char			**merge_with_wildcard(char **str2, int nbr);
 
-/*************************	Input breaking *********************************/
+/**************************** Input breaking *********************************/
 
 //break_input
 int				break_input(t_mini *mini);
@@ -178,6 +172,7 @@ int				ft_mini_redi_init2(t_mini_unit *mini_unit,
 t_redirection	*mini_redi_init(t_mini_unit *mini_unit, char *str, int type_re);
 char			*mini_redi_get_ret(char **temp);
 
+/**************************** Execution *************************************/
 //execute mini_unit
 int				ft_recursion_muni_unit_create(
 					pid_t *pid_arr, t_mini_unit *mini_unit, int fd_in);
@@ -211,17 +206,17 @@ int				ft_execve_absolut(char *cmd, char **args,
 int				ft_execve_dot0(void);
 
 //builtins
-int				exit_code(int new);
 int				ft_export(char ***env_o, char **cmd);
-int				ft_unset(char ***env_o, char **cmd);
-int				ft_env(char ***env_o, char *rule, int unset_export);
-char			**make_env(char **env);
 int				ft_exportpp(char ***env_o, char **cmd, int i);
 int				ft_is_exportpp(char **cmd, int i);
+int				ft_unset(char ***env_o, char **cmd);
+int				ft_env(char ***env_o, char *rule, int unset_export);
+
+int				ft_builtin_env(char **env);
 int				ft_echo(char **cmd);
 int				ft_pwd(void);
 int				ft_exit(char **cmd);
-int				ft_builtin_env(char **env);
+
 int				ft_cd(char **cmd, char ***env);
 int				ft_cd_oldpwd(char ***env);
 int				ft_cd_home(char	***env);
