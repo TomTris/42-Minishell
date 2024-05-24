@@ -4,6 +4,7 @@ LDFLAGS = -lreadline
 NAME = minishell
 LIBFT_DIR = libft
 LIBFT_A = libft/libft.a
+
 SRC = 	\
 		mini_mini.c				mini_sub_mini.c			mini_mini_unit.c		mini_mini_start.c							\
 		syntax_precheck.c		syntax_check.c																				\
@@ -24,19 +25,22 @@ SRC = 	\
 		ft_builtin_exit.c\
 		signal.c
 OBJS = $(SRC:.c=.o)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make re -C $(LIBFT_DIR)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS)
+	@make -C $(LIBFT_DIR)
+	@$(CC) -o $(NAME) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LDFLAGS)
 
 clean:
-	rm -f $(OBJS)
+	@make clean -C $(LIBFT_DIR)
+	@rm -f $(OBJS)
 
-fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	rm -f  $(NAME)
+fclean:
+	@make fclean -C $(LIBFT_DIR)
+	@rm -f $(OBJS) $(NAME)
 
 re: fclean all clean
 
