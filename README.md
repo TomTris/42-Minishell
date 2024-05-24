@@ -45,4 +45,4 @@ My bash still works when you call env -i bash
 but in Bash, env is not builtin, so, env when you call in my shell, it will be _=env. You can try when you unset PATH.
 Shell and MAc...... I think it has other layor or software to store things like HOME, PWD, or PATH. Kind of.
 
-Anyway, i did it very carefullyy in about 3 weeks with more than 200 hours. Enjoy!
+Anyway, i did it very carefullyy in about 2.5-3 weeks with about 250hours. Enjoy!
