@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:33:59 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:33:49 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,14 +164,11 @@ int				ft_fd_heredoc_new2(char *limiter, int write_end,
 					int limiter_len, int cnt);
 
 //break_input4_heredoc
-int				get_fd_heredoc_ori(int fd);
 int				ft_cnt_line_heredoc(void);
 int				ft_reach_end_of_file(char *limiter, int i);
 int				ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add);
-
-//break_input5_heredoc.c
 int				ft_512(char *temp);
-int				ft_init_helper(int *fd_heredoc_ori, int *len);
+
 //break_input6_redi
 int				ft_redi_gen(t_mini_unit *mini_unit,
 					char *str, int *i, int type);
@@ -243,9 +240,6 @@ char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 
 void			sigint_handler1(int sig);
 void			ft_sig_2(int sig);
-void			ft_sig_3(int sig);
 void			sigint_handler2(int sig);
-void			sigint_handler1(int sig);
-void			sigint_handler3(int sig);
 
 #endif

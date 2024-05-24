@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:06:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 23:37:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:28:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	ft_export2(char ***env_o, char **cmd, int *check2)
 	return (1);
 }
 
-//ft_export(env, 0) => declare bla bla
 int	ft_export(char ***env_o, char **cmd)
 {
 	int		check2;

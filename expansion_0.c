@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:42:30 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:29:43 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,66 +124,3 @@ char	**str_replace(char *str_ori, char **env)
 // 	return (0);
 // }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// char	**make_env(char **env)
-// {
-// 	char	**ret;
-// 	int		i;
-
-// 	ret = smerge(0, 0);
-// 	if (ret == 0)
-// 		return (0);
-// 	i = -1;
-// 	while (env[++i])
-// 	{
-// 		ret = smerge(ret, env[i]);
-// 		if (ret == 0)
-// 			return (0);
-// 	}
-// 	return (ret);
-// }
-
-// int	main(int ac, char **av, char **env_ori)
-// {
-// 	char	*str;
-// 	char	**env;
-// 	char	**str_rpl;
-// 	int		i;
-
-// ac = 0;
-// av = 0;
-// 	str = "\"$HOME'$HOME'\"";
-// 	env = make_env(env_ori);
-// 	if (env == 0)
-// 		return (0);
-// 	str_rpl = str_replace(str, env);
-// 	if (str_rpl == 0)
-// 		return (free_split(env), 0);
-// 	i = -1;
-// 	// printf("%s\n", str_rpl[0]);
-// 	while (str_rpl[++i] != 0)
-// 		printf("%s ", str_rpl[i]);
-// 	printf("\n");
-// 	free_split(env);
-// 	free_split(str_rpl);
-// 	return (0);
-// }

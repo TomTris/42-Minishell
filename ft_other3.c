@@ -6,15 +6,12 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:30:33 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 05:27:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-//free both str2_i and ret, f_add free ret, ft_del_quo2 free(str2_i).
-//return the value of a "quote deleted string"
-//ret should be ""
 char	*ft_del_quo2(char *str2_i, char *ret)
 {
 	int		j;
@@ -43,7 +40,6 @@ char	*ft_del_quo2(char *str2_i, char *ret)
 	return (ret);
 }
 
-//create ret = "" before call ft_del_quo2
 char	**ft_del_quo(char **str2)
 {
 	int		i;
