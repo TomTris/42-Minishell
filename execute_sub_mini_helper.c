@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 08:39:47 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:16:45 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 02:49:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	env_underscore(char **cmd, char ***env_o)
 	if (cmd[0][0] == '.' || cmd[0][0] == '/' || path[0] == 0)
 	{
 		free(path);
-		return (env_underscore3(env_o, cmd[0]));
+		i = 1;
+		while (cmd[i])
+			i++;
+		return (env_underscore3(env_o, cmd[i - 1]));
 	}
 	i = env_underscore2(cmd[0], path, env_o);
 	free_split(path);
