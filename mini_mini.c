@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:12:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/24 02:38:01 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	fft_isempty(char *str)
 }
 
 int	main2(int ac, char **av, char ***env, char *str)
-// int	main(int ac, char **av, char **env_ori)
 {
 	t_mini	*mini;
 
