@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 22:33:11 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:27:14 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/26 22:53:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,21 @@ char	*dollar_underscore(char **cmd, int only_return, int free_check)
 	if (ret == 0)
 		return (exit_code(1), perror("ret"), NULL);
 	return (ret);
+}
+
+int	fft_isempty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isempty(str[i]) == 1)
+			i++;
+		else
+			break ;
+	}
+	if (str[i] == 0)
+		return (1);
+	return (0);
 }

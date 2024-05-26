@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:51:50 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/26 22:53:56 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int				syn_err(char *str, int sign);
 char			*dollar_underscore(char **cmd, int only_return, int free_check);
 char			**ft_del_quo(char **str2);
 char			*ft_del_quo2(char *str2_i, char *ret);
+int				fft_isempty(char *str);
 
 /*******************************  ft_clean ***********************************/
 //ft_clean1 && 2

@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:55:45 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 09:07:39 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/26 23:01:46 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int	ft_execve(t_mini_unit *mini_unit, int fd_close)
 				ft_clean_programm(0, 1), -9);
 		ft_clean_programm(0, 1);
 	}
-	ft_execve2(mini_unit);
+	if (mini_unit->cmd[0][0] != '.' || mini_unit->cmd[0][1] != '.' || mini_unit->cmd[0][2] != '\0')
+		ft_execve2(mini_unit);
 	path = ft_path_gen(*(mini_unit->env_ori));
 	if (path == 0)
 		ft_clean_programm(0, 1);
