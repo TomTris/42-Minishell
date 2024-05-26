@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 06:22:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 10:47:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/26 22:02:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int	ft_after_option(char **cmd)
 
 int	ft_print_rest(char **cmd, int i, int option)
 {
+	int	j;
+
+	j = i;
 	if (cmd[i] != 0)
 	{
 		if (printf("%s", cmd[i]) == -1)
@@ -50,6 +53,9 @@ int	ft_print_rest(char **cmd, int i, int option)
 		exit_code(0);
 		return (1);
 	}
+	if (j == i && i == 1)
+		if (printf("\n") == -1)
+			return (exit_code(1), perror("printf"), 0);
 	exit_code(0);
 	return (1);
 }

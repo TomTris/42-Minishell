@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:26:37 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/26 23:04:44 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,6 @@ t_mini	*mini0(char *str, char ***env, int lvl)
 	return (mini);
 }
 
-int	fft_isempty(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isempty(str[i]) == 1)
-			i++;
-		else
-			break ;
-	}
-	if (str[i] == 0)
-		return (1);
-	return (0);
-}
-
 int	main2(int ac, char **av, char ***env, char *str)
 {
 	t_mini	*mini;
@@ -73,11 +56,34 @@ int	main2(int ac, char **av, char ***env, char *str)
 
 int	ft_done(char **env)
 {
-	printf("exit\n");
+	if (isatty(STDIN_FILENO))
+		printf("exit\n");
 	rl_clear_history();
 	dollar_underscore(0, 0, 1);
 	free_split(env);
 	return (exit_code(-1));
+}
+
+char	*main1(void)
+{
+	char	*str;
+	char	*line;
+
+	signal(SIGINT, sigint_handler1);
+	signal(SIGQUIT, SIG_IGN);
+	if (isatty(fileno(stdin)))
+		str = readline("qdo-5.2$ ");
+	else
+	{
+		line = get_next_line(fileno(stdin));
+		if (line == 0)
+			return (NULL);
+		str = ft_strtrim(line, "\n");
+		free(line);
+	}
+	if (str == 0)
+		return (exit_code(1), NULL);
+	return (str);
 }
 
 int	main(int ac, char **av, char **env_ori)
@@ -91,9 +97,7 @@ int	main(int ac, char **av, char **env_ori)
 	rl_initialize();
 	while (1)
 	{
-		signal(SIGINT, sigint_handler1);
-		signal(SIGQUIT, SIG_IGN);
-		str = readline("qdo-5.2$ ");
+		str = main1();
 		if (str == 0)
 			break ;
 		signal(SIGINT, sigint_handler2);
@@ -108,3 +112,4 @@ int	main(int ac, char **av, char **env_ori)
 	}
 	return (ft_done(env));
 }
+
