@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 17:17:14 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/28 01:33:39 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	free_sub_mini(t_sub_mini *sub_mini)
 int	free_mini(t_mini *mini)
 {
 	free(mini->str);
-	free_sub_mini(mini->sub_mini);
+	if (mini->sub_mini != 0)
+		free_sub_mini(mini->sub_mini);
 	return (0);
 }

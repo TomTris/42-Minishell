@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 15:13:15 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/28 01:33:24 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,22 @@ int	main(int ac, char **av, char **env_ori)
 	env = make_env(env_ori);
 	if (env == 0)
 		return (exit_code(1), 0);
-	rl_initialize();
-	while (1)
+	if (rl_initialize() == 0)
 	{
-		str = main1();
-		if (str == 0)
-			break ;
-		signal(SIGINT, sigint_handler2);
-		if (str[0] != 0)
-			add_history(str);
-		if (fft_isempty(str) != 1)
-			main2(ac, av, &env, str);
-		else
-			exit_code(0);
-		free(str);
+		while (1)
+		{
+			str = main1();
+			if (str == 0)
+				break ;
+			signal(SIGINT, sigint_handler2);
+			if (str[0] != 0)
+				add_history(str);
+			if (fft_isempty(str) != 1)
+				main2(ac, av, &env, str);
+			else
+				exit_code(0);
+			free(str);
+		}
 	}
 	return (ft_done(env));
 }
