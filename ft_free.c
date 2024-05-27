@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 07:14:59 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 01:12:12 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 17:17:14 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	free_split(char **to_free2)
 	return (0);
 }
 
-static void	free_mini_unit_redi(t_redirection *redi)
+void	free_mini_unit_redi(t_redirection *redi)
 {
 	int	i;
 

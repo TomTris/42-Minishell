@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:57:24 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 16:25:53 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 17:07:11 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	ft_cd_absolut(char *path, char **cmd, char ***env)
 			return (free(cwd), free(future_cwd), 1);
 		}
 		else
-			return (exit_code(1),
+			return (exit_code(1), free(cwd), free(future_cwd),
 				print_fd(2, "%s: Not a directory\n", cmd[1]), 0);
 	}
 	else
-		return (exit_code(1),
+		return (exit_code(1), free(cwd), free(future_cwd),
 			print_fd(2, "cd: %s: No such file or directory\n", cmd[1]), 0);
 }
 

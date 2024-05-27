@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 05:27:48 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 02:59:04 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 16:23:13 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static char	**modify_shlvl2(char **ret, int i)
 		return (exit_code(1), perror("ft_strjoin"), NULL);
 	if (ft_env(&ret, temp, 1) == 0)
 		return (free_split(ret), free(temp), NULL);
+	free(temp);
 	return (ret);
 }
 

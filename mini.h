@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 03:01:41 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 17:17:20 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int				syntax_check(t_mini_unit *mini_unit, char *str);
 /*************************ft_free *********************************/
 int				free_split(char **to_free2);
 int				free_mini(t_mini *mini);
+void			free_mini_unit_redi(t_redirection *redi);
 
 /*************************ft_other *********************************/
 //ft_other1

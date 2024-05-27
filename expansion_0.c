@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 21:44:19 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 01:35:10 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 17:04:56 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_change_star(char *str, int nbr)
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')
-			i += ft_strchr(str + 1, str[i]) - str + 1;
+			i += ft_strchr(str + i + 1, str[i]) - str - i + 1;
 		else if (str[i] == '*')
 			str[i] = nbr;
 		else
