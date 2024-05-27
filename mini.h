@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:00:33 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/26 22:53:56 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 03:01:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define APPEND 9
 # define NL 10
 // i use pipe to store heredoc -> limit 512 bytes.
-
 
 typedef struct s_redirection
 {
@@ -151,18 +150,23 @@ int				ft_cmd_gen(t_mini_unit *mini_unit, char *str, int *i);
 char			**ft_cmd_create(char **cmd, char *str, char **env);
 char			**smerge2(char **s1, char **s2);
 int				ft_take_string(char *str, int *i);
-//break_input3_herd
+//break_input3_heredoc
 int				ft_heredoc_gen(t_mini_unit *mini_unit, char *str, int *i);
 char			*rm_dollar_before_quote(char *str, int i, char *ret);
 int				ft_fd_heredoc_new(char *limiter);
-int				ft_fd_heredoc_new2(char *limiter, int write_end,
-					int limiter_len, int cnt);
 
 //break_input4_heredoc
+int				ft_fd_heredoc_new2(char *limiter,
+					int write_end, int limi_len, int cnt);
+int				ft_fd_heredoc_new4(char *temp, char *limiter, int cnt);
+char			*ft_fd_heredoc_new3(int *len);
+
+//break_input5_heredoc
 int				ft_cnt_line_heredoc(void);
 int				ft_reach_end_of_file(char *limiter, int i);
 int				ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add);
 int				ft_512(char *temp);
+int				ft_ctrl_c(int nbr);
 
 //break_input6_redi
 int				ft_redi_gen(t_mini_unit *mini_unit,
@@ -237,5 +241,5 @@ char			**ft_args_gen(t_mini_unit *mini_unit, char *cmd, int fd_close);
 void			sigint_handler1(int sig);
 void			ft_sig_2(int sig);
 void			sigint_handler2(int sig);
-
+void			ft_sig_heredoc(int sig);
 #endif

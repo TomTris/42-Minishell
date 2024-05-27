@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 04:07:23 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/26 23:04:44 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 01:34:59 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*main1(void)
 	char	*line;
 
 	signal(SIGINT, sigint_handler1);
-	signal(SIGQUIT, SIG_IGN);
 	if (isatty(fileno(stdin)))
 		str = readline("qdo-5.2$ ");
 	else
@@ -91,6 +90,7 @@ int	main(int ac, char **av, char **env_ori)
 	char	*str;
 	char	**env;
 
+	signal(SIGQUIT, SIG_IGN);
 	env = make_env(env_ori);
 	if (env == 0)
 		return (exit_code(1), 0);
@@ -101,7 +101,6 @@ int	main(int ac, char **av, char **env_ori)
 		if (str == 0)
 			break ;
 		signal(SIGINT, sigint_handler2);
-		signal(SIGQUIT, sigint_handler2);
 		if (str[0] != 0)
 			add_history(str);
 		if (fft_isempty(str) != 1)
@@ -112,4 +111,3 @@ int	main(int ac, char **av, char **env_ori)
 	}
 	return (ft_done(env));
 }
-

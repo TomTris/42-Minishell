@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 03:56:13 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 23:46:05 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 01:20:03 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	ft_execute_sub_mini2(t_sub_mini *sub_mini)
 	if (fd_in == -1)
 		return (ft_sig_ter(pid, i - 1), free(pid), -1);
 	close(fd_in);
+	signal(SIGINT, SIG_IGN);
 	status = ft_wait_pid(pid, i - 1);
+	signal(SIGINT, sigint_handler2);
 	free(pid);
 	return (status);
 }
@@ -106,7 +108,9 @@ int	ft_execute_sub_mini(t_sub_mini *sub_mini)
 				ft_clean_programm(0, EXIT_FAILURE));
 		if (pid == 0)
 			ft_child_1(sub_mini);
+		signal(SIGINT, SIG_IGN);
 		status = ft_wait_pid(&pid, 1);
+		signal(SIGINT, sigint_handler2);
 		return (status);
 	}
 	return (ft_execute_sub_mini2(sub_mini));

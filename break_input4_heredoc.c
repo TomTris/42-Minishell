@@ -5,64 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 03:52:32 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:31:25 by qdo              ###   ########.fr       */
+/*   Created: 2024/05/27 01:48:08 by qdo               #+#    #+#             */
+/*   Updated: 2024/05/27 01:48:51 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	ft_fd_heredoc_add(t_mini_unit *mini_unit, int fd_new_to_add)
+char	*ft_fd_heredoc_new3(int *len)
 {
-	int	i;
-	int	j;
-	int	*fd_new;
+	char	*temp;
 
-	if (mini_unit->fd_heredoc == NULL)
-		i = 0;
+	signal(SIGINT, ft_sig_heredoc);
+	ft_ctrl_c(0);
+	*len = 0;
+	if (isatty(STDIN_FILENO))
+		temp = readline("> ");
 	else
-		i = mini_unit->fd_heredoc[0];
-	fd_new = (int *)malloc((i + 2) * sizeof(int));
-	if (fd_new == 0)
-		return (exit_code(1), 0);
-	if (i == 0)
-		fd_new[0] = 1;
-	else
-		fd_new[0] = mini_unit->fd_heredoc[0] + 1;
-	j = 0;
-	while (++j <= i)
-		fd_new[j] = mini_unit->fd_heredoc[j];
-	fd_new[j] = fd_new_to_add;
-	free(mini_unit->fd_heredoc);
-	mini_unit->fd_heredoc = fd_new;
-	return (1);
+		temp = get_next_line(STDIN_FILENO);
+	return (temp);
 }
 
-int	ft_reach_end_of_file(char *limiter, int cnt)
+int	ft_fd_heredoc_new4(char *temp, char *limiter, int cnt)
 {
-	int	i;
-
-	i = STDERR_FILENO;
-	if (print_fd(i, "warning: here-document  ") == -1
-		|| print_fd(i, "at line %d delimited",
-			ft_cnt_line_heredoc() - cnt) == -1
-		|| print_fd(i, " by end-of-file (wanted `%s')\n", limiter) == -1)
-		return (exit_code(1), perror("print_fd"), 0);
-	return (1);
+	if (ft_ctrl_c(-1) == 1)
+		return (ft_ctrl_c(0), free(temp), 0);
+	if (temp == 0)
+		if (ft_reach_end_of_file(limiter, cnt) == 0)
+			return (0);
+	return (free(temp), signal(SIGINT, sigint_handler2), 1);
 }
 
-int	ft_cnt_line_heredoc(void)
+int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
 {
-	static int	cnt = 0;
+	char	*temp;
+	int		len;
 
-	cnt ++;
-	return (cnt);
-}
-
-int	ft_512(char *temp)
-{
-	if (print_fd(2, "Can't store more than 512 bytes, force") == -1
-		|| print_fd (2, " break and keep doing execution!\n") == -1)
-		return (exit_code(1), perror("printf_fd"), free(temp), 0);
-	return (free(temp), 1);
+	temp = ft_fd_heredoc_new3(&len);
+	while (temp != 0 && ft_ctrl_c(-1) == 0
+		&& (sncmp(limiter, temp, limi_len) != 1 || temp[limi_len] != '\0'))
+	{
+		len += ft_strlen(temp) + 1;
+		if (len > 512)
+			return (ft_512(temp));
+		if (print_fd(write_end, "%s\n", temp) == -1)
+			return (exit_code(1), perror("print_fd"), free(temp), 0);
+		++cnt;
+		ft_cnt_line_heredoc();
+		free(temp);
+		if (isatty(STDIN_FILENO))
+			temp = readline("> ");
+		else
+			temp = get_next_line(STDIN_FILENO);
+	}
+	return (ft_fd_heredoc_new4(temp, limiter, cnt));
 }
