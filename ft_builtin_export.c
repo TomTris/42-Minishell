@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 00:06:26 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/27 17:35:03 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/28 01:43:33 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,25 @@ int	ft_check_identifier(char **cmd, int i, int *check, int *check2)
 {
 	int	j;
 
+	j = -1;
 	if (ft_isdigit(cmd[i][0]) == 1 || ft_isalnum_(cmd[i][0]) != 1)
 	{
 		if (print_fd(2, "export: `%s': not a valid identifier\n", cmd[i]) == -1)
 			return (perror("print_fd"), 0);
 		*check = 1;
 		*check2 = 1;
+		return (1);
 	}
-	j = -1;
 	while (cmd[i][++j] && cmd[i][j] != '=')
 	{
 		if (ft_isalnum_(cmd[i][j]) != 1)
 		{
-			if (print_fd(2, "export: `%s': not a valid identifier\n", cmd[i])
+			if (print_fd(2, "export: `%s': not 1a valid identifier\n", cmd[i])
 				== -1)
 				return (perror("print_fd"), 0);
 			*check = 1;
 			*check2 = 1;
+			return (1);
 		}
 	}
 	return (1);
