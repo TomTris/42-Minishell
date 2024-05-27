@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 21:15:49 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/23 23:45:20 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 16:32:42 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	ft_recursion_muni_unit_create(
 	}
 	pid_arr[mini_unit->nbr - 1] = pid;
 	close(fd_new[1]);
-	close(fd_in);
+	if (fd_in >= 0)
+		close(fd_in);
 	return (fd_new[0]);
 }

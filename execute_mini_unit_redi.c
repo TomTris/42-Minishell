@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:00:58 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/24 05:45:19 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 17:17:41 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_redi_execute_redi(t_redirection *redi, char **env)
 	char	*str2;
 
 	str = str_replace(redi->str, env);
+	free(redi->str);
+	redi->str = 0;
 	if (str == 0)
 		return (perror("str_replace"), 0);
 	if (str[0] == NULL || str[1] != 0)
@@ -102,7 +104,7 @@ int	ft_redi_execute(t_mini_unit *mini_unit)
 		ret = 0;
 		if (i == mini_unit->redi[0].type_re + 1)
 			ret = 1;
-		free(mini_unit->redi);
+		free_mini_unit_redi(mini_unit->redi);
 		mini_unit->redi = 0;
 		return (ret);
 	}
