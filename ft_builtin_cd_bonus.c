@@ -6,7 +6,7 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:35:09 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/22 16:35:39 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 21:09:35 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_cd_home(char	***env)
 	while (env[0][++i])
 		if (sncmp("HOME=", env[0][i], 5) == 1)
 			break ;
-	if (sncmp("HOME=", env[0][i], 5) != 1)
+	if (env[0][i] == 0 || sncmp("HOME=", env[0][i], 5) != 1)
 		return (print_fd(2, "cd: HOME not set\n"), exit_code(1), 0);
 	temp2 = ft_strdup(env[0][i] + 5);
 	if (temp2 == 0)
@@ -52,7 +52,7 @@ int	ft_cd_oldpwd(char ***env)
 	while (env[0][++i])
 		if (sncmp("OLDPWD=", env[0][i], 7) == 1)
 			break ;
-	if (sncmp("OLDPWD=", env[0][i], 7) != 1)
+	if (env[0][i] == 0 || sncmp("OLDPWD=", env[0][i], 7) != 1)
 		return (print_fd(2, "cd: OLDPWD not set\n"), exit_code(1), 0);
 	temp2 = ft_strdup(env[0][i] + 7);
 	if (temp2 == 0)
