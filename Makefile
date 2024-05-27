@@ -7,7 +7,7 @@ LIBFT_A = libft/libft.a
 
 OBJ_DIR = obj
 
-SRC = 	\
+SRC = \
 		mini_mini.c\
 		mini_sub_mini.c\
 		mini_mini_unit.c\
@@ -25,6 +25,7 @@ SRC = 	\
 		break_input2.c\
 		break_input3_heredoc.c\
 		break_input4_heredoc.c\
+		break_input5_heredoc.c\
 		break_input5_redi.c\
 		ft_free.c\
 		ft_other1.c\
@@ -32,9 +33,9 @@ SRC = 	\
 		ft_other3.c\
 		ft_clean1.c\
 		ft_clean2.c\
-		execute_mini_unit_ft_execve.c 	\
+		execute_mini_unit_ft_execve.c \
 		execute_mini_unit_redi.c\
-		execute_mini_unit_ft_execve_gen.c 	\
+		execute_mini_unit_ft_execve_gen.c\
 		execute_mini_unit_ft_execve2.c\
 		execute_mini_unit.c\
 		execute_mini.c\
@@ -44,8 +45,8 @@ SRC = 	\
 		ft_builtin_cd.c\
 		ft_builtin_cd_bonus.c\
 		ft_builtin_unset.c\
-		ft_builtin_export.c 	\
-		ft_builtin_export2.c 	\
+		ft_builtin_export.c \
+		ft_builtin_export2.c \
 		ft_builtin_add_rm.c\
 		ft_builtin_echo.c\
 		ft_builtin_pwd.c\
@@ -64,7 +65,7 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	mkdir obj
+	@mkdir obj
 
 clean:
 	@make clean -C $(LIBFT_DIR)

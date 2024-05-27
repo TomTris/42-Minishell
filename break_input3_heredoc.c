@@ -6,43 +6,11 @@
 /*   By: qdo <qdo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:49:25 by qdo               #+#    #+#             */
-/*   Updated: 2024/05/26 21:31:40 by qdo              ###   ########.fr       */
+/*   Updated: 2024/05/27 01:48:38 by qdo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-int	ft_fd_heredoc_new2(char *limiter, int write_end, int limi_len, int cnt)
-{
-	char	*temp;
-	int		len;
-
-	len = 0;
-	if (isatty(STDIN_FILENO))
-		temp = readline("> ");
-	else
-		temp = get_next_line(STDIN_FILENO);
-	while (temp != 0
-		&& (sncmp(limiter, temp, limi_len) != 1 || temp[limi_len] != '\0'))
-	{
-		len += ft_strlen(temp) + 1;
-		if (len > 512)
-			return (ft_512(temp));
-		if (print_fd(write_end, "%s\n", temp) == -1)
-			return (exit_code(1), perror("print_fd"), free(temp), 0);
-		++cnt;
-		ft_cnt_line_heredoc();
-		free(temp);
-		if (isatty(STDIN_FILENO))
-			temp = readline("> ");
-		else
-			temp = get_next_line(STDIN_FILENO);
-	}
-	if (temp == 0)
-		if (ft_reach_end_of_file(limiter, cnt) == 0)
-			return (0);
-	return (free(temp), 1);
-}
 
 int	ft_fd_heredoc_new(char *limiter)
 {
