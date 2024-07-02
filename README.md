@@ -6,7 +6,8 @@ This is my first big project and because of some reasons, i did it solo. So, for
 In this Minishell, there are several things that i didn't implement.
 
 >| , <>,    2>file.txt or unset with options.
-It should be a case in mandatory, but..... Yeah. I don't implement them.
+They are not worth to do in this minishell, so i don't implemment them.
+But, many many many many many many other owesome things i implemented!
 
 It works as a Bash 5.2.
 Really mimic, really similar. TRy anything that you can figure out. Syntax, ambigious, redirections.
