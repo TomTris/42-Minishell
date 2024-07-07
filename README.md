@@ -47,3 +47,5 @@ but in Bash, env is not builtin, so, env when you call in my shell, it will be _
 Shell and MAc...... I think it has other layor or software to store things like HOME, PWD, or PATH. Kind of.
 
 Anyway, i did it very carefullyy in about 2.5-3 weeks with about 250 - 300 hours. Enjoy!
+
+Score: of course 125/125 for this great project!
