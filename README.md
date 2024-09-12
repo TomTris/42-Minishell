@@ -1,4 +1,4 @@
-Hi everyone. Welcome to my beautiful Shell, mimic 5.2.
+Hi everyone. Welcome to my beautiful Shell, mimic 5.2, of which i was very proud of. The Shell in pure C
 
 This is a 42-Project to get to know Bash and transform your skill, logic to real product!!
 This is my first big project and because of some reasons, i did it solo. So, for me, it's very meaningfull when it's not a trash-project.
