@@ -1,3 +1,4 @@
+en.subject.pdf - original description of the Project.
 Hi everyone. Welcome to my beautiful Shell, mimic 5.2, of which i was very proud of. The Shell in pure C
 
 This is a 42-Project to get to know Bash and transform your skill, logic to real product!!
