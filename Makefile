@@ -1,6 +1,7 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
-LDFLAGS = -lreadline
+READLINE_DIR = $(shell brew --prefix readline)
+CFLAGS = -Wall -Werror -Wextra -I$(READLINE_DIR)/include
+LDFLAGS = -L$(READLINE_DIR)/lib -lreadline
 NAME = minishell
 LIBFT_DIR = libft
 LIBFT_A = libft/libft.a

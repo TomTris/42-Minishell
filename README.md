@@ -1,51 +1,120 @@
-Hi everyone. Welcome to my beautiful Shell, mimic 5.2, of which i was very proud of. The Shell in pure C
+# minishell
 
-This is a 42-Project to get to know Bash and transform your skill, logic to real product!!
-This is my first big project and because of some reasons, i did it solo. So, for me, it's very meaningfull when it's not a trash-project.
+A small reimplementation of **bash 5.2** in pure C — a 42 project. Done solo over ~2.5–3 weeks. Mandatory and bonus parts both implemented. Score: 125/125.
 
-In this Minishell, there are several things that i didn't implement.
+The goal is fidelity: the prompt loop, parsing, expansion, redirections, pipes, signals and built-ins are meant to match bash 5.2 behavior as closely as the subject allows. Most syntax, ambiguity, quoting and combination cases behave like the real thing.
 
->| , <>,    2>file.txt or unset with options.
-They are not worth to do in this minishell, so i don't implemment them.
-But, many many many many many many other owesome things i implemented!
+---
 
-It works as a Bash 5.2.
-Really mimic, really similar. TRy anything that you can figure out. Syntax, ambigious, redirections.
-combination of expansion, << $"" or << $ or << $$ or < $"a     b"*       or echo "a      f"* or export a="b      a         f" && echo $a*.
-also you call env -i ./minishell from bash. No env? i hardcore the Path =)). You can check in function make env
-My Shell is very beautiful. Enjoy it.
+## Build
 
+```sh
+make        # build the minishell binary
+make clean  # remove object files
+make fclean # remove objects + binary
+make re     # fclean + build
+```
 
-Enjoy it !!!!
+Run interactively:
 
-There are something, which are not similar, i will say below.
-1. Expand of $ with number, with * or with $.
-Such cases are not a part of
+```sh
+./minishell
+```
 
-• Handle environment variables ($ followed by a sequence of characters) whichshould expand to their values.
-• Handle $? which should expand to the exit status of the most recently executed foreground pipeline.
+Or non-interactively from another shell:
 
-$$ expands to PID, $2 $* $1 $0 has other meaning "https://www.rackspace.com/blog/fundamentals-shell-scripting#:~:text=%24%23%20%2D%20To%20check%20count%[…]tring%20treated%20as%20separate%20arguments"
-So, because we handle only $? and enviroment variables, if $bla , bla is not a valid name, it will not expand it and consider number or * just as a usual character such as . / +, but not ' or "
-It's great if you can understand what you are doing!
+```sh
+env -i ./minishell    # works with a clean environment; PATH falls back to a hardcoded default
+```
 
-< > << >>: handled very good. 1 case, Limiter can't not store more than (at this school) 512 bytes because i store them in pipes instead of file, so that i can store many limiters as i want,
-in correct order, put them into correct place, correct part.
+---
 
-cd - also handle -, --. cd ~ - a volunteer bonus.
-But, ~ will not expand to HOME. I just handle it only when it's in cd and we have cd ~.
-If you write ~, it's just said "~: command not found" instead of "/User/qdo: Is a directory" 
+## Features
 
-export, unset multiple args, export += works.
-unset - or unset -- just means that, unset, because they are not valid names and we are not supposed to handle options.
+### Core
+- Interactive prompt with line editing and history (`readline`).
+- Executable resolution via `PATH`, or via relative/absolute path.
+- Single global variable for signal handling — stores only the signal number, never touches main data structures.
 
-env - it will update SHLVL. If doesn't exit => new shell has shlvl = shlvl + 1. If doesn't exit or <0 -> SHLVL = 0.  It update _= in the env correctly
-(expands only to the last args of the previous cmds (bash 5.2). You can check by create a test.c and a.out file, which will print the env that it gets. Then you can check this part).
+### Quoting
+- `'single quotes'` — no metacharacter interpretation inside.
+- `"double quotes"` — no interpretation except `$` expansion.
 
-My bash still works when you call env -i bash
-but in Bash, env is not builtin, so, env when you call in my shell, it will be _=env. You can try when you unset PATH.
-Shell and MAc...... I think it has other layor or software to store things like HOME, PWD, or PATH. Kind of.
+### Redirections
+- `<` input
+- `>` output (truncate)
+- `>>` output (append)
+- `<<` heredoc with a delimiter; reads until a line matching the delimiter.
 
-Anyway, i did it very carefullyy in about 2.5-3 weeks with about 250 - 300 hours. Enjoy!
+### Pipes
+- Full `|` pipelines; each command's stdout connects to the next command's stdin.
 
-Score: of course 125/125 for this great project!
+### Expansion
+- `$VAR` → environment variable value.
+- `$?` → exit status of the last foreground pipeline.
+- `$$` → PID.
+- Combined and edge cases: `export a="b    a          f" && echo $a && echo $a*`, `<< $""`, `<< $`, `<< $$`, `< $"a b"*`, `echo "a f"*`, etc.
+
+### Signals (interactive mode)
+- `ctrl-C` → new prompt on a new line.
+- `ctrl-D` → exits the shell.
+- `ctrl-\` → does nothing.
+
+### Built-ins
+- `echo` (with `-n`)
+- `cd` (relative/absolute path; also handles `-`, `--`, and `~` as an extra)
+- `pwd`
+- `export` (with `+=`, multiple arguments)
+- `unset` (multiple arguments)
+- `env`
+- `exit`
+
+### Bonus
+- `&&` and `||` with parentheses for priority.
+- Wildcards `*` for the current working directory.
+
+---
+
+## Behavior notes (deliberate deviations from bash)
+
+These are intentional and documented, not bugs. Where the subject does not require a behavior, this shell follows the subject rather than bash, and stays internally consistent.
+
+**Expansion of `$` followed by digit, `*` or `$`.**
+The subject only requires expanding environment variables (`$NAME`) and `$?`. `$1`, `$2`, `$0`, `$*` etc. have shell-scripting meanings that are out of scope, so they are not expanded. For an invalid name (e.g. `$bla` where `bla` is not a valid variable), the trailing characters like a digit or `*` are treated as ordinary characters (the same as `.`, `/`, `+`), **not** as quote or expansion metacharacters. `$$` is handled and expands to the PID.
+
+**Heredoc delimiter size.**
+Heredocs are stored in pipes rather than temporary files, which allows arbitrarily many delimiters in the correct order and placement. The tradeoff: a single delimiter cannot exceed the pipe buffer (~512 bytes on this system).
+
+**`cd ~`.**
+`~` is only handled inside `cd` (`cd ~` → HOME). It is not expanded generally. `~~` is treated as a command, so `~~` reports `~~: command not found` rather than a directory error.
+
+**`export` / `unset` options.**
+Options are not part of the subject. `unset -` / `unset --` are treated as `unset` with no valid name, since `-` and `--` are not valid variable names.
+
+**`env` and `SHLVL` / `_`.**
+`env` updates `SHLVL`: a new shell gets `SHLVL + 1`; if unset or `< 0`, `SHLVL` resets to 0. `_=` is updated to the last argument of the previous command, matching bash 5.2. `env -i ./minishell` works; with no `PATH`, a hardcoded default path is used. Note `env` is not a real built-in in bash, so calling `env` here resolves through `PATH` (visible when you `unset PATH`).
+
+---
+
+## Not implemented (out of scope)
+
+The following were judged not worth implementing for this minishell and are intentionally absent:
+
+- `|&`
+- `<>`
+- `2>file.txt` (stderr redirection)
+- `unset` / `export` with options
+
+The subject only requires what is listed in the mandatory part; anything beyond it is optional. Where there was doubt, bash 5.2 was used as the reference.
+
+---
+
+## Code quality disclaimer
+
+This project was built under time pressure with correctness as the priority. **Clean code and style were not a focus.** The code works well and passes evaluation, but it is not organized or formatted to a standard I would call clean. Treat the source as functional reference, not a style example.
+
+---
+
+## Project files
+
+Parsing/tokenizing (`break_input*.c`, `syntax_*.c`), expansion (`expansion_*.c`, including wildcard handling), execution and subshells (`execute_*.c`, `mini_*.c`), built-ins (`ft_builtin_*.c`), cleanup/memory (`ft_clean*.c`, `ft_free.c`), signals (`signal.c`), and a vendored `libft`.
